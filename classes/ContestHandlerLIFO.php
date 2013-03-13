@@ -53,6 +53,8 @@ class ContestHandlerLIFO implements ContestHandler {
 		$item->id = isset($impression->item->id) ? $impression->item->id : 0;
 		$item->recommendable = isset($impression->item->recommendable) ? $impression->item->recommendable : true;
 		$item->domain = $domainid;
+		$item->save();
+
 
 		// check to see whether the current item id is contained in the data set
 		if ($item->id > 0 && !in_array($item->id, $data) && $item->recommendable) {
@@ -106,7 +108,6 @@ class ContestHandlerLIFO implements ContestHandler {
 
 		}
 
-		$item->save();
 	}
 
 	/* This method handles feedback messages from the contest server. As of now it does nothing. It could be used to look at
