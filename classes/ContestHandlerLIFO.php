@@ -128,7 +128,7 @@ class ContestHandlerLIFO implements ContestHandler {
 	 */
 	public function handleFeedback(ContestFeedback $contestFeedback) {
 		file_put_contents("log/queries", date('c') .print_r($contestFeedback, true)."\n", FILE_APPEND);
-		file_put_contents("log/queries", date('c') .print_r($contestFeedback->source->id, true)."\n", FILE_APPEND);
+		file_put_contents("log/queries", date('c') .print_r($contestFeedback->source, true)."\n", FILE_APPEND);
 		$feedback = new Feedback();
 
 		$save = false;
