@@ -131,6 +131,7 @@ class ContestHandlerLIFO implements ContestHandler {
 		$feedback = new Feedback();
 		$feedback->client = $contestFeedback->client->id;
 		$feedback->source = $contestFeedback->source->id;
+		$feedback->domain = $contestFeedback->domain->id;
 		$feedback->target = $contestFeedback->target->id;
 
 		$save = false;

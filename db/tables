@@ -25,6 +25,7 @@ CREATE TABLE `item` (
   `client` int(11) DEFAULT NULL,
   `source` int(11) DEFAULT NULL,
   `target` int(11) DEFAULT NULL,
+  `domain` int(11) DEFAULT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8

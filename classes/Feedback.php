@@ -11,4 +11,5 @@ class Feedback extends StardustModel {
 	public $client;
 	public $source;
 	public $target;
+	public $domain;
 }
