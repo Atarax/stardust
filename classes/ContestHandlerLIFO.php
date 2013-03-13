@@ -48,8 +48,9 @@ class ContestHandlerLIFO implements ContestHandler {
 		} else {
 			$data = array(0);
 		}
+		file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
 
-		$impression = new Impression();
+		$impression = new I1mpression();
 		$impression->client = $contestImpression->client->id;
 		$impression->domain = $contestImpression->domain->id;
 		$impression->item = $contestImpression->item->id;
