@@ -7,8 +7,6 @@
 // load some common functions and constants
 require_once 'config.php';
 
-$config["logfile"] = "log/plista.log";
-
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
 $handler = ContestHandlerLIFO::getInstance();
 

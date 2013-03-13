@@ -49,17 +49,19 @@ class ContestHandlerLIFO implements ContestHandler {
 			$data = array(0);
 		}
 
-		$itemid = isset($impression->item->id) ? $impression->item->id : 0;
-		$recommendable = isset($impression->item->recommendable) ? $impression->item->recommendable : true;
+		$item = new Item();
+		$item->id = isset($impression->item->id) ? $impression->item->id : 0;
+		$item->recommendable = isset($impression->item->recommendable) ? $impression->item->recommendable : true;
+		$item->domain = $domainid;
 
 		// check to see whether the current item id is contained in the data set
-		if ($itemid > 0 && !in_array($itemid, $data) && $recommendable) {
+		if ($item->id > 0 && !in_array($item->id, $data) && $item->recommendable) {
 			// prepend it to the data, if not
 			if (count($data) > 10) {
 				array_pop($data);
 			}
 
-			array_unshift($data, $itemid);
+			array_unshift($data, $item->id);
 
 			$data_string = implode(',', $data);
 			// and write the file back
@@ -74,7 +76,7 @@ class ContestHandlerLIFO implements ContestHandler {
 			// iterate over the data array
 			foreach ($data as $data_item) {
 				// exclude the new item id
-				if ($data_item == $itemid) {
+				if ($data_item == $item->id) {
 					continue;
 				}
 
@@ -101,6 +103,8 @@ class ContestHandlerLIFO implements ContestHandler {
 			$result = ContestMessage::createMessage('result', $result_object);
 			// post the result back to the contest server
 			$result->postBack();
+
+			$item->save();
 		}
 	}
 
