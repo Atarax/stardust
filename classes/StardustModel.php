@@ -20,8 +20,6 @@ class StardustModel {
 		$fields = array();
 		$values = array();
 
-		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", array_keys($data)).") VALUES (".implode( ",", $this->enQuoteData( array_values($data) ) ).") ";
-
 		foreach($data as $field => $value) {
 			$value = empty($value) ? "NULL" : $value;
 			$fields[] = $field;
@@ -33,6 +31,7 @@ class StardustModel {
 			$onupdate[] = $field."=".( is_string($value) ? '"'.$value.'"' : $value );
 		}
 
+		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		file_put_contents("log/queries", date('c') . " Query: ".$query."\n", FILE_APPEND);
@@ -46,15 +45,5 @@ class StardustModel {
 		}
 
 		mysql_close();
-	}
-
-	private function enQuoteData($data) {
-		foreach($data as $key => $val) {
-			if( is_string($val) )  {
-				$data[$key] = '"'.$val.'"';
-			}
-		}
-
-		return $data;
 	}
 }
