@@ -7,11 +7,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$config["mysql_host"] = "localhost";
-$config["mysql_user"] = "root";
-$config["mysql_pass"] = "g9H43b";
-
-
 class Item {
 	public $id;
 	public $domain;
