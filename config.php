@@ -24,7 +24,4 @@ define('PLISTA_CONTEST_TIMEOUT', 0.2);
 
 $config = array();
 $config["logfile"] = "log/plista.log";
-$config["mysql_host"] = "localhost";
-$config["mysql_user"] = "root";
-$config["mysql_pass"] = "g9H43b";
 
