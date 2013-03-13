@@ -63,12 +63,12 @@ class ContestHandlerLIFO implements ContestHandler {
 		$item->id = isset($contestImpression->item->id) ? $contestImpression->item->id : 0;
 		$item->recommendable = isset($contestImpression->item->recommendable) ? $contestImpression->item->recommendable : true;
 		$item->domain = $domainid;
-		$item->category = $contestImpression->context->category;
+		$item->category = $contestImpression->item->context->category;
 		$item->text = $contestImpression->item->text;
 		$item->url = $contestImpression->item->url;
 		$item->created = $contestImpression->item->created;
-		$item->title = $contestImpression->title;
-		$item->img = $contestImpression->img;
+		$item->title = $contestImpression->item->title;
+		$item->img = $contestImpression->item->img;
 		$item->save();
 
 
