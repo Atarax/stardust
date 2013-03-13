@@ -12,7 +12,7 @@ $server = 'http://contest.plista.com/api/api.php';
 $type = 'start';
 
 // this variable holds your secret api key
-$apikey = '0123456789abcdef0123456789abcdef';
+$apikey = 'ed6bd15a06540306f54f0c49137c23a9 ';
 
 // any data that needs to be passed to the api message object goes into here
 $data = new stdClass;
