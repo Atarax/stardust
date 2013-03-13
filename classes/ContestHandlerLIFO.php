@@ -136,12 +136,22 @@ class ContestHandlerLIFO implements ContestHandler {
 
 		$save = false;
 		if (!empty($contestFeedback->source)) {
-			$itemid = $contestFeedback->source->id;
+			$feedback->source = $contestFeedback->source->id;
 			$save = true;
 		}
 
 		if (!empty($contestFeedback->target)) {
-			$itemid = $contestFeedback->target->id;
+			$feedback->target = $contestFeedback->target->id;
+			$save = true;
+		}
+
+		if (!empty($contestFeedback->client)) {
+			$feedback->client = $contestFeedback->client->id;
+			$save = true;
+		}
+
+		if (!empty($contestFeedback->domain)) {
+			$feedback->domain = $contestFeedback->domain->id;
 			$save = true;
 		}
 
