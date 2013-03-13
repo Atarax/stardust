@@ -16,19 +16,24 @@ class StardustModel {
 
 	public function save() {
 		$data = get_object_vars($this);
+		$onupdate = array();
+		$fields = array();
 		$values = array();
 
 		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", array_keys($data)).") VALUES (".implode( ",", $this->enQuoteData( array_values($data) ) ).") ";
 
 		foreach($data as $field => $value) {
+			$value = empty($value) ? "" : $value;
+			$fields[] = $field;
+			$values[] = $value;
+
 			if( $field == "id" ) {
 				continue;
 			}
-			$value = empty($value) ? "" : $value;
-			$values[] = $field."=".( is_string($value) ? '"'.$value.'"' : $value );
+			$onupdate[] = $field."=".( is_string($value) ? '"'.$value.'"' : $value );
 		}
 
-		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $values);
+		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		file_put_contents("log/queries", date('c') . " Query: ".$query."\n", FILE_APPEND);
 
