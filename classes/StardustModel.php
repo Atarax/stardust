@@ -21,6 +21,7 @@ class StardustModel {
 		$values = array();
 
 		foreach($data as $field => $value) {
+			$value = is_string($value) ? '"'.$value.'"' : $value;
 			$value = empty($value) ? "NULL" : $value;
 			$fields[] = $field;
 			$values[] = $value;
@@ -28,7 +29,7 @@ class StardustModel {
 			if( $field == "id" ) {
 				continue;
 			}
-			$onupdate[] = $field."=".( is_string($value) ? '"'.$value.'"' : $value );
+			$onupdate[] = $field."=".$value;
 		}
 
 		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
