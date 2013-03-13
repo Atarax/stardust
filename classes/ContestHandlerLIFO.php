@@ -64,7 +64,7 @@ class ContestHandlerLIFO implements ContestHandler {
 		$item->category = $contestImpression->item->context->category;
 		$item->text = $contestImpression->item->text;
 		$item->url = $contestImpression->item->url;
-		$item->created = $contestImpression->item->created;
+		$item->created = date("y-m-d h:i:s", $contestImpression->item->created);
 		$item->title = $contestImpression->item->title;
 		$item->img = $contestImpression->item->img;
 		$item->save();
