@@ -30,6 +30,8 @@ class StardustModel {
 
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $values);
 
+		file_put_contents("log/queries", date('c') . " Query: ".$query, FILE_APPEND);
+
 		mysql_connect( self::$config["mysql_host"], self::$config["mysql_user"], self::$config["mysql_pass"] );
 		mysql_query( $query );
 
