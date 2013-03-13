@@ -23,7 +23,7 @@ class StardustModel {
 		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", array_keys($data)).") VALUES (".implode( ",", $this->enQuoteData( array_values($data) ) ).") ";
 
 		foreach($data as $field => $value) {
-			$value = empty($value) ? "" : $value;
+			$value = empty($value) ? "NULL" : $value;
 			$fields[] = $field;
 			$values[] = $value;
 
