@@ -23,8 +23,6 @@ class ContestHandlerLIFO implements ContestHandler {
 	 * and sends those back to the contest server.
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
-		file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
-
 		$domainid = $contestImpression->domain->id;
 		$filename = "data_contest_$domainid.txt";
 
@@ -50,6 +48,7 @@ class ContestHandlerLIFO implements ContestHandler {
 		} else {
 			$data = array(0);
 		}
+		file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
 
 		$impression = new Impression();
 		$impression->client = $contestImpression->client->id;
