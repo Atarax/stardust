@@ -24,6 +24,7 @@ class StardustModel {
 			if( $field == "id" ) {
 				continue;
 			}
+			$value = empty($value) ? "" : $value;
 			$values[] = $field."=".( is_string($value) ? '"'.$value.'"' : $value );
 		}
 
