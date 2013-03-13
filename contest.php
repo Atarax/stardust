@@ -25,7 +25,6 @@ try {
 	}
 
 	// log the message
-	file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
 	file_put_contents($config["logfile"], date('c') . " Message: $msg\n", FILE_APPEND);
 
 	if ($msg instanceof ContestImpression) {
