@@ -12,6 +12,7 @@ class Item extends StardustModel {
 	public $domain;
 	public $recommendable;
 	public $text;
+	public $title;
 	public $url;
 	public $category;
 }

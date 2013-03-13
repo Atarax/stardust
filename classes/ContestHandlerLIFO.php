@@ -53,6 +53,7 @@ class ContestHandlerLIFO implements ContestHandler {
 		file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
 
 		$impression = new Impression();
+		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
 		$impression->client = $contestImpression->client->id;
 		$impression->domain = $contestImpression->domain->id;
 		$impression->item = $contestImpression->item->id;
@@ -62,6 +63,12 @@ class ContestHandlerLIFO implements ContestHandler {
 		$item->id = isset($contestImpression->item->id) ? $contestImpression->item->id : 0;
 		$item->recommendable = isset($contestImpression->item->recommendable) ? $contestImpression->item->recommendable : true;
 		$item->domain = $domainid;
+		$item->category = $contestImpression->context->category;
+		$item->text = $contestImpression->item->text;
+		$item->url = $contestImpression->item->url;
+		$item->created = $contestImpression->item->created;
+		$item->title = $contestImpression->title;
+		$item->img = $contestImpression->img;
 		$item->save();
 
 
