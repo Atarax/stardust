@@ -22,8 +22,8 @@ class ContestHandlerLIFO implements ContestHandler {
 	 * it needs to generate a recommendation and if so takes object ids from the front of the data (excluding the new one)
 	 * and sends those back to the contest server.
 	 */
-	public function handleImpression(ContestImpression $impression) {
-		$domainid = $impression->domain->id;
+	public function handleImpression(ContestImpression $contestImpression) {
+		$domainid = $contestImpression->domain->id;
 		$filename = "data_contest_$domainid.txt";
 
 		if (!file_exists($filename)) {
@@ -49,9 +49,15 @@ class ContestHandlerLIFO implements ContestHandler {
 			$data = array(0);
 		}
 
+		$impression = new Impression();
+		$impression->client = $contestImpression->client->id;
+		$impression->domain = $contestImpression->domain->id;
+		$impression->item = $contestImpression->item->id;
+		$impression->save();
+
 		$item = new Item();
-		$item->id = isset($impression->item->id) ? $impression->item->id : 0;
-		$item->recommendable = isset($impression->item->recommendable) ? $impression->item->recommendable : true;
+		$item->id = isset($contestImpression->item->id) ? $contestImpression->item->id : 0;
+		$item->recommendable = isset($contestImpression->item->recommendable) ? $contestImpression->item->recommendable : true;
 		$item->domain = $domainid;
 		$item->save();
 
@@ -71,7 +77,7 @@ class ContestHandlerLIFO implements ContestHandler {
 		}
 
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
-		if ($impression->recommend) {
+		if ($contestImpression->recommend) {
 			$result_data = array();
 			$i = 0;
 
@@ -83,7 +89,7 @@ class ContestHandlerLIFO implements ContestHandler {
 				}
 
 				// don't return more items than asked for
-				if (++$i > $impression->limit) {
+				if (++$i > $contestImpression->limit) {
 					break;
 				}
 
@@ -93,14 +99,14 @@ class ContestHandlerLIFO implements ContestHandler {
 				$result_data[] = $data_object;
 			}
 
-			if ($i <= $impression->limit) {
+			if ($i <= $contestImpression->limit) {
 				throw new ContestException('not enough data', 500);
 			}
 
 			// construct a result message
 			$result_object = new stdClass;
 			$result_object->items = $result_data;
-			$result_object->team = $impression->team;
+			$result_object->team = $contestImpression->team;
 
 			$result = ContestMessage::createMessage('result', $result_object);
 			// post the result back to the contest server
@@ -113,14 +119,20 @@ class ContestHandlerLIFO implements ContestHandler {
 	/* This method handles feedback messages from the contest server. As of now it does nothing. It could be used to look at
 	 * the object ids in the feedback message and possibly add those to the data list as well.
 	 */
-	public function handleFeedback(ContestFeedback $feedback) {
-		if (!empty($feedback->source)) {
-			$itemid = $feedback->source->id;
+	public function handleFeedback(ContestFeedback $contestFeedback) {
+		$feedback = new Feedback();
+		$feedback->client = $contestFeedback->client->id;
+		$feedback->source = $contestFeedback->source->id;
+		$feedback->target = $contestFeedback->target->id;
+		$feedback->save();
+
+		if (!empty($contestFeedback->source)) {
+			$itemid = $contestFeedback->source->id;
 			// add id to data file
 		}
 
-		if (!empty($feedback->target)) {
-			$itemid = $feedback->target->id;
+		if (!empty($contestFeedback->target)) {
+			$itemid = $contestFeedback->target->id;
 			// add id to data file
 		}
 	}

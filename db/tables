@@ -1,0 +1,29 @@
+ CREATE TABLE `item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
+  `text` varchar(256) DEFAULT NULL,
+  `url` varchar(256) DEFAULT NULL,
+  `recommendable` tinyint(4) DEFAULT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+
+ CREATE TABLE `impression` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client` int(11) DEFAULT NULL,
+  `domain` int(11) DEFAULT NULL,
+  `item` int(11) DEFAULT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+
+ CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client` int(11) DEFAULT NULL,
+  `source` int(11) DEFAULT NULL,
+  `target` int(11) DEFAULT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+

@@ -3,15 +3,12 @@
  * Created by JetBrains PhpStorm.
  * User: atarax
  * Date: 3/13/13
- * Time: 2:42 PM
+ * Time: 6:15 PM
  * To change this template use File | Settings | File Templates.
  */
-
-class Item extends StardustModel {
+class Impression extends StardustModel{
 	public $id;
+	public $client;
 	public $domain;
-	public $recommendable;
-	public $text;
-	public $url;
-	public $category;
+	public $item;
 }
