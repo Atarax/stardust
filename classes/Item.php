@@ -8,10 +8,11 @@
  */
 
 class Item {
-	$config = array();
-	$config["mysql_host"] = "localhost";
-	$config["mysql_user"] = "root";
-	$config["mysql_pass"] = "g9H43b";
+	private $config = array(
+		"mysql_host" => "localost",
+		"mysql_user" => "root",
+		"mysql_pass" => "g9H43b"
+	);
 
 	public $id;
 	public $domain;
