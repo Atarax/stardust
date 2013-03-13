@@ -48,7 +48,6 @@ class ContestHandlerLIFO implements ContestHandler {
 		} else {
 			$data = array(0);
 		}
-		file_put_contents("log/queries", date('c') . " begin\n", FILE_APPEND);
 
 		$impression = new Impression();
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
@@ -128,6 +127,7 @@ class ContestHandlerLIFO implements ContestHandler {
 	 * the object ids in the feedback message and possibly add those to the data list as well.
 	 */
 	public function handleFeedback(ContestFeedback $contestFeedback) {
+		file_put_contents("log/queries", date('c') .print_r($contestFeedback, true)."\n", FILE_APPEND);
 		$feedback = new Feedback();
 		$feedback->client = $contestFeedback->client->id;
 		$feedback->source = $contestFeedback->source->id;
