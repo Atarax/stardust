@@ -8,7 +8,7 @@
  */
 
 class StardustModel {
-	private $config = array(
+	private static $config = array(
 		"mysql_host" => "localhost",
 		"mysql_user" => "root",
 		"mysql_pass" => "g9H43b"
