@@ -129,10 +129,6 @@ class ContestHandlerLIFO implements ContestHandler {
 	public function handleFeedback(ContestFeedback $contestFeedback) {
 		file_put_contents("log/queries", date('c') .print_r($contestFeedback, true)."\n", FILE_APPEND);
 		$feedback = new Feedback();
-		$feedback->client = $contestFeedback->client->id;
-		$feedback->source = $contestFeedback->source->id;
-		$feedback->domain = $contestFeedback->domain->id;
-		$feedback->target = $contestFeedback->target->id;
 
 		$save = false;
 		if (!empty($contestFeedback->source)) {
