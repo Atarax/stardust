@@ -27,7 +27,9 @@ class ContestHandlerHottestItem implements ContestHandler {
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
-		if ($contestImpression->recommend && isset($contestImpression->item) && isset($contestImpression->item->domain) ) {
+		if ($contestImpression->recommend) {
+			$domainid = $contestImpression->domain->id;
+
 			$db = new DatabaseManager();
 			$data = $db->query("
 				SELECT COUNT(impression.id) AS visits, impression.item
@@ -35,7 +37,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 				WHERE item.id = impression.item AND
 					item.recommendable > 0 AND
 					impression.item != 0 AND
-					item.domain = ".$contestImpression->item->domain."
+					item.domain = ".$domainid."
 				GROUP BY item
 				ORDER BY visits DESC
 				LIMIT 20
