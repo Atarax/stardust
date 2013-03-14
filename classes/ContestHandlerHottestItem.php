@@ -59,6 +59,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$result = ContestMessage::createMessage('result', $result_object);
 			// post the result back to the contest server
 			$result->postBack();
+			file_put_contents("log/queries", date('c') .print_r($result_object, true)."\n", FILE_APPEND);
 
 		}
 
