@@ -12,4 +12,5 @@ class Feedback extends StardustModel {
 	public $source;
 	public $target;
 	public $domain;
+	public $team;
 }
