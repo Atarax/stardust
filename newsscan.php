@@ -108,6 +108,7 @@
 
 	$scores = array();
 	$db = new DatabaseManager();
+	$db->connect();
 	$res = $db->query("SELECT id,title FROM contest.item");
 
 	foreach( $res as $row ) {
