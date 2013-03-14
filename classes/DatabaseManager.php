@@ -13,7 +13,7 @@ class DatabaseManager {
 	private static $config = array(
 		"mysql_host" => "localhost",
 		"mysql_user" => "root",
-		"mysql_pass" => "yfmaster00pw"
+		"mysql_pass" => "g9H43b"
 	);
 
 	public function connect() {
