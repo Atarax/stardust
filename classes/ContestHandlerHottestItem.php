@@ -29,7 +29,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
 		if ($contestImpression->recommend) {
 			$db = new DatabaseManager();
-			$data = $db->query("SELECT COUNT(id) AS visits, item FROM contest.impression WHERE item IS NOT NULL GROUP BY item ORDER BY visits DESC LIMIT 20");
+			$data = $db->query("SELECT COUNT(impression.id) AS visits, impression.item FROM contest.impression, contest.item WHERE item.id = impression.item AND item.recommendable > 0 AND impression.item IS NOT NULL GROUP BY item ORDER BY visits DESC LIMIT 20");
 
 			$result_data = array();
 			$i = 0;
@@ -76,7 +76,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$impression->save();
 
 		$myItem = new Item();
-		$myItem->id = isset($item) ? $item->id : 0;
+		$myItem->id = isset($item->id) ? $item->id : 0;
 		$myItem->recommendable = isset($item) ? $item->recommendable : true;
 		$myItem->domain = isset($domain) ? $domain->id : null;
 		$myItem->category = isset($context) ? $context->category : null;
