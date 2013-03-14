@@ -30,3 +30,12 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8
 
+ CREATE TABLE `recommendation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `impression` int(11) DEFAULT NULL,
+  `item` int(11) DEFAULT NULL,
+  `handler` int(11) DEFAULT NULL,
+  `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8
+

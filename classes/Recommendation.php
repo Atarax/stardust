@@ -10,4 +10,5 @@ class Recommendation extends StardustModel{
 	public $id;
 	public $impression;
 	public $item;
+	public $handler;
 }
