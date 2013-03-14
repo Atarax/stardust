@@ -1,0 +1,6 @@
+Successfull recommends:
+
+    SELECT item.title, feedback.created FROM feedback, item WHERE feedback.target = item.id AND feedback.team = 227 ORDER BY feedback.created DESC;
+
+Latest recommends:
+    SELECT item.title, recommendation.created FROM recommendation, item WHERE recommendation.item = item.id ORDER BY recommendation.created DESC LIMIT 20
