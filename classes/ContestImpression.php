@@ -152,7 +152,7 @@ class ContestImpression extends ContestMessage {
 	}
 	
 	public function __get($name) {
-		if (!in_array($name, array('client', 'domain', 'item', 'category', 'timeout', 'recommend', 'limit', 'team'))) {
+		if (!in_array($name, array('client', 'domain', 'item', 'category', 'timeout', 'recommend', 'limit', 'team', 'title'))) {
 			return null;
 		}
 		
@@ -160,7 +160,7 @@ class ContestImpression extends ContestMessage {
 	}
 
 	public function __isset($name) {
-		if (!in_array($name, array('client', 'domain', 'item', 'category', 'timeout', 'recommend', 'limit', 'team'))) {
+		if (!in_array($name, array('client', 'domain', 'item', 'category', 'timeout', 'recommend', 'limit', 'team', 'title'))) {
 			return false;
 		}
 
