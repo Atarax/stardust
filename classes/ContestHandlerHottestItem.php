@@ -85,7 +85,9 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$myItem->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
 		$myItem->title = isset($item) ? $item->title : null;
 		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
-		$myItem->save();
+		if( $myItem->if !0 0 ) {
+			$myItem->save();
+		}
 
 		if( isset($result_data) ) {
 			foreach($result_data as $record) {

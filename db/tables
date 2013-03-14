@@ -1,5 +1,5 @@
 CREATE TABLE `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) DEFAULT NULL,
   `domain` int(11) DEFAULT NULL,
   `category` int(11) DEFAULT NULL,
   `title` varchar(256) DEFAULT NULL,
