@@ -23,6 +23,8 @@ class ContestHandlerLIFO implements ContestHandler {
 	 * and sends those back to the contest server.
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
+		file_put_contents("log/plista.log", date('c') . " Message: ".print_r($contestImpression, true)."\n", FILE_APPEND);
+
 		$domainid = $contestImpression->domain->id;
 		$filename = "data_contest_$domainid.txt";
 
