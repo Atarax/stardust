@@ -39,6 +39,7 @@ class StardustModel {
 		*/
 
 		mysql_connect( self::$config["mysql_host"], self::$config["mysql_user"], self::$config["mysql_pass"] );
+		mysql_set_charset( "utf8" );
 		mysql_query( $query );
 
 		$error = mysql_error();
