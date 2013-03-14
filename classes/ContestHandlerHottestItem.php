@@ -47,19 +47,16 @@ class ContestHandlerHottestItem implements ContestHandler {
 				$result_data[] = $data_object;
 			}
 
-			if ($i <= $contestImpression->limit) {
-				throw new ContestException('not enough data', 500);
+			if ($i > $contestImpression->limit) {
+				// construct a result message
+				$result_object = new stdClass;
+				$result_object->items = $result_data;
+				$result_object->team = $contestImpression->team;
+
+				$result = ContestMessage::createMessage('result', $result_object);
+				// post the result back to the contest server
+				$result->postBack();
 			}
-
-			// construct a result message
-			$result_object = new stdClass;
-			$result_object->items = $result_data;
-			$result_object->team = $contestImpression->team;
-
-			$result = ContestMessage::createMessage('result', $result_object);
-			// post the result back to the contest server
-			$result->postBack();
-			file_put_contents("log/queries", date('c') .print_r($result_object, true)."\n", FILE_APPEND);
 		}
 
 		// Accumulate Data
@@ -86,7 +83,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$myItem->title = isset($item) ? $item->title : null;
 		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
 
-		if($myItem->id > 0) {
+		if( isset($myItem->id) && $myItem->id > 0) {
 			$myItem->save();
 		}
 
