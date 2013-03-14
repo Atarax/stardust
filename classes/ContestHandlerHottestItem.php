@@ -77,7 +77,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 
 		$myItem = new Item();
 		$myItem->id = isset($item->id) ? $item->id : 0;
-		$myItem->recommendable = isset($item) ? $item->recommendable : true;
+		$myItem->recommendable = isset($item) ? $item->recommendable : false;
 		$myItem->domain = isset($domain) ? $domain->id : null;
 		$myItem->category = isset($context) ? $context->category : null;
 		$myItem->text = isset($item) ? $item->text : null;
