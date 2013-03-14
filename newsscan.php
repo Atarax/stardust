@@ -117,7 +117,7 @@
 
 		foreach( $itemwords as $word ) {
 			$word = preg_replace("/[\,\.\-\"\'?!]/", '', mb_strtolower($word));
-			echo $word."<br>";
+			//echo $word."<br>";
 			if( isset($newswords[$word]) ) {
 				$score += $newswords[$word];
 			}
