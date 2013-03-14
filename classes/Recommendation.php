@@ -8,7 +8,7 @@
  */
 class Recommendation extends StardustModel{
 	public $id;
-	public $impression;
+	public $source;
 	public $item;
 	public $recommender;
 }

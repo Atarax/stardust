@@ -90,7 +90,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		if( isset($result_data) ) {
 			foreach($result_data as $record) {
 				$recommendation = new Recommendation();
-				$recommendation->impression = $impression->id;
+				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
 				$recommendation->recommender = 1;
 				$recommendation->save();

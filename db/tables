@@ -32,7 +32,7 @@ CREATE TABLE `item` (
 
  CREATE TABLE `recommendation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `impression` int(11) DEFAULT NULL,
+  `source` int(11) DEFAULT NULL,
   `item` int(11) DEFAULT NULL,
   `recommender` int(11) DEFAULT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
