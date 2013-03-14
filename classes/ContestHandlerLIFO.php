@@ -63,17 +63,17 @@ class ContestHandlerLIFO implements ContestHandler {
 		$impression->item = isset($item) ? $item->id : null;
 		$impression->save();
 
-		$item = new Item();
-		$item->id = isset($item) ? $item->id : 0;
-		$item->recommendable = isset($item) ? $item->recommendable : true;
-		$item->domain = isset($domain) ? $domain->id : null;
-		$item->category = isset($context) ? $context->category : null;
-		$item->text = isset($item) ? $item->text : null;
-		$item->url = isset($item) ? $item->url : null;
-		$item->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
-		$item->title = isset($item) ? $item->title : null;
-		$item->img = isset($item) && isset($item->img) ? $item->img : null;
-		$item->save();
+		$myItem = new Item();
+		$myItem->id = isset($item) ? $item->id : 0;
+		$myItem->recommendable = isset($item) ? $item->recommendable : true;
+		$myItem->domain = isset($domain) ? $domain->id : null;
+		$myItem->category = isset($context) ? $context->category : null;
+		$myItem->text = isset($item) ? $item->text : null;
+		$myItem->url = isset($item) ? $item->url : null;
+		$myItem->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
+		$myItem->title = isset($item) ? $item->title : null;
+		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
+		$myItem->save();
 
 		//file_put_contents("log/queries", date('c') . " Impression: ".print_r($contestImpression, true)."\n", FILE_APPEND);
 
