@@ -27,6 +27,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
+		/*
 		if ($contestImpression->recommend) {
 			$db = new DatabaseManager();
 			$data = $db->query("SELECT COUNT(impression.id) AS visits, impression.item FROM contest.impression, contest.item WHERE item.id = impression.item AND item.recommendable > 0 AND impression.item IS NOT NULL GROUP BY item ORDER BY visits DESC LIMIT 20");
@@ -61,7 +62,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$result->postBack();
 
 		}
-
+		*/
 		// Accumulate Data
 		$item = $contestImpression->item;
 		$client = $contestImpression->client;
