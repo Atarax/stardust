@@ -8,12 +8,6 @@
  */
 
 class StardustModel {
-	private static $config = array(
-		"mysql_host" => "localhost",
-		"mysql_user" => "root",
-		"mysql_pass" => "g9H43b"
-	);
-
 	public function save() {
 		$data = get_object_vars($this);
 		$onupdate = array();
