@@ -51,21 +51,21 @@ class ContestHandlerLIFO implements ContestHandler {
 
 		$impression = new Impression();
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
-		$impression->client = $contestImpression->client->id;
-		$impression->domain = $contestImpression->domain->id;
-		$impression->item = $contestImpression->item->id;
+		$impression->client = isset($contestImpression->client) ? $contestImpression->client->id : null;
+		$impression->domain = isset($contestImpression->domain) ? $contestImpression->domain->id : null;
+		$impression->item = isset($contestImpression->item) ? $contestImpression->item->id : null;
 		$impression->save();
 
 		$item = new Item();
 		$item->id = isset($contestImpression->item->id) ? $contestImpression->item->id : 0;
 		$item->recommendable = isset($contestImpression->item->recommendable) ? $contestImpression->item->recommendable : true;
-		$item->domain = $domainid;
-		$item->category = $contestImpression->item->context->category;
-		$item->text = $contestImpression->item->text;
-		$item->url = $contestImpression->item->url;
+		$item->domain = isset($contestImpression->domain) ? $domainid : null;
+		$item->category = isset($contestImpression->item) ? $contestImpression->item->context->category : null;
+		$item->text = isset($contestImpression->item) ? $contestImpression->item->text : null;
+		$item->url = isset($contestImpression->client) ? $contestImpression->item->url : null;
 		$item->created = isset($contestImpression->item->created) ? date("y-m-d h:i:s", $contestImpression->item->created) : null;
-		$item->title = $contestImpression->item->title;
-		$item->img = $contestImpression->item->img;
+		$item->title = isset($contestImpression->item) ? $contestImpression->item->title : null;
+		$item->img = isset($contestImpression->item) ? $contestImpression->item->img : null;
 		$item->save();
 
 		file_put_contents("log/queries", date('c') . " Impression: ".$contestImpression->item->text."\n", FILE_APPEND);
