@@ -10,7 +10,7 @@ require_once("config.php");
 
 if( isset($_GET["ajax"]) ) {
 	$db = new DatabaseManager();
-	$res = $db->query("SELECT * FROM contest.feedback WHERE team =");
+	$res = $db->query("SELECT * FROM contest.feedback WHERE team = 2013");
 	die( json_encode( array("data" => $res ) ) );
 }
 
@@ -36,33 +36,25 @@ if( isset($_GET["ajax"]) ) {
             "iDisplayLength":25,
             "aoColumns":[
                 { "mDataProp":"id" },
-                { "mDataProp":"domain" },
-                { "mDataProp":"category" },
-                { "mDataProp":"title" },
-                { "mDataProp":"text" },
-                { "mDataProp":"url" },
-                { "mDataProp":"img" },
-                { "mDataProp":"recommendable" },
-                { "mDataProp":"created" }
+                { "mDataProp":"client" },
+                { "mDataProp":"source" },
+                { "mDataProp":"target" },
+                { "mDataProp":"domain" }
             ]
         });
     });
 </script>
 
-<h2>Items</h2>
+<h2>My Successfull Recommendations</h2>
 
-<table style="" id="items">
+<table style="" id="feedback">
     <thead>
     <tr>
         <th>ID</th>
+        <th>Client</th>
+        <th>Source</th>
+        <th>Target</th>
         <th>Domain</th>
-        <th>Category</th>
-        <th>Title</th>
-        <th>Text</th>
-        <th>Url</th>
-        <th>Image</th>
-        <th>Recommendable</th>
-        <th>Created</th>
     </tr>
     </thead>
     <tbody></tbody>
