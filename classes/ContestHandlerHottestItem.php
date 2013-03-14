@@ -108,13 +108,15 @@ class ContestHandlerHottestItem implements ContestHandler {
 				$recommendation->save();
 			}
 		}
+
+		file_put_contents("log/myteam", date('c') .$contestImpression->team-id."\n", FILE_APPEND);
 	}
 
 	/* This method handles feedback messages from the contest server. As of now it does nothing. It could be used to look at
 	 * the object ids in the feedback message and possibly add those to the data list as well.
 	 */
 	public function handleFeedback(ContestFeedback $contestFeedback) {
-		file_put_contents("log/feedback", date('c') .print_r($contestFeedback, true)."\n", FILE_APPEND);
+
 		/*
 		file_put_contents("log/queries", date('c') .print_r($contestFeedback->source, true)."\n", FILE_APPEND);
 		*/
