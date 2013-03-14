@@ -14,6 +14,9 @@ class StardustModel {
 		$fields = array();
 		$values = array();
 
+		$dbmanager = new DatabaseManager();
+		$dbmanager->connect();
+
 		foreach($data as $field => $value) {
 			$value = is_string($value) ? '"'.mysql_real_escape_string($value).'"' : $value;
 			$value = empty($value) ? "NULL" : $value;
@@ -29,8 +32,6 @@ class StardustModel {
 		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
-		$dbmanager = new DatabaseManager();
-		$dbmanager->connect();
 		$dbmanager->query( $query );
 		$dbmanager->close();
 	}
