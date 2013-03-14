@@ -60,7 +60,6 @@ class ContestHandlerHottestItem implements ContestHandler {
 			// post the result back to the contest server
 			$result->postBack();
 			file_put_contents("log/queries", date('c') .print_r($result_object, true)."\n", FILE_APPEND);
-
 		}
 
 		// Accumulate Data
@@ -86,7 +85,10 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$myItem->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
 		$myItem->title = isset($item) ? $item->title : null;
 		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
-		$myItem->save();
+
+		if($myItem->id > 0) {
+			$myItem->save();
+		}
 
 		if( isset($result_data) ) {
 			foreach($result_data as $record) {
