@@ -24,4 +24,7 @@ define('PLISTA_CONTEST_TIMEOUT', 0.2);
 
 $config = array();
 $config["logfile"] = "log/plista.log";
+$config["zeit_api_key"] = "a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067";
 
+// headline-link
+// api.zeit.de/content?q=department:wirtschaft OR department :politik OR department:digital&limit=100&sort=release_date desc&fields=title&api_key=a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067
