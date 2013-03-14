@@ -142,7 +142,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		}
 
 		if (!empty($contestFeedback->team)) {
-			$feedback->team = $contestFeedback->config->team;
+			$feedback->team = $contestFeedback->team->id;
 			$save = true;
 		}
 
