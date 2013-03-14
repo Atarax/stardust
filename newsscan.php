@@ -132,7 +132,7 @@
 	}
 
 	foreach($newswords as $word => $count) {
-		echo $word." - ".$count."<br>";
+		echo $word." - ".$count."\n";
 	}
 
 ?>
