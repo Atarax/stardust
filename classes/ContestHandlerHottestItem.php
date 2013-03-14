@@ -42,7 +42,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 				}
 
 				$data_object = new stdClass;
-				$data_object->id = $row["id"];
+				$data_object->id = $row["item"];
 
 				$result_data[] = $data_object;
 			}
