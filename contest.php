@@ -18,8 +18,9 @@ $msg = urldecode($msg);
 
 try {
 	// parse plain json into a ContestMessage
+	file_put_contents("log/rawmsg", date('c') . " Message: ".print_r($msg,true)."\n", FILE_APPEND);
 	$msg = ContestMessage::fromJSON($msg);
-	
+
 	if (!$msg) {
 		throw new ContestException('parsing json failed', 400);
 	}

@@ -3,11 +3,11 @@
  * this message is created on the live server, then sent to the contest server and from there on forwarded to all teams.
  */
 class ContestFeedback extends ContestMessage {
-	private $client;
-	private $domain;
-	private $source;
-	private $target;
-	private $category;
+	public $client;
+	public $domain;
+	public $source;
+	public $target;
+	public $category;
 	
 	public function __construct($data) {
 		parent::__construct($data);
