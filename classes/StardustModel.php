@@ -21,7 +21,7 @@ class StardustModel {
 		$values = array();
 
 		foreach($data as $field => $value) {
-			$value = is_string($value) ? '"'.mysql_real_escape_string($value).'"' : $value;
+			$value = is_string($value) ? '"'.$value.'"' : $value;
 			$value = empty($value) ? "NULL" : $value;
 			$fields[] = $field;
 			$values[] = $value;
