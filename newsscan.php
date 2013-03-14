@@ -122,7 +122,11 @@
 			}
 		}
 
-		$db->query("INSERT INTO contest.newsscore(item,score) VALUES (".$row["id"].",".$score.")");
+		$scoreModel = new NewsScore();
+		$scoreModel->item = $row["id"];
+		$scoreModel->score = $score;
+		$scoreModel->save();
+
 		echo $row["id"]." - ".$score;
 	}
 
