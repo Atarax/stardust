@@ -68,6 +68,8 @@ class ContestHandlerLIFO implements ContestHandler {
 		$item->img = $contestImpression->item->img;
 		$item->save();
 
+		file_put_contents("log/queries", date('c') . " Impression: ".$contestImpression->item->text."\n", FILE_APPEND);
+
 
 		// check to see whether the current item id is contained in the data set
 		if ($item->id > 0 && !in_array($item->id, $data) && $item->recommendable) {

@@ -35,9 +35,6 @@ class StardustModel {
 		$query = "INSERT INTO contest.".lcfirst( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
-		file_put_contents("log/queries", date('c') . " Impression: ".$this->title."\n", FILE_APPEND);
-
-
 		mysql_connect( self::$config["mysql_host"], self::$config["mysql_user"], self::$config["mysql_pass"] );
 		mysql_set_charset( "utf8" );
 		mysql_query( $query );
