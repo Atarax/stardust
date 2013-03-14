@@ -133,4 +133,11 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$feedback->save();
 		}
 	}
+
+	/* This is the handler method for error messages from the contest server. Implement your error handling code here.
+	 */
+	public function handleError(ContestError $error) {
+		//echo 'oh no, an error: ' . $error->getMessage();
+		throw new ContestException($error);
+	}
 }
