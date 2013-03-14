@@ -51,23 +51,28 @@ class ContestHandlerLIFO implements ContestHandler {
 			$data = array(0);
 		}
 
+		$item = $contestImpression->item;
+		$client = $contestImpression->client;
+		$domain = $contestImpression->domain;
+		$context = isset($item) ? $item->context : null;
+
 		$impression = new Impression();
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
-		$impression->client = isset($contestImpression->client) ? $contestImpression->client->id : null;
-		$impression->domain = isset($contestImpression->domain) ? $contestImpression->domain->id : null;
-		$impression->item = isset($contestImpression->item) ? $contestImpression->item->id : null;
+		$impression->client = isset($client) ? $client->id : null;
+		$impression->domain = isset($domain) ? $domain->id : null;
+		$impression->item = isset($item) ? $item->id : null;
 		$impression->save();
 
 		$item = new Item();
-		$item->id = isset($contestImpression->item->id) ? $contestImpression->item->id : 0;
-		$item->recommendable = isset($contestImpression->item->recommendable) ? $contestImpression->item->recommendable : true;
-		$item->domain = isset($contestImpression->domain) ? $domainid : null;
-		$item->category = isset($contestImpression->item) ? $contestImpression->item->context->category : null;
-		$item->text = isset($contestImpression->item) ? $contestImpression->getItem()->getText() : null;
-		$item->url = isset($contestImpression->client) ? $contestImpression->item->url : null;
-		$item->created = isset($contestImpression->item->created) ? date("y-m-d h:i:s", $contestImpression->item->created) : null;
-		$item->title = isset($contestImpression->item) ? $contestImpression->item->title : null;
-		$item->img = isset($contestImpression->item) ? $contestImpression->item->img : null;
+		$item->id = isset($item) ? $item->id : 0;
+		$item->recommendable = isset($item) ? $item->recommendable : true;
+		$item->domain = isset($domain) ? $domain->id : null;
+		$item->category = isset($context) ? $context->category : null;
+		$item->text = isset($item) ? $item->text : null;
+		$item->url = isset($item) ? $item->url : null;
+		$item->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
+		$item->title = isset($item) ? $item->title : null;
+		$item->img = isset($item) ? $item->img : null;
 		$item->save();
 
 		file_put_contents("log/queries", date('c') . " Impression: ".print_r($contestImpression, true)."\n", FILE_APPEND);
