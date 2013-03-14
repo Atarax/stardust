@@ -10,14 +10,11 @@ require_once("config.php");
 
 if( isset($_GET["ajax"]) ) {
 	$db = new DatabaseManager();
-	$res = $db->query("SELECT * FROM contest.impression");
+	$res = $db->query("SELECT * FROM contest.feedback");
 	//var_dump( array("data" => $res) );
 	die( json_encode( array("data" => $res ) ) );
 }
 
-$db = new DatabaseManager();
-$res = $db->query("SELECT * FROM contest.impression");
-var_dump($res);
 ?>
 <link rel="stylesheet" type="text/css" href="js/DataTables-1.9.3/media/css/jquery.dataTables.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
