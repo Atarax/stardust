@@ -95,7 +95,8 @@
 			"bin",
 			"seit",
 			"kann",
-			"kein"
+			"kein",
+			"soll"
 		);
 
 		return in_array($word, $blacklist);
