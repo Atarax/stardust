@@ -39,7 +39,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 			$db = new DatabaseManager();
 			$data = $db->query("
 					SELECT item.id, item.title
-					FROM item, newsscore
+					FROM contest.item, contest.newsscore
 					WHERE item.id = newsscore.item AND
 						  item.domain = ".$domainid."
 					ORDER BY newsscore.score DESC
