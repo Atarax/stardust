@@ -131,8 +131,8 @@
 	$scores = array();
 	$db = new DatabaseManager();
 	$db->connect();
-	$db->query("TRUNCATE TABLE contest.newsscore");
 	$res = $db->query("SELECT id,title FROM contest.item");
+	$db->query("TRUNCATE TABLE contest.newsscore");
 
 	foreach( $res as $row ) {
 		$itemwords = explode(" ", $row["title"]);
