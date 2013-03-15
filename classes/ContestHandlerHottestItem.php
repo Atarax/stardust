@@ -38,7 +38,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$db = new DatabaseManager();
 			$data = $db->query("
 					SELECT item.id AS item
-					FROM contest.item, contest.hottestitem
+					FROM contest.item, contest.hottestitemscore
 					WHERE item.id = hottestitem.item AND
 						  item.domain = ".$domainid." AND
 						  item.recommendable > 0 AND
