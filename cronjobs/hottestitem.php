@@ -23,7 +23,7 @@ foreach( $data as $row ) {
 	if( !$row["item"] ) {
 		continue;
 	}
-	$scoreModel = new HottestItemScore();
+	$scoreModel = new Hottestitemscore();
 	$scoreModel->item = $row["item"];
 	$scoreModel->score = $row["score"];
 	$scoreModel->save();
@@ -31,7 +31,6 @@ foreach( $data as $row ) {
 
 echo "Finished.".PHP_EOL;
 
-$db->close();
 file_put_contents("hottestitem.log", date('c') . " Newsc-Scan finished\n", FILE_APPEND);
 
 ?>
