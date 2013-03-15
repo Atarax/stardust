@@ -33,7 +33,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
-		if ($contestImpression->recommend) {
+		if ( $item->id > 0 && $contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();
