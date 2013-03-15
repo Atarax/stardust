@@ -43,7 +43,8 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 					SELECT item.id, item.title
 					FROM contest.item, contest.newsscore
 					WHERE item.id = newsscore.item AND
-						  item.domain = ".$domainid."
+						  item.domain = ".$domainid." AND
+						  item.recommendable != 0
 					ORDER BY newsscore.score DESC
 					LIMIT 30;
 			");
