@@ -40,7 +40,7 @@ if( isset($_GET["ajax"]) ) {
                 { "mDataProp":"source" },
                 { "mDataProp":"target" },
                 { "mDataProp":"domain" },
-                { "mDataProp":"created" }
+                { "mDataProp":"created", "asSorting": [ "desc" ] }
             ]
         });
     });
