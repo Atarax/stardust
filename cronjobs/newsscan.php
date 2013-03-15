@@ -1,5 +1,5 @@
 <?php
-	require_once("config.php");
+	require_once("../config.php");
 
 	file_put_contents("newsscan.log", date('c') . " Newsc-Scan started\n", FILE_APPEND);
 
