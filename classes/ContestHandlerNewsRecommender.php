@@ -50,7 +50,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 			$result_data = array();
 			$i = 0;
 
-			schuffle($data);
+			shuffle($data);
 
 			// iterate over the data array
 			foreach ($data as $row) {
