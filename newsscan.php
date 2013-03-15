@@ -1,7 +1,7 @@
 <?php
 	require_once("config.php");
 
-	file_put_contents("log/newsscan.php", date('c') . " Newsc-Scan started\n", FILE_APPEND);
+	file_put_contents("log/newsscan", date('c') . " Newsc-Scan started\n", FILE_APPEND);
 
 	function ignoreWord($word) {
 		$blacklist = array(
@@ -162,6 +162,6 @@
 		echo $word." - ".$count.PHP_EOL;
 	}
 
-	file_put_contents("log/newsscan.php", date('c') . " Newsc-Scan finished\n", FILE_APPEND);
+	file_put_contents("log/newsscan", date('c') . " Newsc-Scan finished\n", FILE_APPEND);
 
 ?>
