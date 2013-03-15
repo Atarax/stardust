@@ -7,3 +7,6 @@ Latest recommends:
 
 Recommends in hour:
     SELECT DATE_FORMAT(recommendation.created,"%Y-%m-%d %k") FROM recommendation WHERE DATE_FORMAT(recommendation.created,"%Y-%m-%d %k") = "2013-03-15 10";
+
+Hottest item by news:
+    SELECT item.title,newsscore.score FROM contest.item, contest.newsscore WHERE item.id = newsscore.item ORDER BY score DESC LIMIT 150;

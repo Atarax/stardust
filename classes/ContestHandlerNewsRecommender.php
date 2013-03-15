@@ -50,6 +50,8 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 			$result_data = array();
 			$i = 0;
 
+			schuffle($data);
+
 			// iterate over the data array
 			foreach ($data as $row) {
 				if(is_object($item) && $item->id > 0 && $row["item"] == $item->id) {
@@ -122,6 +124,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 		file_put_contents("log/queries", date('c') .print_r($contestFeedback->source, true)."\n", FILE_APPEND);
 		*/
 		$feedback = new Feedback();
+
 
 		$save = false;
 		if (!empty($contestFeedback->source)) {
