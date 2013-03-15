@@ -1,5 +1,12 @@
 <?php
 
+$config = array();
+$config["logfile"] = "log/plista.log";
+$config["zeit_api_key"] = "a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067";
+
+// headline-link
+// api.zeit.de/content?q=department:wirtschaft OR department :politik OR department:digital&limit=100&sort=release_date desc&fields=title&api_key=a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067
+
 // this function tries to autoload classes whose definition is unknown to the interpreter at runtime
 function autoload_plista_contest($className) {
 	if (is_readable(dirname(__FILE__) . '/classes/' . $className . '.php')) {
@@ -21,10 +28,3 @@ function plista_json_encode($elem) {
 
 // defines the network timeout for HttpRequest.php
 define('PLISTA_CONTEST_TIMEOUT', 0.2);
-
-$config = array();
-$config["logfile"] = "log/plista.log";
-$config["zeit_api_key"] = "a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067";
-
-// headline-link
-// api.zeit.de/content?q=department:wirtschaft OR department :politik OR department:digital&limit=100&sort=release_date desc&fields=title&api_key=a374ba6ae49faeb3af267874fb185392914670071e2b14b1a067
