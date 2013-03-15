@@ -29,7 +29,7 @@ class StardustModel {
 			$onupdate[] = $field."=".$value;
 		}
 
-		$query = "INSERT INTO contest.".str_to_lower( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
+		$query = "INSERT INTO contest.".strtolower( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		$dbmanager->query( $query );
