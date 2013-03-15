@@ -161,7 +161,7 @@
 	foreach($newswords as $word => $count) {
 		echo $word." - ".$count.PHP_EOL;
 	}
-
+	$db->close();
 	file_put_contents("newsscan.log", date('c') . " Newsc-Scan finished\n", FILE_APPEND);
 
 ?>

@@ -41,8 +41,13 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8
 
-
  CREATE TABLE `newsscore` (
+  `item` int(11) NOT NULL,
+  `score` float DEFAULT 0,
+  PRIMARY KEY (`item`)
+) DEFAULT CHARSET=utf8
+
+ CREATE TABLE `hottestitemscore` (
   `item` int(11) NOT NULL,
   `score` float DEFAULT 0,
   PRIMARY KEY (`item`)
