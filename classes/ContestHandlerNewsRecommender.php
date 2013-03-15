@@ -109,7 +109,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
-				$recommendation->recommender = 1;
+				$recommendation->recommender = 2;
 				$recommendation->save();
 			}
 		}
