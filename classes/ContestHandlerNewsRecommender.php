@@ -44,7 +44,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 						  item.recommendable > 0 AND
 						  item.id > 0
 					ORDER BY newsscore.score DESC
-					LIMIT 30;
+					LIMIT 15;
 			");
 
 			$result_data = array();
