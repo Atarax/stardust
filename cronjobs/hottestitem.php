@@ -23,7 +23,7 @@ foreach( $data as $row ) {
 	if( !$row["item"] ) {
 		continue;
 	}
-	$scoreModel = new Hottestitemscore();
+	$scoreModel = new HottestItemScore();
 	$scoreModel->item = $row["item"];
 	$scoreModel->score = $row["score"];
 	$scoreModel->save();
