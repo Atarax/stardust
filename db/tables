@@ -35,6 +35,7 @@ CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `source` int(11) DEFAULT NULL,
   `item` int(11) DEFAULT NULL,
+  `client` int(11) DEFAULT NULL,
   `recommender` int(11) DEFAULT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

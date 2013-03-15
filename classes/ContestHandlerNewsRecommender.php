@@ -6,7 +6,7 @@
  * Time: 7:11 PM
  * To change this template use File | Settings | File Templates.
  */
-class ContestHandlerHottestItem implements ContestHandler {
+class ContestHandlerNewsRecommender implements ContestHandler {
 	// holds the instance, singleton pattern
 	private static $instance;
 
@@ -14,7 +14,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new ContestHandlerHottestItem();
+			self::$instance = new ContestHandlerNewsRecommender();
 		}
 
 		return self::$instance;
@@ -40,7 +40,8 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$data = $db->query("
 					SELECT item.id, item.title
 					FROM item, newsscore
-					WHERE item.id = newsscore.item
+					WHERE item.id = newsscore.item AND
+						  item.domain = ".$domainid."
 					ORDER BY newsscore.score DESC
 					LIMIT 30;
 			");
