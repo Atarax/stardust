@@ -39,8 +39,7 @@ try {
 	} else if ($msg instanceof ContestFeedback) {
 		// no response required here
 		$handler->handleFeedback($msg);
-		file_put_contents("log/feedback", date('c') . print_r($msg,true)."\n", FILE_APPEND);
-		if($msg->getTeam() == "227") {
+		if($msg->team->id == "227") {
 			file_put_contents("log/feedback", date('c') . " Feedback received!\n", FILE_APPEND);
 		}
 	} else if ($msg instanceof ContestError) {
