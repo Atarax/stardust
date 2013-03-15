@@ -32,7 +32,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
-		if (isset($item->id) && $contestImpression->recommend) {
+		if ($contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();
@@ -52,7 +52,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 
 			// iterate over the data array
 			foreach ($data as $row) {
-				if($row["item"] == $item->id) {
+				if(is_object($item) && $item->id > 0 && $row["item"] == $item->id) {
 					continue;
 				}
 				// don't return more items than asked for
