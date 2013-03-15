@@ -52,7 +52,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 			shuffle($data);
 			// iterate over the data array
 			foreach ($data as $row) {
-				if($row["item"] == $item->id) {
+				if(is_object($item) && $item->id > 0 && $row["item"] == $item->id) {
 					continue;
 				}
 				// don't return more items than asked for
