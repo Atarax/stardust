@@ -9,11 +9,11 @@ require_once 'config.php';
 
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
 $rand = rand(0,1);
-if( $rand == 0 ) {
+if( $rand == 0 || true ) {
 	$handler = ContestHandlerHottestItem::getInstance();
 }
 else {
-	$handler = ContestHandlerNewsRecommender::getInstance();
+	//$handler = ContestHandlerNewsRecommender::getInstance();
 }
 
 // read entire message body into a variable
