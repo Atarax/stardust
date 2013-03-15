@@ -32,7 +32,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
-		$itemid = isset($impression->item->id) ? $impression->item->id : 0;
+		$itemid = isset($item->id) ? $item->id : 0;
 
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
 		if ($itemid > 0 && $contestImpression->recommend) {
