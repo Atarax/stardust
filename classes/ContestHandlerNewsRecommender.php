@@ -32,7 +32,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
-		if (is_object($item) && $item->id > 0 && $contestImpression->recommend) {
+		if (isset($item->id) && $contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();
