@@ -39,7 +39,8 @@ if( isset($_GET["ajax"]) ) {
                 { "mDataProp":"client" },
                 { "mDataProp":"source" },
                 { "mDataProp":"target" },
-                { "mDataProp":"domain" }
+                { "mDataProp":"domain" },
+                { "mDataProp":"created" }
             ]
         });
     });
@@ -55,6 +56,7 @@ if( isset($_GET["ajax"]) ) {
         <th>Source</th>
         <th>Target</th>
         <th>Domain</th>
+        <th>Created</th>
     </tr>
     </thead>
     <tbody></tbody>
