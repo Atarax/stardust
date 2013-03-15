@@ -9,7 +9,7 @@ require_once 'config.php';
 
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
 $rand = rand(0,1);
-if( $rand == 0 && false ) {
+if( $rand == 0 ) {
 	$handler = ContestHandlerHottestItem::getInstance();
 }
 else {

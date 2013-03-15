@@ -6,7 +6,7 @@
  * Time: 7:11 PM
  * To change this template use File | Settings | File Templates.
  */
-class ContestHandlerNewsRecommender implements ContestHandler {
+class ContestHandlerNewsRecommender implements ContestHandler{
 	// holds the instance, singleton pattern
 	private static $instance;
 
@@ -106,6 +106,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
+				$recommendation->client = $client;
 				$recommendation->recommender = 2;
 				$recommendation->save();
 			}

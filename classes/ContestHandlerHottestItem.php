@@ -107,6 +107,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
+				$recommendation->client = $client;
 				$recommendation->recommender = 1;
 				$recommendation->save();
 			}
