@@ -119,10 +119,8 @@ class ContestHandlerHottestItem implements ContestHandler {
 	 * the object ids in the feedback message and possibly add those to the data list as well.
 	 */
 	public function handleFeedback(ContestFeedback $contestFeedback) {
+		file_put_contents("log/feedback", date('c') .print_r($contestFeedback, true)."\n", FILE_APPEND);
 
-		/*
-		file_put_contents("log/queries", date('c') .print_r($contestFeedback->source, true)."\n", FILE_APPEND);
-		*/
 		$feedback = new Feedback();
 
 		$save = false;

@@ -11,4 +11,5 @@ class Recommendation extends StardustModel{
 	public $source;
 	public $item;
 	public $recommender;
+	public $client
 }

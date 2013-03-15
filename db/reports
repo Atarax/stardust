@@ -4,3 +4,6 @@ Successfull recommends:
 
 Latest recommends:
     SELECT item.title, recommendation.created FROM recommendation, item WHERE recommendation.item = item.id ORDER BY recommendation.created DESC LIMIT 20
+
+Recommends in hour:
+    SELECT DATE_FORMAT(recommendation.created,"%Y-%m-%d %k") FROM recommendation WHERE DATE_FORMAT(recommendation.created,"%Y-%m-%d %k") = "2013-03-15 10";
