@@ -62,7 +62,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 				}
 
 				$data_object = new stdClass;
-				$data_object->id = $row["item"];
+				$data_object->id = $row["id"];
 
 				$result_data[] = $data_object;
 			}
