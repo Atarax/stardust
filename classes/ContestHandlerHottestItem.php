@@ -53,6 +53,9 @@ class ContestHandlerHottestItem implements ContestHandler {
 
 			// iterate over the data array
 			foreach ($data as $row) {
+				if($row["item"] == $item->id) {
+					continue;
+				}
 				// don't return more items than asked for
 				if (++$i > $contestImpression->limit) {
 					break;
