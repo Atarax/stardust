@@ -20,11 +20,11 @@ $data = $db->query("
 $db->query("TRUNCATE TABLE contest.hottestitemscore");
 
 foreach( $data as $row ) {
-	if( !$row["id"] ) {
+	if( !$row["item"] ) {
 		continue;
 	}
 	$scoreModel = new HottestItemScore();
-	$scoreModel->item = $row["id"];
+	$scoreModel->item = $row["item"];
 	$scoreModel->score = $row["score"];
 	$scoreModel->save();
 }
