@@ -37,20 +37,19 @@ class ContestHandlerHottestItem implements ContestHandler {
 
 			$db = new DatabaseManager();
 			$data = $db->query("
-				SELECT COUNT(impression.id) AS visits, impression.item
-				FROM contest.impression, contest.item
-				WHERE item.id = impression.item AND
-					item.recommendable > 0 AND
-					impression.item != 0 AND
-					item.domain = ".$domainid."
-				GROUP BY item
-				ORDER BY visits DESC
-				LIMIT 20
+					SELECT item.id AS item
+					FROM contest.item, contest.hottestitem
+					WHERE item.id = hottestitem.item AND
+						  item.domain = ".$domainid." AND
+						  item.recommendable > 0 AND
+						  item.id > 0
+					ORDER BY hottestitem.score DESC
+					LIMIT 30;
 			");
-
 			$result_data = array();
 			$i = 0;
 
+			shuffle($data);
 			// iterate over the data array
 			foreach ($data as $row) {
 				if($row["item"] == $item->id) {
