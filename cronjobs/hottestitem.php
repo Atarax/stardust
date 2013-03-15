@@ -23,8 +23,7 @@ foreach( $data as $row ) {
 	if( !$row["id"] ) {
 		continue;
 	}
-	$score = $score/count($itemwords);
-	$scoreModel = new NewsScore();
+	$scoreModel = new HottestItemScore();
 	$scoreModel->item = $row["id"];
 	$scoreModel->score = $row["score"];
 	$scoreModel->save();
