@@ -26,14 +26,8 @@ class ContestHandlerHottestItem implements ContestHandler {
 	 * and sends those back to the contest server.
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
-		// Accumulate Data
-		$item = $contestImpression->item;
-		$client = $contestImpression->client;
-		$domain = $contestImpression->domain;
-		$context = isset($item) && isset($item->context) ? $item->context : null;
-
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
-		if (isset($item->id) && $item->id > 0 && $contestImpression->recommend) {
+		if ($contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();
@@ -54,11 +48,6 @@ class ContestHandlerHottestItem implements ContestHandler {
 
 			// iterate over the data array
 			foreach ($data as $row) {
-				// exclude the new item id
-				if ($row["item"] == $item->id) {
-					continue;
-				}
-
 				// don't return more items than asked for
 				if (++$i > $contestImpression->limit) {
 					break;
@@ -81,6 +70,12 @@ class ContestHandlerHottestItem implements ContestHandler {
 				$result->postBack();
 			}
 		}
+
+		// Accumulate Data
+		$item = $contestImpression->item;
+		$client = $contestImpression->client;
+		$domain = $contestImpression->domain;
+		$context = isset($item) && isset($item->context) ? $item->context : null;
 
 		$impression = new Impression();
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
