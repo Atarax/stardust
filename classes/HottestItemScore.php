@@ -6,7 +6,7 @@
  * Time: 7:21 PM
  * To change this template use File | Settings | File Templates.
  */
-class Hottestitemscore extends StardustModel {
+class HottestItemScore extends StardustModel {
 	public $item;
 	public $score;
 }
