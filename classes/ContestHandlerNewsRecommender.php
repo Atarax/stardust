@@ -32,8 +32,10 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
+		$itemid = isset($item->id) ? $item->id : 0;
+
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
-		if ( $item->id > 0 && $contestImpression->recommend) {
+		if ( $itemid > 0 && $contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();
@@ -52,7 +54,7 @@ class ContestHandlerNewsRecommender implements ContestHandler {
 			// iterate over the data array
 			foreach ($data as $row) {
 				// exclude the new item id
-				if ($row == $item->id) {
+				if ($row["id"] == $item->id) {
 					continue;
 				}
 
