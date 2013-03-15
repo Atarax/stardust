@@ -39,11 +39,11 @@ class ContestHandlerHottestItem implements ContestHandler {
 			$data = $db->query("
 					SELECT item.id AS item
 					FROM contest.item, contest.hottestitemscore
-					WHERE item.id = hottestitem.item AND
+					WHERE item.id = hottestitemscore.item AND
 						  item.domain = ".$domainid." AND
 						  item.recommendable > 0 AND
 						  item.id > 0
-					ORDER BY hottestitem.score DESC
+					ORDER BY hottestitemscore.score DESC
 					LIMIT 30;
 			");
 			$result_data = array();
