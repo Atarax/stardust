@@ -55,7 +55,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 			// iterate over the data array
 			foreach ($data as $row) {
 				// exclude the new item id
-				if ($row == $item->id) {
+				if ($row["item"] == $item->id) {
 					continue;
 				}
 
