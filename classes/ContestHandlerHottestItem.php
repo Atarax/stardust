@@ -27,6 +27,11 @@ class ContestHandlerHottestItem implements ContestHandler {
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
+		$item = $contestImpression->item;
+		$client = $contestImpression->client;
+		$domain = $contestImpression->domain;
+		$context = isset($item) && isset($item->context) ? $item->context : null;
+
 		if ($contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
 
@@ -72,11 +77,6 @@ class ContestHandlerHottestItem implements ContestHandler {
 		}
 
 		// Accumulate Data
-		$item = $contestImpression->item;
-		$client = $contestImpression->client;
-		$domain = $contestImpression->domain;
-		$context = isset($item) && isset($item->context) ? $item->context : null;
-
 		$impression = new Impression();
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
 		$impression->client = isset($client) ? $client->id : null;
