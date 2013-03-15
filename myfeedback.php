@@ -10,7 +10,7 @@ require_once("config.php");
 
 if( isset($_GET["ajax"]) ) {
 	$db = new DatabaseManager();
-	$res = $db->query("SELECT * FROM contest.feedback WHERE team = 227");
+	$res = $db->query("SELECT * FROM contest.feedback WHERE team = 227 ORDER BY CREATED DESC");
 	die( json_encode( array("data" => $res ) ) );
 }
 
