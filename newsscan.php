@@ -73,7 +73,29 @@
 			"wegen",
 			"ja",
 			"nein",
-			"sind"
+			"sind",
+			"auch",
+			"sein",
+			"wer",
+			"zwei",
+			"eins",
+			"drei",
+			"ihr",
+			"bis",
+			"doch",
+			"ohne",
+			"ich",
+			"zur",
+			"seine",
+			"uns",
+			"man",
+			"mir",
+			"du",
+			"unter",
+			"bin",
+			"seit",
+			"kann",
+			"kein"
 		);
 
 		return in_array($word, $blacklist);
@@ -109,6 +131,7 @@
 	$scores = array();
 	$db = new DatabaseManager();
 	$db->connect();
+	$db->query("TRUNCATE TABLE contest.newsscore");
 	$res = $db->query("SELECT id,title FROM contest.item");
 
 	foreach( $res as $row ) {
@@ -122,17 +145,18 @@
 				$score += $newswords[$word];
 			}
 		}
-
+		$score = $score/count($itemwords);
 		$scoreModel = new NewsScore();
 		$scoreModel->item = $row["id"];
 		$scoreModel->score = $score;
 		$scoreModel->save();
 
-		echo $row["id"]." - ".$score;
+		//echo $row["id"]." - ".$score;
 	}
 
+	asort($newswords);
 	foreach($newswords as $word => $count) {
-		echo $word." - ".$count."\n";
+		echo $word." - ".$count.PHP_EOL;
 	}
 
 ?>
