@@ -20,7 +20,9 @@ $data = $db->query("
 $db->query("TRUNCATE TABLE contest.hottestitemscore");
 
 foreach( $data as $row ) {
-
+	if( !isset($row["id"]) ) {
+		continue;
+	}
 	$score = $score/count($itemwords);
 	$scoreModel = new NewsScore();
 	$scoreModel->item = $row["id"];
