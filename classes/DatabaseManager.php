@@ -10,14 +10,8 @@
 class DatabaseManager {
 	private $connected = false;
 
-	private static $config = array(
-		"mysql_host" => "localhost",
-		"mysql_user" => "root",
-		"mysql_pass" => "g9H43b"
-	);
-
 	public function connect() {
-		mysql_connect( self::$config["mysql_host"], self::$config["mysql_user"], self::$config["mysql_pass"] );
+		mysql_connect( MYSQL_HOST, MYSQL_USER, MYSQL_PASS );
 
 		$error = mysql_error();
 		if( strlen($error) != 0 ) {
