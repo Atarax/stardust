@@ -8,5 +8,5 @@
  */
 require_once("../config.php");
 $db = new DatabaseManager();
-$res = $db->query("SELECT item.id AS itemid, feedback.*, item.id, item.title FROM contest.feedback, contest.item WHERE feedback.target = item.id AND feedback.team = 227 ORDER BY feedback.created DESC LIMIT 10");
+$res = $db->query("SELECT item.url, item.id AS itemid, feedback.*, item.id, item.title FROM contest.feedback, contest.item WHERE feedback.target = item.id AND feedback.team = 227 ORDER BY feedback.created DESC LIMIT 10");
 die( json_encode( array("data" => $res ) ) );
