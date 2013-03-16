@@ -35,15 +35,44 @@ $myfeedbackcount = $data[0]["count"];
 <script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.fnGetColumnData.js"></script>
 <script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.helperFunctions.js"></script>
 
-<h3>Numbers:</h3>
-<div id="numbers">
-	Impressions: <?= $impressioncount ?><br>
-	Items: <?= $itemcount ?><br>
-	Recommendations: <?= $recommendationcount ?><br>
-	Feedbacks: <?= $feedbackcount ?><br>
-	My Feedbacks: <?= $myfeedbackcount ?><br>
-</div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        /**
+         * running processes and daemons
+         */
+        $('#numbers').dataTable({
+			"sDom": "r",
+            "sAjaxSource":"api/numbers.php",
+            "sAjaxDataProp":"data",
+            "iDisplayLength":10,
+            "aoColumns":[
+                { "mDataProp":"impressioncount" },
+                { "mDataProp":"itemcount" },
+                { "mDataProp":"recommendationcount" },
+                { "mDataProp":"feedbackcount" },
+                { "mDataProp":"myfeedbackcount" }
+            ]
+        });
+    });
+</script>
+
+<h3>Numbers</h3>
+
+<table style="" id="numbers">
+    <thead>
+    <tr>
+        <th>Impressions</th>
+        <th>Items</th>
+        <th>Recommendations</th>
+        <th>Feedback total</th>
+        <th>My Feedback</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table><br/>
+<br>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -52,7 +81,6 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#latestrecommends').dataTable({
-            "bProcessing":true,
             "sAjaxSource":"api/latestrecommends.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
@@ -68,7 +96,7 @@ $myfeedbackcount = $data[0]["count"];
     });
 </script>
 
-<h2>Latest Reccomends</h2>
+<h3>Latest Reccomends</h3>
 
 <table style="" id="latestrecommends">
     <thead>
@@ -93,7 +121,6 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#latestfeedbacks').dataTable({
-            "bProcessing":true,
             "sAjaxSource":"api/latestfeedbacks.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
@@ -111,7 +138,7 @@ $myfeedbackcount = $data[0]["count"];
     });
 </script>
 
-<h2>Latest Feedbacks</h2>
+<h3>Latest Feedbacks</h3>
 
 <table style="" id="latestfeedbacks">
     <thead>
