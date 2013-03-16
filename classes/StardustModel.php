@@ -8,8 +8,6 @@
  */
 
 class StardustModel {
-	public $id;
-
 	public function save() {
 		$data = get_object_vars($this);
 		$onupdate = array();
