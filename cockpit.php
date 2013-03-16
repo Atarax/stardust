@@ -107,7 +107,8 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"client" },
                 {
                     "mData":function (data, type) {
-                        return data.url.length == 0 ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+						console.debug(data);
+                        return "" ;
                     }
 				},
                 { "mDataProp":"sourcetitle", "sWidth": "38%" },
