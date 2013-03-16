@@ -1,7 +1,5 @@
 <?php
 
-use InvalidArgumentException;
-
 /**
  * StringUtil class
  * class for common string functions
