@@ -105,7 +105,11 @@ $myfeedbackcount = $data[0]["count"];
             "iDisplayLength":10,
             "aoColumns":[
                 { "mDataProp":"client" },
-                { "mDataProp":"sourceid" },
+                {
+                    "mData":function (data, type) {
+                        return data.url.length == 0 ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                    }
+				},
                 { "mDataProp":"sourcetitle", "sWidth": "38%" },
                 { "mDataProp":"id" },
                 { "mDataProp":"title", "sWidth": "38%" },
