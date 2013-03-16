@@ -34,7 +34,25 @@ $myfeedbackcount = $data[0]["count"];
 <script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.rowGrouping.js"></script>
 <script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.fnGetColumnData.js"></script>
 <script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.helperFunctions.js"></script>
+<script type="text/javascript">
+    /**
+     * function to update an table
+     */
+    function performAjaxUpdates(id) {
+        $('#' + id).dataTable().fnReloadAjax();
+    }
 
+	function updateTables() {
+        performAjaxUpdates('numbers');
+        performAjaxUpdates('latestrecommends');
+        performAjaxUpdates('latestfeedbacks');
+        setTimeout("updateTables()", 5000);
+	}
+
+    $(document).ready(function () {
+        setTimeout("updateTables()", 2500);
+	});
+</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -121,7 +139,7 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#latestfeedbacks').dataTable({
-            "sAjaxSource":"api/latestfeedbacks.php",
+             "sAjaxSource":"api/latestfeedbacks.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
