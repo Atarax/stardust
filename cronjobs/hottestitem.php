@@ -12,7 +12,8 @@ $data = $db->query("
 				FROM contest.impression, contest.item
 				WHERE item.id = impression.item AND
 					item.recommendable > 0 AND
-					impression.item != 0
+					impression.item != 0 AND
+					DATEFIFF(NOW(), impression.created) = 0
 				GROUP BY item
 				ORDER BY score DESC
 			");
