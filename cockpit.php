@@ -76,16 +76,16 @@ $myfeedbackcount = $data[0]["count"];
     });
 </script>
 
-<h3>Numbers</h3>
+<h3>Stats</h3>
 
 <table style="" id="numbers">
     <thead>
     <tr>
-        <th>Impressions</th>
-        <th>Items</th>
-        <th>Recommendations</th>
-        <th>Feedback total</th>
-        <th>My Feedback</th>
+        <th>Items in database</th>
+        <th>Impressions today</th>
+        <th>Recommendations today</th>
+        <th>Feedback today</th>
+        <th>My Feedback today</th>
     </tr>
     </thead>
     <tbody></tbody>
