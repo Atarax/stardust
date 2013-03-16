@@ -48,7 +48,7 @@ try {
 		}
 	} else if ($msg instanceof ContestError) {
 		// yup, it's an error
-		file_put_contents(LOG_PATH."error", date('c') . "Error: ".print_r($msg, true)."\n--------------------------------------------------\n", FILE_APPEND);
+		file_put_contents(LOG_PATH."error", date('c') . "Error: ".print_r($msg, true)."\n--------------------------------------------------\n\n", FILE_APPEND);
 		$handler->handleError($msg);
 	} else {
 		// we don't know how to handle anything else
