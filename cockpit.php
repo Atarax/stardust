@@ -102,6 +102,7 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"client" },
                 { "mDataProp":"source" },
                 { "mDataProp":"title" },
+                { "mDataProp":"item" },
                 { "mDataProp":"domain" },
                 { "mDataProp":"team" },
                 { "mDataProp":"created" }
@@ -119,6 +120,7 @@ $myfeedbackcount = $data[0]["count"];
         <th>Client</th>
         <th>Source</th>
         <th>Target</th>
+        <th>Target ID</th>
         <th>Domain</th>
         <th>Team</th>
         <th>Created</th>
