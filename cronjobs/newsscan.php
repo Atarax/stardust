@@ -3,107 +3,6 @@
 
 	file_put_contents("newsscan.log", date('c') . " Newsc-Scan started\n", FILE_APPEND);
 
-	function ignoreWord($word) {
-		$blacklist = array(
-			"sich",
-			"halbiert",
-			"hat",
-			"der",
-			"die",
-			"in",
-			"von",
-			"ein",
-			"auf",
-			"gegen",
-			"fr",
-			"vor",
-			"ist",
-			"wird",
-			"nicht",
-			"das",
-			"mit",
-			"sich",
-			"wir",
-			"im",
-			"und",
-			"an",
-			"als",
-			"zu",
-			"des",
-			"eine",
-			"neue",
-			"mehr",
-			"für",
-			"aus",
-			"um",
-			"will",
-			"zum",
-			"am",
-			"über",
-			"dem",
-			"ab",
-			"sie",
-			"bei",
-			"zurück",
-			"jetzt",
-			"was",
-			"alle",
-			"wie",
-			"neuer",
-			"war",
-			"nur",
-			"noch",
-			"er",
-			"so",
-			"einen",
-			"viele",
-			"haben",
-			"den",
-			"wenn",
-			"es",
-			"seinen",
-			"ihren",
-			"seiner",
-			"vom",
-			"nach",
-			"da",
-			"fort",
-			"of",
-			"the",
-			"on",
-			"and",
-			"wegen",
-			"ja",
-			"nein",
-			"sind",
-			"auch",
-			"sein",
-			"wer",
-			"zwei",
-			"eins",
-			"drei",
-			"ihr",
-			"bis",
-			"doch",
-			"ohne",
-			"ich",
-			"zur",
-			"seine",
-			"uns",
-			"man",
-			"mir",
-			"du",
-			"unter",
-			"bin",
-			"seit",
-			"kann",
-			"kein",
-			"soll"
-		);
-
-		return in_array($word, $blacklist);
-	}
-
 	header("Content-Type: text/html; charset=utf-8");
 	mb_internal_encoding('UTF-8');
 
@@ -113,23 +12,12 @@
 	$res = curl_exec($curl);
 	$data = json_decode($res);
 
-	$newswords = array();
+	$extractor = new BuzzwordExtractor();
 
 	foreach($data->matches as $news) {
-		$tmpWords = explode(" ", $news->title);
-		foreach($tmpWords as $word) {
-			$word = preg_replace("/[\,\.\-\"\'?!]/", '', mb_strtolower($word));
-			//$word = preg_replace("/[^A-Za-z0-9öäüß ]/", '', mb_strtolower($word));
-			if( !ignoreWord($word) ) {
-				if( isset($newswords[$word]) ) {
-					$newswords[$word]++;
-				}
-				else {
-					$newswords[$word] = 1;
-				}
-			}
-		}
+		$extractor->addString($news->title);
 	}
+	$newswords = $extractor->extract();
 
 	$scores = array();
 	$db = new DatabaseManager();
