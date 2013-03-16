@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once(CRON_ROOT_PATH."config.php");
+require_once("../config.php");
 
 file_put_contents(LOG_PATH."cronjobs", date('c') . " RssFeed Scorer started\n", FILE_APPEND);
 
