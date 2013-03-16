@@ -17,7 +17,7 @@ $impressioncount = isset($data[0]["count"]) ? $data[0]["count"] : 0;
 $data = $db->query("SELECT COUNT(id) AS count FROM contest.item");
 $itemcount = isset($data[0]["count"]) ?$data[0]["count"] : 0;
 
-$data = $db->query("SELECT COUNT(impression.id) FROM contest.impression, contest.item WHERE impression.item = item.id AND item.recommendable > 0 AND DATEDIFF(NOW(), impression.created) = 0;");
+$data = $db->query("SELECT COUNT(impression.id) FROM contest.impression, contest.item WHERE impression.item = item.id AND item.recommendable > 0 AND DATEDIFF(NOW(), impression.created) = 0");
 $recommendationcount = isset($data[0]["count"]) ?$data[0]["count"] : 0;
 
 $data = $db->query("SELECT COUNT(id) AS count FROM contest.feedback WHERE DATEDIFF(NOW(), created) = 0");
