@@ -13,7 +13,7 @@ $data = $db->query("
 				WHERE item.id = impression.item AND
 					item.recommendable > 0 AND
 					impression.item != 0 AND
-					DATEDIFF(NOW(), impression.created) = 0
+					DATEDIFF(NOW(), impression.created) <= 1
 				GROUP BY item
 				ORDER BY score DESC
 			");
