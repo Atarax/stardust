@@ -79,7 +79,7 @@ foreach( $buzzwords as $buzzword => $count ) {
 	$out .= $buzzword." - ".$count.PHP_EOL;
 }
 
-echo "Loggin...".PHP_EOL;
+echo "Logging...".PHP_EOL;
 file_put_contents(LOG_PATH."newswords", "Words at date('c'):\n-----------------------\n".$out."\n\n", FILE_APPEND);
 echo "Finished!".PHP_EOL;
 
