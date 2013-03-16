@@ -19,31 +19,37 @@ class RssReader {
 		// auszulesende Datensaetze
 
 		// Items vorhanden?
-		if( !isset($xml->channel[0]->item) ) {
-			die('Keine Items vorhanden!');
+		if( !isset($xml->channel->item) ) {
+			// fix for heise
+			if( !isset($xml->item)) {
+				die( "no items".PHP_EOL );
+				return array();
+			}
+			else {
+				$items = $xml->item;
+			}
 		}
 		else {
-			$i = count($xml->channel[0]->item);
+			$items = $xml->channel->item;
 		}
 
+		$i = count($items);
+
 		// Items holen
-		foreach($xml->channel[0]->item as $item) {
+		foreach($items as $item) {
 			if( $i-- == 0 ) {
 				break;
 			}
 
-		$out[] = array(
-			'title'        => (string) $item->title,
-			'description'  => (string) $item->description,
-			'link'         => (string) $item->guid,
-			'date'         => date('d.m.Y H:i', strtotime((string) $item->pubDate))
-		);
+			$out[] = array(
+				'title'        => (string) $item->title,
+				'description'  => (string) $item->description,
+				'link'         => (string) $item->guid,
+				'date'         => date('d.m.Y H:i', strtotime((string) $item->pubDate))
+			);
 		}
 
-		// Eintraege ausgeben
-		foreach ($out as $value) {
-				echo $value['title'].$value['description'].$value['link']."<br>";
-		}
+		return $out;
 	}
 
 }

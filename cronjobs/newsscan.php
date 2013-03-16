@@ -46,6 +46,7 @@
 	}
 
 	asort($newswords);
+
 	foreach($newswords as $word => $count) {
 		echo $word." - ".$count.PHP_EOL;
 	}
