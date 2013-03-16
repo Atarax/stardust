@@ -37,6 +37,7 @@ CREATE TABLE `item` (
   `item` int(11) DEFAULT NULL,
   `client` int(11) DEFAULT NULL,
   `recommender` int(11) DEFAULT NULL,
+  `impression` int(11) DEFAULT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8

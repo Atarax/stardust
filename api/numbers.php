@@ -11,7 +11,7 @@ require_once("../config.php");
 $db = new DatabaseManager();
 $db->connect();
 
-$data = $db->query("SELECT COUNT(id) AS count FROM contest.impression");
+$data = $db->query("SELECT COUNT(id) AS count FROM contest.impression WHERE DATEDIFF(NOW(), created) = 0");
 $impressioncount = isset($data[0]["count"]) ? $data[0]["count"] : 0;
 
 $data = $db->query("SELECT COUNT(id) AS count FROM contest.item");
