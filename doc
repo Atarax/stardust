@@ -1,0 +1,6 @@
+Requirements:
+
+
+PHP 5 with modules:
+    php5-curl
+    php5-cgi
