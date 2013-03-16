@@ -35,7 +35,7 @@ class StardustModel {
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		$dbmanager->query( $query );
-		$this->id = mysql_insert_id();
+		//$this->id = mysqli_insert_id();
 		$dbmanager->close();
 	}
 }
