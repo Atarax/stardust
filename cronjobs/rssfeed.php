@@ -7,7 +7,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once("config.php");
+require_once(CRON_ROOT_PATH."config.php");
+
+file_put_contents(LOG_PATH."cronjobs", date('c') . " RssFeed Scorer started\n", FILE_APPEND);
 
 $feeds = array(
 	'http://www.heise.de/newsticker/heise.rdf',
@@ -83,3 +85,4 @@ echo "Logging...".PHP_EOL;
 file_put_contents(LOG_PATH."newswords", "Words at date('c'):\n-----------------------\n".$out."\n\n", FILE_APPEND);
 echo "Finished!".PHP_EOL;
 
+file_put_contents(LOG_PATH."cronjobs", date('c') . " RssFeed Scorer finished\n", FILE_APPEND);
