@@ -66,8 +66,8 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
-                { "mDataProp":"impressioncount" },
                 { "mDataProp":"itemcount" },
+                { "mDataProp":"impressioncount" },
                 { "mDataProp":"recommendationcount" },
                 { "mDataProp":"feedbackcount" },
                 { "mDataProp":"myfeedbackcount" }
