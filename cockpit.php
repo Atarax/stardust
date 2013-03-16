@@ -57,13 +57,11 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":25,
             "aoColumns":[
+                { "mDataProp":"client" },
+                { "mDataProp":"sourceid" },
+                { "mDataProp":"sourcetitle" },
                 { "mDataProp":"id" },
-                { "mDataProp":"url" },
                 { "mDataProp":"title" },
-                { "mDataProp":"text" },
-                { "mDataProp":"domain" },
-                { "mDataProp":"img" },
-                { "mDataProp":"category" },
                 { "mDataProp":"created" }
             ]
         });
@@ -75,13 +73,11 @@ $myfeedbackcount = $data[0]["count"];
 <table style="" id="latestrecommends">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Url</th>
-        <th>Title</th>
-        <th>Text</th>
-        <th>Domain</th>
-        <th>Image</th>
-        <th>Category</th>
+        <th>Client</th>
+        <th>Source ID</th>
+        <th>Source Title</th>
+        <th>Target ID</th>
+        <th>Target Title</th>
         <th>Created</th>
     </tr>
     </thead>
