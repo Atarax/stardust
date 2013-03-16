@@ -57,12 +57,12 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
-                { "mDataProp":"client", "sWidth": 1 },
-                { "mDataProp":"sourceid", "sWidth": 1 },
-                { "mDataProp":"sourcetitle", "sWidth": 1 },
-                { "mDataProp":"id", "sWidth": 1 },
-                { "mDataProp":"title", "sWidth": 1 },
-                { "mDataProp":"created", "sWidth": 1 }
+                { "mDataProp":"client" },
+                { "mDataProp":"sourceid" },
+                { "mDataProp":"sourcetitle", "sWidth": 600 },
+                { "mDataProp":"id" },
+                { "mDataProp":"title" },
+                { "mDataProp":"created" }
             ]
         });
     });
@@ -98,14 +98,14 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
-                { "mDataProp":"id", "sWidth": 0},
-                { "mDataProp":"client", "sWidth": 0 },
-                { "mDataProp":"source", "sWidth": 0 },
-                { "mDataProp":"title", "sWidth": 0 },
-                { "mDataProp":"itemid", "sWidth": 0 },
-                { "mDataProp":"domain", "sWidth": 0 },
-                { "mDataProp":"team", "sWidth": 0 },
-                { "mDataProp":"created", "sWidth": 0 }
+                { "mDataProp":"id"},
+                { "mDataProp":"client" },
+                { "mDataProp":"source" },
+                { "mDataProp":"title", "sWidth": 600 },
+                { "mDataProp":"itemid" },
+                { "mDataProp":"domain" },
+                { "mDataProp":"team" },
+                { "mDataProp":"created" }
             ]
         });
     });
