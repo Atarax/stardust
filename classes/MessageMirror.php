@@ -19,7 +19,7 @@ class MessageMirror {
 		}
 	}
 
-	public function mirror(ContestMessage $message) {
+	public function mirror($message) {
 		if( !empty($this->mirror) ) {
 			$message->postTo($this->mirror);
 		}

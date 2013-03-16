@@ -24,6 +24,9 @@ $msg = urldecode($msg);
 
 
 try {
+	$mirror = new MessageMirror();
+	$mirror->mirror($msg);
+
 	// parse plain json into a ContestMessage
 	$msg = ContestMessage::fromJSON($msg);
 
@@ -31,8 +34,6 @@ try {
 		throw new ContestException('parsing json failed', 400);
 	}
 
-	$mirror = new MessageMirror();
-	$mirror->mirror($msg);
 
 	// log the message
 	//file_put_contents($config["logfile"], date('c') . " Message: ".print_r($msg, true)."\n", FILE_APPEND);
