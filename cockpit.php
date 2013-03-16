@@ -61,7 +61,7 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#numbers').dataTable({
-			"sDom": "r",
+            "sDom": "r",
             "sAjaxSource":"api/numbers.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
@@ -89,8 +89,8 @@ $myfeedbackcount = $data[0]["count"];
     </tr>
     </thead>
     <tbody></tbody>
-</table><br/>
-<br>
+</table>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -99,16 +99,17 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#latestrecommends').dataTable({
+            "sDom": "r",
             "sAjaxSource":"api/latestrecommends.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
                 { "mDataProp":"client" },
                 { "mDataProp":"sourceid" },
-                { "mDataProp":"sourcetitle", "sWidth": 400 },
+                { "mDataProp":"sourcetitle", "sWidth": "38%" },
                 { "mDataProp":"id" },
-                { "mDataProp":"title", "sWidth": 400 },
-                { "mDataProp":"created" }
+                { "mDataProp":"title", "sWidth": "38%" },
+                { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
     });
@@ -129,7 +130,6 @@ $myfeedbackcount = $data[0]["count"];
     </thead>
     <tbody></tbody>
 </table><br/>
-<br>
 
 
 <script type="text/javascript">
@@ -139,6 +139,7 @@ $myfeedbackcount = $data[0]["count"];
          * running processes and daemons
          */
         $('#latestfeedbacks').dataTable({
+            "sDom": "r",
              "sAjaxSource":"api/latestfeedbacks.php",
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
