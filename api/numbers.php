@@ -14,16 +14,16 @@ $db->connect();
 $data = $db->query("SELECT COUNT(id) AS count FROM contest.impression WHERE DATEDIFF(NOW(), created) = 0");
 $impressioncount = isset($data[0]["count"]) ? $data[0]["count"] : 0;
 
-$data = $db->query("SELECT COUNT(id) AS count FROM contest.item");
+$data = $db->query("SELECT COUNT(id) AS count FROM contest.item WHERE DATEDIFF(NOW(), created) = 0");
 $itemcount = isset($data[0]["count"]) ?$data[0]["count"] : 0;
 
-$data = $db->query("SELECT COUNT(id) AS count FROM contest.recommendation");
+$data = $db->query("SELECT COUNT(id) AS count FROM contest.recommendation WHERE DATEDIFF(NOW(), created) = 0");
 $recommendationcount = isset($data[0]["count"]) ?$data[0]["count"] : 0;
 
-$data = $db->query("SELECT COUNT(id) AS count FROM contest.feedback");
+$data = $db->query("SELECT COUNT(id) AS count FROM contest.feedback WHERE DATEDIFF(NOW(), created) = 0");
 $feedbackcount = isset($data[0]["count"]) ?$data[0]["count"] : 0;
 
-$data = $db->query("SELECT COUNT(id) AS count FROM contest.feedback WHERE team = 227");
+$data = $db->query("SELECT COUNT(id) AS count FROM contest.feedback WHERE team = 227 AND DATEDIFF(NOW(), created) = 0");
 $myfeedbackcount = isset($data[0]["count"]) ? $data[0]["count"] : 0;
 
 die( json_encode( array( "data" =>
