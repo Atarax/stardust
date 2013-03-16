@@ -107,13 +107,13 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"client" },
                 {
                     "mData":function (data, type) {
-                        data.url.length == undefined  ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                        return data.url.length == undefined ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
                     }
                 },
                 { "mDataProp":"sourcetitle", "sWidth": "38%" },
                 {
                     "mData":function (data, type) {
-                        data.url.length == undefined  ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                        return data.url.length == undefined ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
                     }
                 },
                 { "mDataProp":"title", "sWidth": "38%" },
