@@ -22,8 +22,6 @@ $msg = file_get_contents("php://input");
 // the message may arrive url encoded
 $msg = urldecode($msg);
 
-$mirror = new MessageMirror();
-$mirror->mirror($msg);
 
 try {
 	// parse plain json into a ContestMessage
@@ -32,6 +30,9 @@ try {
 	if (!$msg) {
 		throw new ContestException('parsing json failed', 400);
 	}
+
+	$mirror = new MessageMirror();
+	$mirror->mirror($msg);
 
 	// log the message
 	//file_put_contents($config["logfile"], date('c') . " Message: ".print_r($msg, true)."\n", FILE_APPEND);
