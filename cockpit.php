@@ -59,9 +59,9 @@ $myfeedbackcount = $data[0]["count"];
             "aoColumns":[
                 { "mDataProp":"client" },
                 { "mDataProp":"sourceid" },
-                { "mDataProp":"sourcetitle", "sWidth": 600 },
+                { "mDataProp":"sourcetitle", "sWidth": 400 },
                 { "mDataProp":"id" },
-                { "mDataProp":"title" },
+                { "mDataProp":"title", "sWidth": 400 },
                 { "mDataProp":"created" }
             ]
         });
