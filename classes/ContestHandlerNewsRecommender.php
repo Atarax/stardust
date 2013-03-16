@@ -78,6 +78,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 				// post the result back to the contest server
 			 	if( !DEBUG_ENVIRONMENT) {
 					$result->postBack();
+				 	file_put_contents("log/response", date('c') .print_r($result, true)."\n", FILE_APPEND);
 				}
 			}
 		}
