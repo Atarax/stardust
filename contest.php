@@ -32,9 +32,6 @@ try {
 		throw new ContestException('parsing json failed', 400);
 	}
 
-	$mirror = new MessageMirror();
-	$mirror->mirror($msg);
-
 	// log the message
 	//file_put_contents($config["logfile"], date('c') . " Message: ".print_r($msg, true)."\n", FILE_APPEND);
 
@@ -54,6 +51,10 @@ try {
 		// we don't know how to handle anything else
 		throw new ContestException('unknown message type: ' . get_class($msg));
 	}
+
+	$mirror = new MessageMirror();
+	$mirror->mirror($msg);
+
 } catch (ContestException $e) {
 	// we forward every error we catch back to the server
 	$e->getError()->postBack();
