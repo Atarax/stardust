@@ -31,7 +31,6 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 		$client = $contestImpression->client;
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
-		file_put_contents("log/debug", date('c') . " Message: ".print_r($contestImpression, true)."\n", FILE_APPEND);
 
 		if ($contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
@@ -69,6 +68,8 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 				$result_data[] = $data_object;
 			}
 
+			file_put_contents("log/response", date('c') .print_r($result_data, true)."\n", FILE_APPEND);
+
 			if ($i > $contestImpression->limit) {
 				// construct a result message
 				$result_object = new stdClass;
@@ -80,7 +81,6 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 //			 	if( !DEBUG_ENVIRONMENT) {
 					$result->postBack();
 //				}
-				file_put_contents("log/response", date('c') .print_r($result, true)."\n", FILE_APPEND);
 			}
 		}
 
