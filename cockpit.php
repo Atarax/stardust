@@ -107,12 +107,15 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"client" },
                 {
                     "mData":function (data, type) {
-						console.debug(data);
-                        return "" ;
+                        return data.url.length == 0 ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
                     }
-				},
+                },
                 { "mDataProp":"sourcetitle", "sWidth": "38%" },
-                { "mDataProp":"id" },
+                {
+                    "mData":function (data, type) {
+                        return data.url.length == 0 ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                    }
+                },
                 { "mDataProp":"title", "sWidth": "38%" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
@@ -153,7 +156,11 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"client" },
                 { "mDataProp":"source" },
                 { "mDataProp":"title", "sWidth": 600 },
-                { "mDataProp":"itemid" },
+                {
+                    "mData":function (data, type) {
+                        return data.url.length == 0 ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                    }
+                },
                 { "mDataProp":"domain" },
                 { "mDataProp":"team" },
                 { "mDataProp":"created" }
