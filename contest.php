@@ -35,7 +35,6 @@ try {
 	}
 
 	// log the message
-	file_put_contents($config["logfile"], date('c') . " Message: ".print_r($msg, true)."\n", FILE_APPEND);
 
 	if ($msg instanceof ContestImpression) {
 		// call the handler method, which is also responsible for posting the data back to the contest server

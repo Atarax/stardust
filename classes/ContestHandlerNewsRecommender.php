@@ -31,6 +31,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 		$client = $contestImpression->client;
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
+		file_put_contents("log/debug", date('c') . " Message: ".print_r($contestImpression, true)."\n", FILE_APPEND);
 
 		if ($contestImpression->recommend) {
 			$domainid = $contestImpression->domain->id;
