@@ -8,6 +8,8 @@
  */
 
 class StardustModel {
+	public $id;
+
 	public function save() {
 		$data = get_object_vars($this);
 		$onupdate = array();
@@ -33,6 +35,7 @@ class StardustModel {
 		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		$dbmanager->query( $query );
+		$this->id = mysql_insert_id();
 		$dbmanager->close();
 	}
 }
