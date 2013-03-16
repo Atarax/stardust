@@ -43,9 +43,6 @@ try {
 	} else if ($msg instanceof ContestFeedback) {
 		// no response required here
 		$handler->handleFeedback($msg);
-		if($msg->team->id == "227") {
-			file_put_contents("log/feedback", date('c') . " Feedback received!\n", FILE_APPEND);
-		}
 	} else if ($msg instanceof ContestError) {
 		// yup, it's an error
 		file_put_contents(LOG_PATH."error", date('c') . "Error: ".print_r($msg, true)."\n--------------------------------------------------\n\n", FILE_APPEND);
