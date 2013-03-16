@@ -83,7 +83,7 @@ $myfeedbackcount = $data[0]["count"];
     <tr>
         <th>Items in database</th>
         <th>Impressions today</th>
-        <th>Recommendations today</th>
+        <th>Recommendationrequests today</th>
         <th>Feedback today</th>
         <th>My Feedback today</th>
     </tr>
