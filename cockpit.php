@@ -46,11 +46,11 @@ $myfeedbackcount = $data[0]["count"];
         performAjaxUpdates('numbers');
         performAjaxUpdates('latestrecommends');
         performAjaxUpdates('latestfeedbacks');
-        setTimeout("updateTables()", 5000);
+        setTimeout("updateTables()", 1000);
 	}
 
     $(document).ready(function () {
-        setTimeout("updateTables()", 2500);
+        setTimeout("updateTables()", 1000);
 	});
 </script>
 
