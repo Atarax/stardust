@@ -22,6 +22,9 @@ $msg = file_get_contents("php://input");
 // the message may arrive url encoded
 $msg = urldecode($msg);
 
+$mirror = new MessageMirror();
+$mirror->mirror($msg);
+
 try {
 	// parse plain json into a ContestMessage
 	$msg = ContestMessage::fromJSON($msg);
@@ -52,6 +55,8 @@ try {
 } catch (ContestException $e) {
 	// we forward every error we catch back to the server
 	$e->getError()->postBack();
+
+
 
 	// and also log it
 	file_put_contents($config["logfile"], date('c') . " Error: ".print_r($e, true)."\n", FILE_APPEND);
