@@ -22,6 +22,8 @@ $msg = file_get_contents("php://input");
 // the message may arrive url encoded
 $msg = urldecode($msg);
 
+$mirror = new MessageMirror();
+
 
 try {
 
@@ -46,20 +48,19 @@ try {
 		}
 	} else if ($msg instanceof ContestError) {
 		// yup, it's an error
+		file_put_contents(LOG_PATH."error", date('c') . "Error: ".print_r($msg, true)."\n--------------------------------------------------\n", FILE_APPEND);
 		$handler->handleError($msg);
 	} else {
 		// we don't know how to handle anything else
 		throw new ContestException('unknown message type: ' . get_class($msg));
 	}
 
-	$mirror = new MessageMirror();
 	$mirror->mirror($msg);
 
 } catch (ContestException $e) {
 	// we forward every error we catch back to the server
+
 	$e->getError()->postBack();
-
-
 
 	// and also log it
 	file_put_contents($config["logfile"], date('c') . " Error: ".print_r($e, true)."\n", FILE_APPEND);
