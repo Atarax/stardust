@@ -70,7 +70,12 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"impressioncount" },
                 { "mDataProp":"recommendationcount" },
                 { "mDataProp":"feedbackcount" },
-                { "mDataProp":"myfeedbackcount" }
+                { "mDataProp":"myfeedbackcount" },
+                {
+                    "mData":function (data, type) {
+                        return round( (data.feedback / data.recommendationcount) * 1000 ) / 1000 ;
+                    }
+                }
             ]
         });
     });
@@ -86,6 +91,7 @@ $myfeedbackcount = $data[0]["count"];
         <th>Recommendationrequests today</th>
         <th>Feedback today</th>
         <th>My Feedback today</th>
+        <th>My CTR today</th>
     </tr>
     </thead>
     <tbody></tbody>
