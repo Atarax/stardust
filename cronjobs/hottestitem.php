@@ -1,7 +1,7 @@
 <?php
 require_once("../config.php");
 
-file_put_contents("hottestitem.log", date('c') . " Hottest-Item started\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Hottest-Item started\n", FILE_APPEND);
 
 mb_internal_encoding('UTF-8');
 
@@ -32,6 +32,6 @@ foreach( $data as $row ) {
 
 echo "Finished.".PHP_EOL;
 
-file_put_contents("hottestitem.log", date('c') . " Hottest-Item finished\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Hottest-Item finished\n", FILE_APPEND);
 
 ?>
