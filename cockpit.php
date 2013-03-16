@@ -55,7 +55,7 @@ $myfeedbackcount = $data[0]["count"];
             "bProcessing":true,
             "sAjaxSource":"api/latestrecommends.php",
             "sAjaxDataProp":"data",
-            "iDisplayLength":25,
+            "iDisplayLength":10,
             "aoColumns":[
                 { "mDataProp":"client" },
                 { "mDataProp":"sourceid" },
@@ -96,7 +96,7 @@ $myfeedbackcount = $data[0]["count"];
             "bProcessing":true,
             "sAjaxSource":"api/latestfeedbacks.php",
             "sAjaxDataProp":"data",
-            "iDisplayLength":25,
+            "iDisplayLength":10,
             "aoColumns":[
                 { "mDataProp":"id" },
                 { "mDataProp":"client" },
