@@ -16,6 +16,7 @@ CREATE TABLE `item` (
   `client` int(11) DEFAULT NULL,
   `domain` int(11) DEFAULT NULL,
   `item` int(11) DEFAULT NULL,
+  `recommend` tinyint(4) DEFAULT NULL,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8

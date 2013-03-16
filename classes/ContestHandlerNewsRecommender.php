@@ -114,7 +114,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 				$recommendation->item = $record->id;
 				$recommendation->client = $impression->client;
 				$recommendation->recommender = 2;
-				//$recommendation->impression = $impression->id;
+				$impression->recommend = $contestImpression->recommend;
 				$recommendation->save();
 				//file_put_contents("log/queries", date('c') .print_r($impression, true)."\n", FILE_APPEND);
 			}

@@ -11,4 +11,5 @@ class Impression extends StardustModel{
 	public $client;
 	public $domain;
 	public $item;
+	public $recommend;
 }

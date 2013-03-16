@@ -84,6 +84,7 @@ class ContestHandlerHottestItem implements ContestHandler {
 		$impression->client = isset($client) ? $client->id : null;
 		$impression->domain = isset($domain) ? $domain->id : null;
 		$impression->item = isset($item) ? $item->id : null;
+		$impression->recommend = $contestImpression->recommend;
 		$impression->save();
 
 		$myItem = new Item();
