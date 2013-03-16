@@ -142,7 +142,7 @@ class ContestMessage {
 
 		echo plista_json_encode($this) . PHP_EOL;
 		flush();
-		//ob_end_flush();
+		ob_end_flush();
 
 	}
 	

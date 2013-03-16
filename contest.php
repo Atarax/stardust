@@ -52,7 +52,7 @@ try {
 		throw new ContestException('unknown message type: ' . get_class($msg));
 	}
 
-	$mirror->mirror($msg);
+	@$mirror->mirror($msg);
 
 } catch (ContestException $e) {
 	// we forward every error we catch back to the server
