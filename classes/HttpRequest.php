@@ -150,6 +150,9 @@ class HttpRequest {
 
 			return $resp;
 		}
+		else {
+			$this->disconnect();
+		}
 	}
 
 	public function get($path = null) {
