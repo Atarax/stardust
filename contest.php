@@ -52,6 +52,7 @@ try {
 } catch (ContestException $e) {
 	// we forward every error we catch back to the server
 	$e->getError()->postBack();
+
 	// and also log it
-	file_put_contents($config["logfile"], date('c') . " Error: $e\n", FILE_APPEND);
+	file_put_contents($config["logfile"], date('c') . " Error: ".print_r($e, true)."\n", FILE_APPEND);
 }
