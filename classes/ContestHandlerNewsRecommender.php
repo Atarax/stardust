@@ -78,9 +78,9 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 
 				$result = ContestMessage::createMessage('result', $result_object);
 				// post the result back to the contest server
-//			 	if( !DEBUG_ENVIRONMENT) {
+			 	if( !DEBUG_ENVIRONMENT) {
 					$result->postBack();
-//				}
+				}
 			}
 		}
 
