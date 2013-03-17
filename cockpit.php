@@ -111,7 +111,11 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
-                { "mDataProp":"client" },
+                {
+                    "mData":function (data, type) {
+                        return data.client == null ? "" : "<a href='client.php?client=" + data.client + "'>" + data.client + "</a>" ;
+                    }
+                },
                 {
                     "mData":function (data, type) {
                         return data.sourceurl == null ? data.id : "<a href='" + data.sourceurl + "'>" + data.id + "</a>" ;
@@ -141,7 +145,7 @@ $myfeedbackcount = $data[0]["count"];
         <th>Source Title</th>
         <th>Target ID</th>
         <th>Target Title</th>
-        <th>R-ID</th>
+        <th>R</th>
         <th>Created</th>
     </tr>
     </thead>
@@ -161,8 +165,11 @@ $myfeedbackcount = $data[0]["count"];
             "sAjaxDataProp":"data",
             "iDisplayLength":10,
             "aoColumns":[
-                { "mDataProp":"id"},
-                { "mDataProp":"client" },
+                {
+                    "mData":function (data, type) {
+                        return data.client == null ? "" : "<a href='client.php?client=" + data.client + "'>" + data.client + "</a>" ;
+                    }
+                },
                 { "mDataProp":"source" },
                 { "mDataProp":"title", "sWidth": 600 },
                 {
