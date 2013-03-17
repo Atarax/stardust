@@ -8,7 +8,7 @@
  */
 require_once("config.php");
 
-$db = new DatabaseManager();
+$db = DatabaseManager::getInstace();
 $db->connect();
 
 $data = $db->query("SELECT COUNT(id) AS count FROM contest.impression");

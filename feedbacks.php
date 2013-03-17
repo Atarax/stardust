@@ -9,7 +9,7 @@
 require_once("config.php");
 
 if( isset($_GET["ajax"]) ) {
-	$db = new DatabaseManager();
+	$db = DatabaseManager::getInstace();
 	$res = $db->query("SELECT * FROM contest.feedback");
 	//var_dump( array("data" => $res) );
 	die( json_encode( array("data" => $res ) ) );

@@ -7,6 +7,6 @@
  * To change this template use File | Settings | File Templates.
  */
 require_once("../config.php");
-$db = new DatabaseManager();
+$db = DatabaseManager::getInstace();
 $res = $db->query("SELECT item.url, item.id AS itemid, feedback.*, item.id, item.title FROM contest.feedback, contest.item WHERE feedback.target = item.id AND feedback.team = 227 ORDER BY feedback.created DESC LIMIT 10");
 die( json_encode( array("data" => $res ) ) );

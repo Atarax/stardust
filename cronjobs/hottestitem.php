@@ -5,7 +5,7 @@ file_put_contents(LOG_PATH."cronjobs", date('c') . " Hottest-Item started\n", FI
 
 mb_internal_encoding('UTF-8');
 
-$db = new DatabaseManager();
+$db = DatabaseManager::getInstace();
 $db->connect();
 $data = $db->query("
 				SELECT COUNT(impression.id) AS score, impression.item

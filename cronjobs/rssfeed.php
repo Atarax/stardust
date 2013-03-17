@@ -47,7 +47,7 @@ echo PHP_EOL."Extracting buzzwords...".PHP_EOL;
 $buzzwords = $extractor->extract();
 
 $scores = array();
-$db = new DatabaseManager();
+$db = DatabaseManager::getInstace();
 $db->connect();
 $res = $db->query("SELECT id,title FROM contest.item");
 $db->query("TRUNCATE TABLE contest.newsscore");

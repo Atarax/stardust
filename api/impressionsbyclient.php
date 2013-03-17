@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 require_once("../config.php");
-$db = new DatabaseManager();
+$db = DatabaseManager::getInstace();
 $client = $_GET["client"];
 $res = $db->query("SELECT item.url, item.id AS itemid, impression.id, impression.client, impression.created, item.title, item.domain FROM contest.impression, contest.item WHERE impression.client = ".$client." AND  impression.item = item.id ORDER BY impression.created DESC");
 die( json_encode( array("data" => $res ) ) );

@@ -9,8 +9,9 @@
 class BuzzwordExtractor {
 	private $strings = array();
 	private $weights = array();
-
 	private $buzzwords = array();
+	private $blacklist = null;
+
 	public function addString($string, $weight = 1) {
 		$this->strings[] = $string;
 		$this->weights[] = $weight;
@@ -25,7 +26,7 @@ class BuzzwordExtractor {
 			$tmpWords = explode(" ", $string);
 
 			foreach($tmpWords as $word) {
-				$word = preg_replace("/[\,\.\-\"\'?!:]/", '', mb_strtolower($word));
+				$word = preg_replace("/[\,\.\-­\"\'?!:;]/", '', mb_strtolower($word));
 
 				//$word = preg_replace("/[^A-Za-z0-9öäüß ]/", '', mb_strtolower($word));
 
@@ -47,11 +48,21 @@ class BuzzwordExtractor {
 		if( strlen($word) < 2 ) {
 			return true;
 		}
+		if( !isset($this->blacklist) ) {
+			$wordlistPath = CRON_ROOT_PATH."data/unsignificantwords";
+			$this->blacklist = explode("\n", file_get_contents($wordlistPath) );
+		}
 
-		$wordlistPath = CRON_ROOT_PATH."data/unsignificantwords";
-		$blacklist = explode("\n", file_get_contents($wordlistPath) );
+		return Util::binarySearch($word, $this->blacklist) >= 0;
+	}
 
-		// TODO: Add binary search here
-		return in_array($word, $blacklist);
+	public function reset() {
+		unset($this->strings);
+		unset($this->weights);
+		unset($this->buzzwords);
+
+		$this->strings = array();
+		$this->weights = array();
+		$this->buzzwords = array();
 	}
 }

@@ -14,7 +14,7 @@ class StardustModel {
 		$fields = array();
 		$values = array();
 
-		$dbmanager = new DatabaseManager();
+		$dbmanager = DatabaseManager::getInstace();
 		$dbmanager->connect();
 
 		foreach($data as $field => $value) {

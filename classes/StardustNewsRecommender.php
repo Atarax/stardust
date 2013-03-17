@@ -19,7 +19,7 @@ class StardustNewsRecommender implements ContestRecommender {
 			$filter = "";
 		}
 
-		$db = new DatabaseManager();
+		$db = DatabaseManager::getInstace();
 		$data = $db->query("
 				SELECT item.id AS item
 				FROM contest.item, contest.newsscore

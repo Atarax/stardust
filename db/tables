@@ -55,3 +55,11 @@ CREATE TABLE `item` (
   PRIMARY KEY (`item`)
 ) DEFAULT CHARSET=utf8
 
+ CREATE TABLE `clientbuzzword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client` int(11) NOT NULL,
+  `buzzword` varchar(80) NOT NULL,
+  `count` float DEFAULT 0,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8
+
