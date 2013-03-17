@@ -179,7 +179,7 @@ $myfeedbackcount = $data[0]["count"];
                 },
                 { "mDataProp":"domain" },
                 { "mDataProp":"team" },
-                { "mDataProp":"created" }
+                { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
     });
