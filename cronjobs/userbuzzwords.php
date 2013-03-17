@@ -35,7 +35,7 @@ foreach( $clients as $i => $client ) {
 	$i = 0;
 	$size = count($buzzwords);
 	foreach( $buzzwords as $buzzword => $count ) {
-		$query .= "(".$client["id"].",'".$buzzword."',".$count.")".( $i == $size - 1 ? "" : ",");
+		$query .= "(".$client["id"].",'".mysql_real_escape_string($buzzword)."',".$count.")".( $i == $size - 1 ? "" : ",");
 		$i++;
 		/*
 		$model = new ClientBuzzword();
