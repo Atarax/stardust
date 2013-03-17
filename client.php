@@ -77,7 +77,7 @@ if( !isset($_GET["client"]) ) {
                         return data.url == null ? data.itemid : "<a href='" + data.url + "'>" + data.itemid + "</a>" ;
                     }
                 },
-                { "mDataProp":"title", "sWidth": "58%" },
+                { "mDataProp":"title", "sWidth": "85%" },
                 { "mDataProp":"domain" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
@@ -116,7 +116,7 @@ if( !isset($_GET["client"]) ) {
                         return data.url == null ? data.itemid : "<a href='" + data.url + "'>" + data.itemid + "</a>" ;
                     }
                 },
-                { "mDataProp":"title", "sWidth": "58%" },
+                { "mDataProp":"title", "sWidth": "85%" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
