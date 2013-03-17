@@ -35,10 +35,10 @@ class StardustContestHandler implements ContestHandler{
 		if ($contestImpression->recommend) {
 			$rand = rand(0,1000);
 			if( $rand <= 500 ) {
-				$recommender = StardustNewsRecommender();
+				$recommender = new StardustNewsRecommender();
 			}
 			else {
-				$recommender = StardustHottestItemRecommender();
+				$recommender = new StardustHottestItemRecommender();
 			}
 
 			$recommender->recommend($contestImpression);
