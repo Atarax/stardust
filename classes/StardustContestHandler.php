@@ -61,7 +61,9 @@ class StardustContestHandler implements ContestHandler{
 				$result_object = new stdClass;
 				$result_object->items = $result_data;
 				$result_object->team = $contestImpression->team;
-
+				if( $fallback = false ) {
+					file_put_contents("log/nofallback", date('c') . " nofallback ".print_r($result_data, true)."\n", FILE_APPEND);
+				}
 				$result = ContestMessage::createMessage('result', $result_object);
 				$result->postBack();
 			}
