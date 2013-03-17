@@ -55,7 +55,7 @@ class StardustContestHandler implements ContestHandler{
 				}
 
 				$fill_data = $recommender->getRecommendations($contestImpression);
-				$k = $contestImpression->limit;
+				$k = 0;
 				foreach($fill_data as $d) {
 					$result_data[] = $d;
 					$k++;
