@@ -8,13 +8,7 @@
 require_once 'config.php';
 
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
-$rand = rand(0,1000);
-if( $rand <= 500 ) {
-	$handler = ContestHandlerHottestItem::getInstance();
-}
-else {
-	$handler = ContestHandlerNewsRecommender::getInstance();
-}
+$handler = StardustContestHandler::getInstance();
 
 // read entire message body into a variable
 $msg = file_get_contents("php://input");
