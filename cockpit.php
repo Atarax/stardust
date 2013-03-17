@@ -123,7 +123,7 @@ $myfeedbackcount = $data[0]["count"];
                     }
                 },
                 { "mDataProp":"title", "sWidth": "38%" },
-                { "mDataProp":"recommender" },
+                { "mDataProp":"recommender", "sWidth": "2%" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
