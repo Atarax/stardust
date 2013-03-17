@@ -12,7 +12,7 @@ class ContestImpression extends ContestMessage {
 
 	protected $timeout;
 	protected $recommend;
-	protected $limit;
+	public $limit;
 
 	public function __construct($data) {
 		parent::__construct($data);

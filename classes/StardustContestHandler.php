@@ -37,8 +37,8 @@ class StardustContestHandler implements ContestHandler{
 			if( $item->id > 0 ) {
 				$recommender = new StardustSimilarRecommender();
 				$result_data = 	$recommender->getRecommendations($contestImpression);
-				file_put_contents("log/newrecommender", date('c') . " Error ".$contestImpression->limit.": ".print_r($result_data, true)."\n", FILE_APPEND);
-				if( count($result_data) == $contestImpression->limit ) {
+				if( count($result_data) < $contestImpression->limit ) {
+				$contestImpression->limit = $contestImpression->limit - count($result_data);
 					$fallback = false;
 				}
 			}
@@ -52,7 +52,15 @@ class StardustContestHandler implements ContestHandler{
 					$recommender = new StardustHottestItemRecommender();
 				}
 
-				$result_data = 	$recommender->getRecommendations($contestImpression);
+				$fill_data = $recommender->getRecommendations($contestImpression);
+				$k = $contestImpression->limit;
+				foreach($fill_data as $d) {
+					$result_data[] = $d;
+					$k++;
+					if($k > $contestImpression->limit) {
+						break;
+					}
+				}
 			}
 
 			// post the result back to the contest server

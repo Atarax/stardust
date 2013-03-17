@@ -29,12 +29,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 			");
 		$result_data = array();
 		$i = 0;
-		file_put_contents("log/db", date('c') . "
-					SELECT similaritems.item AS itemid
-					FROM contest.similaritems, contest.item
-					WHERE item.id = similaritems.similaritem AND item = ".$contestImpression->item->id.$filter."
-					ORDER BY similarity DESC;\n", FILE_APPEND);
-		//shuffle($data);
+
 		// iterate over the data array
 		foreach ($data as $row) {
 			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["itemid"] == $contestImpression->item->id) {
@@ -47,7 +42,6 @@ class StardustSimilarRecommender implements ContestRecommender {
 
 			$data_object = new stdClass;
 			$data_object->id = $row["itemid"];
-
 			$result_data[] = $data_object;
 		}
 
