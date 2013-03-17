@@ -33,7 +33,7 @@ foreach( $clients as $i => $client ) {
 	$query = "INSERT INTO contest.clientbuzzword(client, buzzword, count) VALUES ";
 
 	$i = 0;
-	$size = count($buzzwords);
+
 	foreach( $buzzwords as $buzzword => $count ) {
 		if( $count < 2 ) {
 			continue;
@@ -48,7 +48,7 @@ foreach( $clients as $i => $client ) {
 		$model->save();
 		*/
 	}
-	if( $size > 0 ) {
+	if( $i > 0 ) {
 		file_put_contents(LOG_PATH."trash", date('c') . print_r($query, true)."\n", FILE_APPEND);
 		$db->query($query);
 	}
