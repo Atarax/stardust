@@ -25,11 +25,15 @@ class StardustSimilarRecommender implements ContestRecommender {
 					SELECT similaritems.item AS itemid
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.similaritem AND item = ".$contestImpression->item->id.$filter."
-					ORDER BY similarity DESC;
+					ORDER BY similarity DESC
 			");
 		$result_data = array();
 		$i = 0;
-
+		file_put_contents("log/db", date('c') . "
+					SELECT similaritems.item AS itemid
+					FROM contest.similaritems, contest.item
+					WHERE item.id = similaritems.similaritem AND item = ".$contestImpression->item->id.$filter."
+					ORDER BY similarity DESC;\n", FILE_APPEND);
 		//shuffle($data);
 		// iterate over the data array
 		foreach ($data as $row) {
