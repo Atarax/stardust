@@ -1,48 +1,137 @@
 <?php
-/*
- * This code demonstrates how to communicate with the contest server using the supplied classes.
- * Refer to the API documentation for more in-depth information about the various requests and responses.
+
+if( !isset($_GET["client"]) ) {
+	die("Please supply client as get parameter!");
+}
+/**
+ * Created by JetBrains PhpStorm.
+ * User: atarax
+ * Date: 3/17/13
+ * Time: 1:55 PM
+ * To change this template use File | Settings | File Templates.
  */
+?>
 
-// this variable holds the url of the endpoint of the contest server
-$server = 'http://contest.plista.com/api/api.php';
+<link rel="stylesheet" type="text/css" href="js/DataTables-1.9.3/media/css/jquery.dataTables.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/DataTables-1.9.3/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.fnReloadAjax.js"></script>
+<script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.rowGrouping.js"></script>
+<script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.fnGetColumnData.js"></script>
+<script type="text/javascript" src="js/DataTables-1.9.3/media/js/dataTables.helperFunctions.js"></script>
 
-// this variable defines the type of message you want to send to the server
-// available options are: start, stop, sync, trigger
-$type = 'start';
+<script type="text/javascript">
+    $(document).ready(function () {
 
-// this variable holds your secret api key
-$apikey = 'ed6bd15a06540306f54f0c49137c23a9 ';
+        /**
+         * running processes and daemons
+         */
+        $('#impressions').dataTable({
+            "sDom": "r",
+            "sAjaxSource":"api/impressionsbyclient.php?client=" + <?= $_GET["client"] ?>,
+            "sAjaxDataProp":"data",
+            "iDisplayLength":10,
+            "aoColumns":[
+                {
+                    "mData":function (data, type) {
+                        return data.url == null ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
+                    }
+                },
+                { "mDataProp":"title", "sWidth": "58%" },
+                { "mDataProp":"domain" },
+                { "mDataProp":"created", "sWidth": "10%" }
+            ]
+        });
+    });
+</script>
 
-// any data that needs to be passed to the api message object goes into here
-$data = new stdClass;
-$data->apikey = $apikey;
+<h3>Impressions</h3>
 
-try {
-	// create a new message
-	$msg = ContestAPIMessage::createMessage($type, $data);
-	// and post it to the server, fetching the response at the same time
-	$resp = $msg->postTo($server);
-} catch (ContestException $e) {
-	// oh no, an exception
-	die("exception caught: {$e->getMessage()}");
-}
+<table style="" id="impressions">
+    <thead>
+    <tr>
+        <th>Item ID</th>
+        <th>Item Title</th>
+        <th>Domain</th>
+        <th>Created</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table><br/>
 
-if (!($resp instanceof ContestMessage)) {
-	// usually the server only sends back json data which gets converted into an appropriate object automatically,
-	// so receiving anything but a ContestMessage means that something awful happened :)
-	die("received plain text from server: $resp");
-}
 
-if ($resp instanceof ContestError) {
-	// some sort of error occured, better handle it appropriately
-	die("received error: {$resp->getMessage()}");
-}
+<script type="text/javascript">
+    $(document).ready(function () {
 
-if (!($resp instanceof ContestAPIResponse)) {
-	// the only proper response to an api request is a ContestAPIResponse message, anything else is an error
-	die('received message: ' . get_class($resp));
-}
+        /**
+         * running processes and daemons
+         */
+        $('#recommendations').dataTable({
+            "sDom": "r",
+            "sAjaxSource":"api/recommendationsbyclient.php?client=" + <?= $_GET["client"] ?>,
+            "sAjaxDataProp":"data",
+            "iDisplayLength":10,
+            "aoColumns":[
+                {
+                    "mData": function (data, type) {
+                        return data.url == null ? data.itemid : "<a href='" + data.url + "'>" + data.itemid + "</a>" ;
+                    }
+                },
+                { "mDataProp":"title", "sWidth": "58%" },
+                { "mDataProp":"domain" },
+                { "mDataProp":"created", "sWidth": "10%" }
+            ]
+        });
+    });
+</script>
 
-// at this point everything is bueno
-echo $resp;
+<h3>Reccomends</h3>
+
+<table style="" id="recommendations">
+    <thead>
+    <tr>
+        <th>Item ID</th>
+        <th>Item Title</th>
+        <th>Domain</th>
+        <th>Created</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table><br/>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        /**
+         * running processes and daemons
+         */
+        $('#feedbacks').dataTable({
+            "sDom": "r",
+            "sAjaxSource":"api/feedbacksbyclient.php?client=" + <?= $_GET["client"] ?>,
+            "sAjaxDataProp":"data",
+            "iDisplayLength":10,
+            "aoColumns":[
+                {
+                    "mData": function (data, type) {
+                        return data.url == null ? data.itemid : "<a href='" + data.url + "'>" + data.itemid + "</a>" ;
+                    }
+                },
+                { "mDataProp":"title", "sWidth": "58%" },
+                { "mDataProp":"created", "sWidth": "10%" }
+            ]
+        });
+    });
+</script>
+
+<h3>Feedbacks</h3>
+
+<table style="" id="feedbacks">
+    <thead>
+    <tr>
+        <th>Item ID</th>
+        <th>Item Title</th>
+        <th>Created</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table><br/>
