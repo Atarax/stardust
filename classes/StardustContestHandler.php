@@ -85,7 +85,7 @@ class StardustContestHandler implements ContestHandler{
 				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
 				$recommendation->client = $impression->client;
-				$recommendation->recommender = 2;
+				$recommendation->recommender = $recommender instanceof StardustHottestItemRecommender ? 1 : 2;
 				$recommendation->save();
 			}
 		}
