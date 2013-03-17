@@ -89,6 +89,7 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 		$impression->id = isset($contestImpression->id) ? $contestImpression->id : 0;
 		$impression->client = isset($client) ? $client->id : null;
 		$impression->domain = isset($domain) ? $domain->id : null;
+		$impression->recommend = $contestImpression->recommend;
 		$impression->item = isset($item) ? $item->id : null;
 		$impression->save();
 
@@ -114,7 +115,6 @@ class ContestHandlerNewsRecommender implements ContestHandler{
 				$recommendation->item = $record->id;
 				$recommendation->client = $impression->client;
 				$recommendation->recommender = 2;
-				$impression->recommend = $contestImpression->recommend;
 				$recommendation->save();
 				//file_put_contents("log/queries", date('c') .print_r($impression, true)."\n", FILE_APPEND);
 			}
