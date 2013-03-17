@@ -171,7 +171,7 @@ $myfeedbackcount = $data[0]["count"];
                     }
                 },
                 { "mDataProp":"source" },
-                { "mDataProp":"title", "sWidth": "85%" },
+                { "mDataProp":"title", "sWidth": "75%" },
                 {
                     "mData":function (data, type) {
                         return data.url == null ? data.id : "<a href='" + data.url + "'>" + data.id + "</a>" ;
