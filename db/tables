@@ -63,3 +63,19 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8
 
+ CREATE TABLE `itembuzzword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item` int(11) NOT NULL,
+  `buzzword` varchar(80) NOT NULL,
+  `count` float DEFAULT 0,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8
+
+
+ CREATE TABLE `similaritems` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item` int(11) NOT NULL,
+  `similar` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8
+

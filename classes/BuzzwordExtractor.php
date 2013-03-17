@@ -26,7 +26,7 @@ class BuzzwordExtractor {
 			$tmpWords = explode(" ", $string);
 
 			foreach($tmpWords as $word) {
-				$word = preg_replace("/[\,\.\-­\"\'?!:;]/", '', mb_strtolower($word));
+				$word = preg_replace("/[\,\.\-­\"\'?!:;“„]/", '', mb_strtolower($word));
 
 				//$word = preg_replace("/[^A-Za-z0-9öäüß ]/", '', mb_strtolower($word));
 

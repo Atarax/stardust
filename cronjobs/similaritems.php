@@ -1,24 +1,22 @@
 <?php
 require_once("../config.php");
 
-file_put_contents(LOG_PATH."cronjobs", date('c') . " Clientbuzzword started\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Similaritems started\n", FILE_APPEND);
 
 mb_internal_encoding('UTF-8');
 
 $db = DatabaseManager::getInstace();
 $db->connect();
-$clients = $db->query("
-				SELECT DISTINCT client AS id FROM contest.impression WHERE client IS NOT NULL;
+$items = $db->query("
+				SELECT id FROM contest.item WHERE recommendable > 0;
 			");
 
-$db->query("TRUNCATE TABLE contest.clientbuzzword");
+$db->query("TRUNCATE TABLE contest.similaritems");
 $extractor = new BuzzwordExtractor();
 
 foreach( $clients as $i => $client ) {
-	$impressions = $db->query("
-		SELECT item.title, item.text
-		FROM contest.item, contest.impression
-		WHERE client = ".$client["id"]." AND item.id = impression.item AND impression.item != 0
+	$items = $db->query("
+		SELECT *, i1.count+i2.count AS similarity FROM itembuzzword i1, itembuzzword i2 WHERE i1.buzzword = i2.buzzword AND i1.item != i2.item GROUP BY i2.item ORDER BY i1.item DESC LIMIT 50;
 	");
 
 	echo "Client $i (".$client["id"].") of ".count($clients)."\n";
@@ -40,13 +38,7 @@ foreach( $clients as $i => $client ) {
 		}
 		$query .= ( $i == 0 ? "" : ",")."(".$client["id"].",'".mysql_real_escape_string($buzzword)."',".$count.")";
 		$i++;
-		/*
-		$model = new ClientBuzzword();
-		$model->client = $client["id"];
-		$model->count = $count;
-		$model->buzzword = $buzzword;
-		$model->save();
-		*/
+
 	}
 	if( $i > 0 ) {
 		$db->query($query);
@@ -57,6 +49,6 @@ foreach( $clients as $i => $client ) {
 
 echo "Finished.".PHP_EOL;
 
-file_put_contents(LOG_PATH."cronjobs", date('c') . " Clientbuzzword finished\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Similaritems finished\n", FILE_APPEND);
 
 ?>
