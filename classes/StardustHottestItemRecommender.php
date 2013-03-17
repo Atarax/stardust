@@ -10,6 +10,14 @@ class StardustHottestItemRecommender implements ContestRecommender {
 
 	public function getRecommendations(ContestImpression $contestImpression) {
 			$domainid = $contestImpression->domain->id;
+			$clientid = is_object($contestImpression->client) && $contestImpression->client->id > 0 ? $contestImpression->client->id : 0;
+
+			if( $clientid > 0 ) {
+					$filter = " AND item.id NOT IN (SELECT itemid FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid." ";
+			}
+			else {
+				$filter = "";
+			}
 
 			$db = new DatabaseManager();
 			$data = $db->query("
@@ -19,8 +27,9 @@ class StardustHottestItemRecommender implements ContestRecommender {
 						  item.domain = ".$domainid." AND
 						  item.recommendable > 0 AND
 						  item.id > 0
+						  ".$filter."
 					ORDER BY hottestitemscore.score DESC
-					LIMIT 15;
+					LIMIT 15
 			");
 			$result_data = array();
 			$i = 0;
