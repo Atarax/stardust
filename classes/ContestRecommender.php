@@ -3,7 +3,7 @@
  * message type.
  */
 
-interface Recommender {
+interface ContestRecommender {
 	/* this function handles incoming impression messages. it is responsible for posting the data back to the contest server
 	 * using ContestMessage::postTo('stdout').
 	 *
