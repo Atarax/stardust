@@ -190,7 +190,6 @@ $myfeedbackcount = $data[0]["count"];
 <table style="" id="latestfeedbacks">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Client</th>
         <th>Source</th>
         <th>Target</th>
