@@ -13,7 +13,7 @@ class StardustHottestItemRecommender implements ContestRecommender {
 			$clientid = is_object($contestImpression->client) && $contestImpression->client->id > 0 ? $contestImpression->client->id : 0;
 
 			if( $clientid > 0 ) {
-					$filter = " AND item.id NOT IN (SELECT itemid FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid." ";
+					$filter = " AND item.id NOT IN (SELECT itemid FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid.") ";
 			}
 			else {
 				$filter = "";
