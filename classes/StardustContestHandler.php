@@ -84,17 +84,17 @@ class StardustContestHandler implements ContestHandler{
 			$myItem->save();
 		}
 
-		if($recommender instanceof StardustHottestItemRecommender) {
-			$recommenderid = 1;
-		}
-		else if ($recommender instanceof StardustNewsRecommender) {
-			$recommenderid = 2;
-		}
-		else {
-			$recommenderid = 3;
-		}
-
 		if( isset($result_data) ) {
+			if($recommender instanceof StardustHottestItemRecommender) {
+				$recommenderid = 1;
+			}
+			else if ($recommender instanceof StardustNewsRecommender) {
+				$recommenderid = 2;
+			}
+			else {
+				$recommenderid = 3;
+			}
+
 			foreach($result_data as $record) {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
