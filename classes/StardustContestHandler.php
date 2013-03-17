@@ -33,7 +33,7 @@ class StardustContestHandler implements ContestHandler{
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
 		if ($contestImpression->recommend) {
-			$recommender = new StardustNewsRecommender();
+			$recommender = new StardustSimilarRecommender();
 			$result_data = 	$recommender->getRecommendations($contestImpression);
 
 			if( count($result_data) < $contestImpression->limit ) {
