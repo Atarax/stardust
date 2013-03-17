@@ -78,6 +78,7 @@ if( !isset($_GET["client"]) ) {
                     }
                 },
                 { "mDataProp":"title", "sWidth": "85%" },
+                { "mDataProp":"recommender" },
                 { "mDataProp":"domain" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
@@ -93,6 +94,7 @@ if( !isset($_GET["client"]) ) {
         <th>Item ID</th>
         <th>Item Title</th>
         <th>Domain</th>
+        <th>R</th>
         <th>Created</th>
     </tr>
     </thead>
