@@ -123,6 +123,7 @@ $myfeedbackcount = $data[0]["count"];
                     }
                 },
                 { "mDataProp":"title", "sWidth": "38%" },
+                { "mDataProp":"recommender" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
@@ -139,6 +140,7 @@ $myfeedbackcount = $data[0]["count"];
         <th>Source Title</th>
         <th>Target ID</th>
         <th>Target Title</th>
+        <th>Recommender</th>
         <th>Created</th>
     </tr>
     </thead>
