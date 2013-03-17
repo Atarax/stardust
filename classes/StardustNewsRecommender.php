@@ -6,7 +6,7 @@
  * Time: 7:11 PM
  * To change this template use File | Settings | File Templates.
  */
-class StardustNewsRecommender implements ContestHandler{
+class StardustNewsRecommender {
 	public function recommend(ContestImpression $contestImpression) {
 		$domainid = $contestImpression->domain->id;
 
