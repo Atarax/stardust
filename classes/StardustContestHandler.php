@@ -33,15 +33,20 @@ class StardustContestHandler implements ContestHandler{
 		$context = isset($item) && isset($item->context) ? $item->context : null;
 
 		if ($contestImpression->recommend) {
-			$rand = rand(0,1000);
-			if( $rand <= 500 ) {
-				$recommender = new StardustNewsRecommender();
-			}
-			else {
-				$recommender = new StardustHottestItemRecommender();
-			}
-
+			$recommender = new StardustNewsRecommender();
 			$result_data = 	$recommender->getRecommendations($contestImpression);
+
+			if( count($result_data) < $contestImpression->limit ) {
+				$rand = rand(0,1000);
+				if( $rand <= 500 ) {
+					$recommender = new StardustNewsRecommender();
+				}
+				else {
+					$recommender = new StardustHottestItemRecommender();
+				}
+
+				$result_data = 	$recommender->getRecommendations($contestImpression);
+			}
 
 			// post the result back to the contest server
 			if( !DEBUG_ENVIRONMENT) {
@@ -79,13 +84,23 @@ class StardustContestHandler implements ContestHandler{
 			$myItem->save();
 		}
 
+		if($recommender instanceof StardustHottestItemRecommender) {
+			$recommenderid = 1;
+		}
+		else if ($recommender instanceof StardustNewsRecommender) {
+			$recommenderid = 2;
+		}
+		else {
+			$recommenderid = 3;
+		}
+
 		if( isset($result_data) ) {
 			foreach($result_data as $record) {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
 				$recommendation->item = $record->id;
 				$recommendation->client = $impression->client;
-				$recommendation->recommender = $recommender instanceof StardustHottestItemRecommender ? 1 : 2;
+				$recommendation->recommender = $recommenderid;
 				$recommendation->save();
 			}
 		}
