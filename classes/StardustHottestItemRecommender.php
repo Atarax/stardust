@@ -43,14 +43,7 @@ class StardustHottestItemRecommender implements ContestRecommender {
 			}
 
 			if ($i > $contestImpression->limit) {
-				// construct a result message
-				$result_object = new stdClass;
-				$result_object->items = $result_data;
-				$result_object->team = $contestImpression->team;
-
-				$result = ContestMessage::createMessage('result', $result_object);
-				// post the result back to the contest server
-				$result->postBack();
+				return $result_data;
 			}
 	}
 }
