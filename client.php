@@ -78,8 +78,8 @@ if( !isset($_GET["client"]) ) {
                     }
                 },
                 { "mDataProp":"title", "sWidth": "85%" },
-                { "mDataProp":"recommender" },
                 { "mDataProp":"domain" },
+                { "mDataProp":"recommender" },
                 { "mDataProp":"created", "sWidth": "10%" }
             ]
         });
