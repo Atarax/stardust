@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 class StardustNewsRecommender implements ContestRecommender {
-	public function recommend(ContestImpression $contestImpression) {
+	public function getRecommendations(ContestImpression $contestImpression) {
 		$domainid = $contestImpression->domain->id;
 
 		$db = new DatabaseManager();
@@ -46,16 +46,8 @@ class StardustNewsRecommender implements ContestRecommender {
 		file_put_contents("log/response", date('c') .print_r($result_data, true)."\n", FILE_APPEND);
 
 		if ($i > $contestImpression->limit) {
-			// construct a result message
-			$result_object = new stdClass;
-			$result_object->items = $result_data;
-			$result_object->team = $contestImpression->team;
-
-			$result = ContestMessage::createMessage('result', $result_object);
-			// post the result back to the contest server
-			if( !DEBUG_ENVIRONMENT) {
-				$result->postBack();
-			}
+			return $result_data;
 		}
+
 	}
 }

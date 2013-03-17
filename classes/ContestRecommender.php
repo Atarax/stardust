@@ -9,5 +9,5 @@ interface ContestRecommender {
 	 *
 	 * @param ContestImpression $msg the incoming impression, use the provided accessor methods such as getClient() and getItem() to access the contained data
 	 */
-	function recommend(ContestImpression $msg);
+	function getRecommendations(ContestImpression $msg);
 }

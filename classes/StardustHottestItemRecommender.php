@@ -8,7 +8,7 @@
  */
 class StardustHottestItemRecommender implements ContestRecommender {
 
-	public function recommend(ContestImpression $contestImpression) {
+	public function getRecommendations(ContestImpression $contestImpression) {
 			$domainid = $contestImpression->domain->id;
 
 			$db = new DatabaseManager();

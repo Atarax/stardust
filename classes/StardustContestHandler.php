@@ -41,7 +41,18 @@ class StardustContestHandler implements ContestHandler{
 				$recommender = new StardustHottestItemRecommender();
 			}
 
-			$recommender->recommend($contestImpression);
+			$result_data = 	$recommender->getRecommendations($contestImpression);
+
+			// post the result back to the contest server
+			if( !DEBUG_ENVIRONMENT) {
+				// construct a result message
+				$result_object = new stdClass;
+				$result_object->items = $result_data;
+				$result_object->team = $contestImpression->team;
+
+				$result = ContestMessage::createMessage('result', $result_object);
+				$result->postBack();
+			}
 		}
 
 		// Accumulate Data
@@ -76,7 +87,6 @@ class StardustContestHandler implements ContestHandler{
 				$recommendation->client = $impression->client;
 				$recommendation->recommender = 2;
 				$recommendation->save();
-				//file_put_contents("log/queries", date('c') .print_r($impression, true)."\n", FILE_APPEND);
 			}
 		}
 	}
