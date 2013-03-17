@@ -73,7 +73,7 @@ $myfeedbackcount = $data[0]["count"];
                 { "mDataProp":"myfeedbackcount" },
                 {
                     "mData":function (data, type) {
-                        return ( ( Math.round( (data.myfeedbackcount / data.recommendationcount) * 100 ) * 1000  ) / 1000 ) + " %" ;
+                        return ( Math.round( (data.myfeedbackcount / data.recommendationcount) * 100000  ) / 1000 ) + " %" ;
                     }
                 }
             ]
