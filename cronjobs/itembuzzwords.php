@@ -11,7 +11,7 @@ $items = $db->query("
 				SELECT DISTINCT id, title, text FROM contest.item WHERE recommendable > 0 IS NOT NULL;
 			");
 
-$db->query("TRUNCATE TABLE contest.clientbuzzword");
+$db->query("TRUNCATE TABLE contest.itembuzzword");
 $extractor = new BuzzwordExtractor();
 
 foreach( $items as $i => $item ) {

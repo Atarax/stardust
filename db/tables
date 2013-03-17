@@ -75,7 +75,8 @@ CREATE TABLE `item` (
  CREATE TABLE `similaritems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item` int(11) NOT NULL,
-  `similar` int(11) NOT NULL,
+  `similaritem` int(11) NOT NULL,
+  `similarity` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8
 
