@@ -37,7 +37,7 @@ class StardustContestHandler implements ContestHandler{
 			if( $item->id > 0 ) {
 				$recommender = new StardustSimilarRecommender();
 				$result_data = 	$recommender->getRecommendations($contestImpression);
-				file_put_contents("log/newrecommender", date('c') . " Error ".print_r($contestImpression, true).": ".print_r($result_data, true)."\n", FILE_APPEND);
+				file_put_contents("log/newrecommender", date('c') . " Error ".$contestImpression->limit.": ".print_r($result_data, true)."\n", FILE_APPEND);
 				if( count($result_data) == $contestImpression->limit ) {
 					$fallback = false;
 				}
