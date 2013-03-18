@@ -20,17 +20,20 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$filter = "";
 		}
 
+		$db = DatabaseManager::getInstace();
+		$db->connect();
+
 		$query = "
 			SELECT similaritems.similaritem AS itemid
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.item AND
 						item.recommendable > 0 AND
+						item.title != '".mysql_real_escape_string($contestImpression->item->title)."'
 						similaritems.item = ".$contestImpression->item->id." AND
 						similaritems.similaritem != ".$contestImpression->item->id.$filter."
 					ORDER BY similarity DESC
 			";
 
-		$db = DatabaseManager::getInstace();
 		$data = $db->query($query);
 		file_put_contents("log/similar", date('c') . " Item (".$contestImpression->item->id.": ".print_r($query, true)."\n", FILE_APPEND);
 		$result_data = array();
