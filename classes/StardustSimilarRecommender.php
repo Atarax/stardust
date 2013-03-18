@@ -45,8 +45,9 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$result_data[] = $data_object;
 		}
 
-		if ($i > $contestImpression->limit) {
+		//if ($i > $contestImpression->limit) {
 			return $result_data;
-		}
+		//}
+
 	}
 }
