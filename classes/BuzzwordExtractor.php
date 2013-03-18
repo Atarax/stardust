@@ -23,6 +23,7 @@ class BuzzwordExtractor {
 		foreach( $this->strings as $i => $string ) {
 			$weight = $this->weights[$i];
 
+			$string = preg_replace("/[\-­]/", ' ', $string);
 			$tmpWords = explode(" ", $string);
 
 			foreach($tmpWords as $word) {
