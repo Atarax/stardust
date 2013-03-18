@@ -43,8 +43,8 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$data_object = new stdClass;
 			$data_object->id = $row["itemid"];
 			$result_data[] = $data_object;
+			file_put_contents("log/similar", date('c') . " Item (".$$contestImpression->item->id.": ".print_r($data_object, true)."\n", FILE_APPEND);
 		}
-
 		//if ($i > $contestImpression->limit) {
 			return $result_data;
 		//}
