@@ -42,6 +42,6 @@ foreach( $items as $i => $item ) {
 
 echo "Finished.".PHP_EOL;
 
-file_put_contents(LOG_PATH."cronjobs", date('c') . " Clientbuzzword finished\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Itembuzzword finished\n", FILE_APPEND);
 
 ?>
