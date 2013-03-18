@@ -35,7 +35,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 			";
 
 		$data = $db->query($query);
-		file_put_contents("log/similar", date('c') . " Item (".$contestImpression->item->id.": ".print_r($query, true)."\n", FILE_APPEND);
+
 		$result_data = array();
 		$i = 0;
 		// iterate over the data array
