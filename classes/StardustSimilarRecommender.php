@@ -29,9 +29,9 @@ class StardustSimilarRecommender implements ContestRecommender {
 			");
 		$result_data = array();
 		$i = 0;
-		file_put_contents("log/similar", date('c') . " Data (".$$contestImpression->item->id.": ".print_r($data, true)."\n", FILE_APPEND);
 		// iterate over the data array
 		foreach ($data as $row) {
+			file_put_contents("log/similar", date('c') . " Data (".$$contestImpression->item->id.": ".print_r($row, true)."\n", FILE_APPEND);
 			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["itemid"] == $contestImpression->item->id) {
 				continue;
 			}
