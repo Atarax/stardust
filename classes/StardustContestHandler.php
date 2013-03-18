@@ -103,7 +103,7 @@ class StardustContestHandler implements ContestHandler{
 
 		file_put_contents("titles", date('c') . " Error: ".print_r($myItem->title, true)."\n", FILE_APPEND);
 
-		if( isset($result_data) ) {
+		if( isset($recommender) ) {
 			if($recommender instanceof StardustHottestItemRecommender) {
 				$recommenderid = 1;
 			}
