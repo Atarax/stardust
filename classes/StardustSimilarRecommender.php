@@ -21,15 +21,15 @@ class StardustSimilarRecommender implements ContestRecommender {
 		}
 
 		$query = "
-			SELECT similaritems.item AS itemid
-					FROM contest.similaritems, contest.item
-					WHERE item.id = similaritems.similaritem AND similaritem = ".$contestImpression->item->id.$filter."
+			SELECT similaritems.similaritem AS itemid
+					FROM contest.similaritems
+					WHERE similaritems.item = ".$contestImpression->item->id." AND similaritem = ".$contestImpression->item->id.$filter."
 					ORDER BY similarity DESC
 			";
 
 		$db = DatabaseManager::getInstace();
 		$data = $db->query($query);
-		//file_put_contents("log/similar", date('c') . " Item (".$contestImpression->item->id.": ".print_r($query, true)."\n", FILE_APPEND);
+		file_put_contents("log/similar", date('c') . " Item (".$contestImpression->item->id.": ".print_r($query, true)."\n", FILE_APPEND);
 		$result_data = array();
 		$i = 0;
 		// iterate over the data array
