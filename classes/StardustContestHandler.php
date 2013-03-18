@@ -31,6 +31,7 @@ class StardustContestHandler implements ContestHandler{
 		$client = $contestImpression->client;
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
+		$result_data = array();
 
 		if ($contestImpression->recommend) {
 			$fallback = true;
@@ -71,9 +72,6 @@ class StardustContestHandler implements ContestHandler{
 				$result_object = new stdClass;
 				$result_object->items = $result_data;
 				$result_object->team = $contestImpression->team;
-				if( $fallback = false ) {
-					file_put_contents("log/nofallback", date('c') . " nofallback ".print_r($result_data, true)."\n", FILE_APPEND);
-				}
 				$result = ContestMessage::createMessage('result', $result_object);
 				$result->postBack();
 			}
@@ -102,6 +100,8 @@ class StardustContestHandler implements ContestHandler{
 		if( isset($myItem->id) && $myItem->id > 0) {
 			$myItem->save();
 		}
+
+		file_put_contents("titles", date('c') . " Error: ".print_r($myItem->title, true)."\n", FILE_APPEND);
 
 		if( isset($result_data) ) {
 			if($recommender instanceof StardustHottestItemRecommender) {
