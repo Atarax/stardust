@@ -34,7 +34,7 @@ if( !isset($_GET["client"]) ) {
             "aoColumns":[
                 {
                     "mData":function (data, type) {
-                        return data.url == null ? data.item : "<a href='" + data.url + "'>" + data.item + "</a>" ;
+                        return data.url == null ? data.itemid : "<a href='" + data.url + "'>" + data.itemid + "</a>" ;
                     }
                 },
                 { "mDataProp":"title", "sWidth": "58%" },
