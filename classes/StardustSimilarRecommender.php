@@ -28,7 +28,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.item AND
 						item.recommendable > 0 AND
-						item.title != '".mysql_real_escape_string($contestImpression->item->title)."'
+						item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
 						similaritems.item = ".$contestImpression->item->id." AND
 						similaritems.similaritem != ".$contestImpression->item->id.$filter."
 					ORDER BY similarity DESC
