@@ -22,8 +22,11 @@ class StardustSimilarRecommender implements ContestRecommender {
 
 		$query = "
 			SELECT similaritems.similaritem AS itemid
-					FROM contest.similaritems
-					WHERE similaritems.item = ".$contestImpression->item->id." AND similaritems.similaritem != ".$contestImpression->item->id.$filter."
+					FROM contest.similaritems, contest.item
+					WHERE item.id = similaritems.item AND
+						item.recommendable > 0 AND
+						similaritems.item = ".$contestImpression->item->id." AND
+						similaritems.similaritem != ".$contestImpression->item->id.$filter."
 					ORDER BY similarity DESC
 			";
 
