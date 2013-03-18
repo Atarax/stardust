@@ -20,18 +20,21 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$filter = "";
 		}
 
-		$db = DatabaseManager::getInstace();
-		$data = $db->query("
-					SELECT similaritems.item AS itemid
+		$query = "
+			SELECT similaritems.item AS itemid
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.similaritem AND item = ".$contestImpression->item->id.$filter."
 					ORDER BY similarity DESC
-			");
+			";
+
+		$db = DatabaseManager::getInstace();
+		$data = $db->query($query);
+		file_put_contents("log/similar", date('c') . " Item (".$contestImpression->item->id.": ".print_r($query, true)."\n", FILE_APPEND);
 		$result_data = array();
 		$i = 0;
 		// iterate over the data array
 		foreach ($data as $row) {
-			file_put_contents("log/similar", date('c') . " Data (".$$contestImpression->item->id.": ".print_r($row, true)."\n", FILE_APPEND);
+			//file_put_contents("log/similar", date('c') . " Data (".$contestImpression->item->id.": ".print_r($row, true)."\n", FILE_APPEND);
 			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["itemid"] == $contestImpression->item->id) {
 				continue;
 			}
@@ -43,7 +46,6 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$data_object = new stdClass;
 			$data_object->id = $row["itemid"];
 			$result_data[] = $data_object;
-			file_put_contents("log/similar", date('c') . " Item (".$$contestImpression->item->id.": ".print_r($data_object, true)."\n", FILE_APPEND);
 		}
 		//if ($i > $contestImpression->limit) {
 			return $result_data;
