@@ -59,10 +59,11 @@ try {
 	$e->getError()->postBack();
 
 	$message = $e->getMessage();
+	file_put_contents("wrongitems", date('c') . " Error: ".print_r($message, true)."\n", FILE_APPEND);
 	if( strpos($message, "invalid items returned:") !== false ) {
 		$wrongitems = explode( ",", substr( $e->getMessage(), strpos($message, ":")+1 ) );
 
-		file_put_contents("wrongitems", date('c') . " Error: ".print_r($e, true)."\n", FILE_APPEND);
+		file_put_contents("wrongitems", date('c') . " Error: ".print_r($wrongitems, true)."\n", FILE_APPEND);
 	}
 
 
