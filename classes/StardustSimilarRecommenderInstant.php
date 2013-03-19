@@ -29,6 +29,11 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 		$db = DatabaseManager::getInstace();
 		$db->connect();
 
+		$tmp = array();
+		foreach(array_keys($buzzwords) as $word) {
+			$tmp[] = mysql_real_escape_string($word);
+		}
+
 		$query = "
 			SELECT * FROM (
 			SELECT
@@ -40,7 +45,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 				contest.itembuzzword ib1,
 				contest.itembuzzword ib2
 			WHERE
-				ib2.buzzword IN (".implode(",", array_keys($buzzwords) ).") AND
+				ib2.buzzword IN (".mysql_real_escape_string( implode(",", $tmp ) ).") AND
 				item.id = ib2.item AND
 				item.recommendable > 0 AND
 				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
