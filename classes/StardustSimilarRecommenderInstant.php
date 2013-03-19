@@ -44,7 +44,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 				contest.item,
 				contest.itembuzzword ib2
 			WHERE
-				ib2.buzzword IN (".mysql_real_escape_string( implode(",", $tmp ) ).") AND
+				ib2.buzzword IN (".implode(",", $tmp ).") AND
 				item.id = ib2.item AND
 				item.recommendable > 0 AND
 				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
