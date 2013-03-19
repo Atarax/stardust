@@ -66,7 +66,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 			}
 
 			$data_object = new stdClass;
-			$data_object->id = $row["itemid"];
+			$data_object->id = $row["item"];
 			$result_data[] = $data_object;
 		}
 		//if ($i > $contestImpression->limit) {

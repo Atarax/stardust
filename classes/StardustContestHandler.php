@@ -57,6 +57,11 @@ class StardustContestHandler implements ContestHandler{
 
 				$fill_data = $recommender->getRecommendations($contestImpression);
 				$k = 0;
+
+				if( !is_array($fill_data) ) {
+					//TODO: Throw Exception and Log Error
+					$fill_data = array();
+				}
 				foreach($fill_data as $d) {
 					$result_data[] = $d;
 					$k++;
