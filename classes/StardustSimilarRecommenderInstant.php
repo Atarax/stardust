@@ -24,8 +24,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 		$db->connect();
 
 		$query = "
-			SELECT similaritems.similaritem AS itemid,
-					DISTINCT item.title,
+			SELECT similaritems.similaritem AS itemid
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.similaritem AND
 						item.recommendable > 0 AND
@@ -55,7 +54,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 			$result_data[] = $data_object;
 		}
 		//if ($i > $contestImpression->limit) {
-			return $result_data;
+		return $result_data;
 		//}
 
 	}
