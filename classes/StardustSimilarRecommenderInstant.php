@@ -24,7 +24,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 		$extractor->addString($contestImpression->item->title);
 
 		$buzzwords = $extractor->extract();
-		file_put_contents("log/release2", date('c') . " Data (".print_r(explode(",",array_keys($buzzwords)), true)."\n", FILE_APPEND);
+		//file_put_contents("log/release2", date('c') . " Data (".print_r(explode(",",array_keys($buzzwords)), true)."\n", FILE_APPEND);
 
 		$db = DatabaseManager::getInstace();
 		$db->connect();
@@ -40,7 +40,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 				contest.itembuzzword ib1,
 				contest.itembuzzword ib2
 			WHERE
-				ib2.buzzword IN (".explode(",", array_keys($buzzwords).") AND
+				ib2.buzzword IN (".explode(",", array_keys($buzzwords) ).") AND
 				item.id = ib2.item AND
 				item.recommendable > 0 AND
 				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
