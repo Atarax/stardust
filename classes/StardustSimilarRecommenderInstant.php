@@ -20,6 +20,8 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 			$filter = "";
 		}
 
+		file_put_contents("log/release2", date('c') . " Data (".print_r($contestImpression, true)."\n", FILE_APPEND);
+
 		$db = DatabaseManager::getInstace();
 		$db->connect();
 
