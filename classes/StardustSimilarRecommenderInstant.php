@@ -24,7 +24,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 		$extractor->addString($contestImpression->item->title);
 
 		$buzzwords = $extractor->extract();
-		file_put_contents("log/release2", date('c') . " Data (".print_r($buzzwords, true)."\n", FILE_APPEND);
+		file_put_contents("log/release2", date('c') . " Data (".print_r(explode(",",array_keys($buzzwords)), true)."\n", FILE_APPEND);
 
 		$db = DatabaseManager::getInstace();
 		$db->connect();
