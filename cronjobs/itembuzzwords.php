@@ -3,6 +3,15 @@ require_once("../config.php");
 
 file_put_contents(LOG_PATH."cronjobs", date('c') . " Itembuzzword started\n", FILE_APPEND);
 
+// update migrations as well
+$table = "CREATE TABLE `itembuzzword_tmp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item` int(11) NOT NULL,
+  `buzzword` varchar(80) NOT NULL,
+  `count` float DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+
 mb_internal_encoding('UTF-8');
 
 $db = DatabaseManager::getInstace();
@@ -11,7 +20,10 @@ $items = $db->query("
 				SELECT DISTINCT id, title, text FROM contest.item;
 			");
 
-$db->query("TRUNCATE TABLE contest.itembuzzword");
+$db->query("DROP TABLE IF EXISTS itembuzzword_tmp");
+$db->query($table);
+
+//$db->query("TRUNCATE TABLE contest.itembuzzword");
 $extractor = new BuzzwordExtractor();
 
 foreach( $items as $i => $item ) {
@@ -22,7 +34,7 @@ foreach( $items as $i => $item ) {
 
 	$buzzwords = $extractor->extract();
 
-	$query = "INSERT INTO contest.itembuzzword(item, buzzword, count) VALUES ";
+	$query = "INSERT INTO contest.itembuzzword_tmp(item, buzzword, count) VALUES ";
 
 	$i = 0;
 
@@ -40,6 +52,10 @@ foreach( $items as $i => $item ) {
 	$extractor->reset();
 }
 
+$db->query("CREATE INDEX itemANDbuzzword ON itembuzzword_tmp (item,buzzword)");
+$db->query("CREATE INDEX buzzword ON itembuzzword_tmp (buzzword)");
+$db->query("DROP TABLE IF EXISTS itembuzzword");
+$db->query("RENAME TABLE itembuzzword_tmp TO itembuzzword");
 echo "Finished.".PHP_EOL;
 
 file_put_contents(LOG_PATH."cronjobs", date('c') . " Itembuzzword finished\n", FILE_APPEND);

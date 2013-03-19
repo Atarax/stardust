@@ -29,6 +29,7 @@ class DatabaseManager {
 		}
 
 		mysql_set_charset( "utf8" );
+		$this->query("USE contest");
 	}
 
 	public function query($query) {
