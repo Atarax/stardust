@@ -5,13 +5,13 @@
 class ContestImpression extends ContestMessage {
 	protected $logId;
 	
-	protected $client;
-	protected $domain;
-	protected $item;
-	protected $category;
+	public $client;
+	public $domain;
+	public $item;
+	public $category;
 
-	protected $timeout;
-	protected $recommend;
+	public $timeout;
+	public $recommend;
 	public $limit;
 
 	public function __construct($data) {
