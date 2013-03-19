@@ -24,8 +24,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 		$db->connect();
 
 		$query = "
-			SELECT similaritems.similaritem AS itemid,
-					DISTINCT item.title
+			SELECT similaritems.similaritem AS itemid
 					FROM contest.similaritems, contest.item
 					WHERE item.id = similaritems.similaritem AND
 						item.recommendable > 0 AND
