@@ -13,8 +13,8 @@ class StardustSimilarRecommender implements ContestRecommender {
 		$clientid = is_object($contestImpression->client) && $contestImpression->client->id > 0 ? $contestImpression->client->id : 0;
 
 		if( $clientid > 0 ) {
-			$filter = " AND similaritems.similaritem NOT IN (SELECT item FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid.") ";
-			$filter .= " AND similaritems.similaritem NOT IN (SELECT item FROM contest.impression WHERE client IS NOT NULL and client = ".$clientid.") ";
+			$filter = " AND item.id NOT IN (SELECT item FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid.") ";
+			$filter .= " AND item.id NOT IN (SELECT item FROM contest.impression WHERE client IS NOT NULL and client = ".$clientid.") ";
 		}
 		else {
 			$filter = "";
@@ -24,14 +24,29 @@ class StardustSimilarRecommender implements ContestRecommender {
 		$db->connect();
 
 		$query = "
-			SELECT similaritems.similaritem AS itemid
-					FROM contest.similaritems, contest.item
-					WHERE item.id = similaritems.similaritem AND
-						item.recommendable > 0 AND
-						item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
-						similaritems.item = ".$contestImpression->item->id." AND
-						similaritems.similaritem != ".$contestImpression->item->id.$filter."
-					ORDER BY similarity DESC
+			SELECT * FROM (
+			SELECT
+				ib1.item AS source,
+				ib2.item,
+				SUM(ib2.count) AS similarity,
+				item.title
+			FROM
+				contest.item,
+				contest.itembuzzword ib1,
+				contest.itembuzzword ib2
+			WHERE
+				item.id = ib2.item AND
+				ib1.item = ".$contestImpression->item->id." AND
+				ib1.buzzword = ib2.buzzword AND
+				ib1.item != ib2.item AND
+				item.recommendable > 0 AND
+				item.domain = ".$domainid." AND ".$filter."
+			GROUP BY
+				ib2.item
+			) r1
+			GROUP BY title
+			ORDER BY
+				r1.similarity DESC
 			";
 
 		$data = $db->query($query);

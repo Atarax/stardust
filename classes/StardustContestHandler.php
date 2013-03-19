@@ -36,7 +36,7 @@ class StardustContestHandler implements ContestHandler{
 		if ($contestImpression->recommend) {
 			$fallback = true;
 			if( is_object($item) && $item->id > 0 ) {
-				$recommender = new StardustSimilarRecommender();
+				$recommender = new StardustSimilarRecommenderInstant();
 				$result_data = 	$recommender->getRecommendations($contestImpression);
 				if( count($result_data) < $contestImpression->limit ) {
 					$contestImpression->limit = $contestImpression->limit - count($result_data);
@@ -110,8 +110,11 @@ class StardustContestHandler implements ContestHandler{
 			else if ($recommender instanceof StardustNewsRecommender) {
 				$recommenderid = 2;
 			}
-			else {
+			else if($recommender instanceof StardustSimilarRecommender) {
 				$recommenderid = 3;
+			}
+			else {
+				$recommenderid = 4;
 			}
 
 			foreach($result_data as $record) {
