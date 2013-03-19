@@ -105,7 +105,7 @@ class StardustContestHandler implements ContestHandler{
 		$myItem->text = isset($item) ? $item->text : null;
 		$myItem->url = isset($item) ? $item->url : null;
 		$myItem->created = isset($item) && isset($item->created) ? date("y-m-d h:i:s", $item->created) : null;
-		$myItem->title = isset($item) ? $item->title : null;
+		$myItem->title = isset($item) ? preg_replace('/[^\P{C}\n]+/u', '', $item->title) : null;
 		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
 
 		if( isset($myItem->id) && $myItem->id > 0) {
