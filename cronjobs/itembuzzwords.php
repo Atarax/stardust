@@ -8,7 +8,7 @@ mb_internal_encoding('UTF-8');
 $db = DatabaseManager::getInstace();
 $db->connect();
 $items = $db->query("
-				SELECT DISTINCT id, title, text FROM contest.item WHERE recommendable > 0 IS NOT NULL;
+				SELECT DISTINCT id, title, text FROM contest.item;
 			");
 
 $db->query("TRUNCATE TABLE contest.itembuzzword");
