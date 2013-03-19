@@ -49,6 +49,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 				r1.similarity DESC
 			";
 
+		file_put_contents("log/release", date('c') . " Data (".$query."\n", FILE_APPEND);
 		$data = $db->query($query);
 
 		$result_data = array();
