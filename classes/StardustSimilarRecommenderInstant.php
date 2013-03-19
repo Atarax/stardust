@@ -40,6 +40,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 				ib1.buzzword = ib2.buzzword AND
 				ib1.item != ib2.item AND
 				item.recommendable > 0 AND
+				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
 				item.domain = ".$domainid.$filter."
 			GROUP BY
 				ib2.item
