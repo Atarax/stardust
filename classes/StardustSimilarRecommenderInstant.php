@@ -31,7 +31,7 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 
 		$tmp = array();
 		foreach(array_keys($buzzwords) as $word) {
-			$tmp[] = mysql_real_escape_string($word);
+			$tmp[] = "'".mysql_real_escape_string($word)."'";
 		}
 
 		$query = "
