@@ -20,25 +20,32 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 			$filter = "";
 		}
 
+		$extractor = new BuzzwordExtractor();
+		$extractor->addString($contestImpression->item->title);
+
+		$buzzwords = $extractor->extract();
+		//file_put_contents("log/release2", date('c') . " Data (".print_r(explode(",",array_keys($buzzwords)), true)."\n", FILE_APPEND);
+
 		$db = DatabaseManager::getInstace();
 		$db->connect();
+
+		$tmp = array();
+		foreach(array_keys($buzzwords) as $word) {
+			$tmp[] = "'".mysql_real_escape_string($word)."'";
+		}
 
 		$query = "
 			SELECT * FROM (
 			SELECT
-				ib1.item AS source,
 				ib2.item,
 				SUM(ib2.count) AS similarity,
 				item.title
 			FROM
 				contest.item,
-				contest.itembuzzword ib1,
 				contest.itembuzzword ib2
 			WHERE
+				ib2.buzzword IN (".mysql_real_escape_string( implode(",", $tmp ) ).") AND
 				item.id = ib2.item AND
-				ib1.item = ".$contestImpression->item->id." AND
-				ib1.buzzword = ib2.buzzword AND
-				ib1.item != ib2.item AND
 				item.recommendable > 0 AND
 				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
 				item.domain = ".$domainid.$filter."
