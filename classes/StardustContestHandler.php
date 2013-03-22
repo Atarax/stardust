@@ -130,8 +130,11 @@ class StardustContestHandler implements ContestHandler{
 			else if($recommender instanceof StardustSimilarRecommender) {
 				$recommenderid = 3;
 			}
-			else {
+			else if($recommender instanceof StardustSimilarRecommenderInstant) {
 				$recommenderid = 4;
+			}
+			else {
+				$recommenderid = 5;
 			}
 
 			foreach($result_data as $record) {
