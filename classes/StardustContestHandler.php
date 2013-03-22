@@ -125,8 +125,6 @@ class StardustContestHandler implements ContestHandler{
 			$myItem->save();
 		}
 
-		file_put_contents("titles", date('c') . " Error: ".print_r($myItem->title, true)."\n", FILE_APPEND);
-
 		if( isset($recommender) ) {
 			if($recommender instanceof StardustHottestItemRecommender) {
 				$recommenderid = 1;
@@ -153,6 +151,10 @@ class StardustContestHandler implements ContestHandler{
 				$recommendation->save();
 			}
 		}
+	}
+
+	private function mergeRecommendations($data1, $data2) {
+
 	}
 
 	/* This method handles feedback messages from the contest server. As of now it does nothing. It could be used to look at

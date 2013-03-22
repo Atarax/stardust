@@ -39,6 +39,9 @@ class StardustSimilarRecommender implements ContestRecommender {
 
 		$result_data = array();
 		$i = 0;
+
+		$items = array();
+
 		// iterate over the data array
 		foreach ($data as $row) {
 			//file_put_contents("log/similar", date('c') . " Data (".$contestImpression->item->id.": ".print_r($row, true)."\n", FILE_APPEND);
@@ -50,6 +53,7 @@ class StardustSimilarRecommender implements ContestRecommender {
 				break;
 			}
 
+			$items[] =
 			$data_object = new stdClass;
 			$data_object->id = $row["itemid"];
 			$result_data[] = $data_object;
