@@ -29,6 +29,13 @@ class StardustContestHandler implements ContestHandler{
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
 		// TODO: Remove confusing characters to fix the duplicate recommendation bug
 		$item = $contestImpression->item;
+
+		if( is_object($item) ) {
+			if( $item->titel != null ) {
+				$item->title = preg_replace('/[^\P{C}\n]+/u', '', $item->title);
+			}
+		}
+
 		$client = $contestImpression->client;
 		$domain = $contestImpression->domain;
 		$context = isset($item) && isset($item->context) ? $item->context : null;
