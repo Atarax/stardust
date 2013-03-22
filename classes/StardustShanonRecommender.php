@@ -6,7 +6,7 @@
  * Time: 7:11 PM
  * To change this template use File | Settings | File Templates.
  */
-class StardustSimilarRecommenderInstant implements ContestRecommender {
+class StardustShanonRecommender implements ContestRecommender {
 
 	public function getRecommendations(ContestImpression $contestImpression) {
 		$domainid = $contestImpression->domain->id;
@@ -21,9 +21,11 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 		}
 
 		$extractor = new BuzzwordExtractor();
+		// TODO: Add title and compare results, lets see if its even more cool ^^
 		$extractor->addString($contestImpression->item->title);
 
-		$buzzwords = $extractor->extract();
+		$buzzwords = $extractor->extract(true);
+		//file_put_contents("log/release2", date('c') . " Data (".print_r(explode(",",array_keys($buzzwords)), true)."\n", FILE_APPEND);
 
 		$db = DatabaseManager::getInstace();
 		$db->connect();
@@ -33,38 +35,39 @@ class StardustSimilarRecommenderInstant implements ContestRecommender {
 			$tmp[] = "'".mysql_real_escape_string($word)."'";
 		}
 
-		$query = "
-			SELECT * FROM (
+		$query = "SELECT id AS item FROM (
 			SELECT
-				ib2.item,
-				SUM(ib2.count) AS similarity,
-				item.title
+				item.id,
+				SUM(itembuzzword.count * buzzword.information) AS score
 			FROM
-				contest.item,
-				contest.itembuzzword ib2
+				itembuzzword,
+				item,
+				buzzword
 			WHERE
-				ib2.buzzword IN (".implode(",", $tmp ).") AND
-				item.id = ib2.item AND
+				buzzword.buzzword = itembuzzword.buzzword AND
+				item.id = itembuzzword.item AND
+				itembuzzword.buzzword IN (".implode(",", $tmp ).") AND
+				item.id != ".$contestImpression->item->id." AND
+				item.domain = ".$domainid." AND
 				item.recommendable > 0 AND
-				item.title != '".mysql_real_escape_string($contestImpression->item->title)."' AND
-				item.domain = ".$domainid.$filter."
+				item.title NOT LIKE '".mysql_real_escape_string($contestImpression->item->title)."'
+				".$filter."
 			GROUP BY
-				ib2.item
+				item.id
 			) r1
-			GROUP BY title
+			GROUP BY
+				title
 			ORDER BY
-				r1.similarity DESC
-			";
+				score DESC
+		";
 
+		file_put_contents("log/release", date('c') . " Data (".$query."\n", FILE_APPEND);
 		$data = $db->query($query);
 
 		$result_data = array();
 		$i = 0;
 		// iterate over the data array
 		foreach ($data as $row) {
-			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["item"] == $contestImpression->item->id) {
-				continue;
-			}
 			// don't return more items than asked for
 			if (++$i > $contestImpression->limit) {
 				break;
