@@ -80,3 +80,10 @@ CREATE TABLE `item` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8
 
+ CREATE TABLE `buzzword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `buzzword` varchar(80) NOT NULL,
+  count int(11) DEFAULT NULL,
+  information float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8

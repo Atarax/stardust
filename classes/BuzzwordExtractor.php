@@ -17,7 +17,7 @@ class BuzzwordExtractor {
 		$this->weights[] = $weight;
 	}
 
-	public function extract() {
+	public function extract($dontIgnoreUnsignificant = false) {
 		mb_internal_encoding('UTF-8');
 
 		foreach( $this->strings as $i => $string ) {
@@ -32,7 +32,7 @@ class BuzzwordExtractor {
 
 				//$word = preg_replace("/[^A-Za-z0-9öäüß ]/", '', mb_strtolower($word));
 
-				if( !$this->ignoreWord($word) ) {
+				if( $dontIgnoreUnsignificant || !$this->ignoreWord($word) ) {
 					if( isset($this->buzzwords[$word]) ) {
 						$this->buzzwords[$word] += 1 * $weight;
 					}
