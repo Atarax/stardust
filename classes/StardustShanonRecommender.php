@@ -35,9 +35,10 @@ class StardustShanonRecommender implements ContestRecommender {
 			$tmp[] = "'".mysql_real_escape_string($word)."'";
 		}
 
-		$query = "SELECT id AS item FROM (
+		$query = "SELECT id AS item, title FROM (
 			SELECT
 				item.id,
+				item.title,
 				SUM(itembuzzword.count * buzzword.information) AS score
 			FROM
 				itembuzzword,
@@ -62,8 +63,7 @@ class StardustShanonRecommender implements ContestRecommender {
 		";
 
 		file_put_contents("log/release", date('c') . " Data (".$query."\n", FILE_APPEND);
-		$data = array();
-		//$data = $db->query($query);
+		$data = $db->query($query);
 
 		$result_data = array();
 		$i = 0;

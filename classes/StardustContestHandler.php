@@ -27,6 +27,7 @@ class StardustContestHandler implements ContestHandler{
 	 */
 	public function handleImpression(ContestImpression $contestImpression) {
 		// check whether a recommendation is expected. if the flag is set to false, the current message is just a training message.
+		// TODO: Remove confusing characters to fix the duplicate recommendation bug
 		$item = $contestImpression->item;
 		$client = $contestImpression->client;
 		$domain = $contestImpression->domain;
@@ -37,11 +38,12 @@ class StardustContestHandler implements ContestHandler{
 			$fallback = true;
 			if( is_object($item) && $item->id > 0 ) {
 				$recommender = new StardustShanonRecommender();
-				$recommender->getRecommendations($contestImpression);
+				$result_data = $recommender->getRecommendations($contestImpression);
 
-
-				$recommender = new StardustSimilarRecommender();
-				$result_data = 	$recommender->getRecommendations($contestImpression);
+				if( count($result_data) == 0 ) {
+					$recommender = new StardustSimilarRecommender();
+					$result_data = 	$recommender->getRecommendations($contestImpression);
+				}
 
 				if( count($result_data) == 0 ) {
 					$recommender = new StardustSimilarRecommenderInstant();
