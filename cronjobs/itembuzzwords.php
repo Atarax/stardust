@@ -32,7 +32,7 @@ foreach( $items as $i => $item ) {
 	$extractor->addString($item["title"], 3);
 	$extractor->addString($item["text"], 1);
 
-	$buzzwords = $extractor->extract();
+	$buzzwords = $extractor->extract(true);
 
 	$query = "INSERT INTO contest.itembuzzword_tmp(item, buzzword, count) VALUES ";
 
