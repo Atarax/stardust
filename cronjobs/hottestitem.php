@@ -39,7 +39,7 @@ foreach( $data as $i => $row ) {
 	$db->query($query);
 }
 
-$db->query("CREATE INDEX item ON hottestitemscore_tmp (item)");
+$db->query("CREATE INDEX itemANDscore ON hottestitemscore_tmp (item,score)");
 $db->query("DROP TABLE IF EXISTS hottestitemscore");
 $db->query("RENAME TABLE hottestitemscore_tmp TO hottestitemscore");
 

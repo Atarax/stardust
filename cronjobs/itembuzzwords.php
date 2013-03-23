@@ -17,7 +17,7 @@ mb_internal_encoding('UTF-8');
 $db = DatabaseManager::getInstace();
 $db->connect();
 $items = $db->query("
-				SELECT DISTINCT id, title, text FROM contest.item;
+				SELECT id FROM contest.item;
 			");
 
 $db->query("DROP TABLE IF EXISTS itembuzzword_tmp");
