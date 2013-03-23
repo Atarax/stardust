@@ -47,16 +47,6 @@ class StardustContestHandler implements ContestHandler{
 				$recommender = new StardustShanonRecommender();
 				$result_data = $recommender->getRecommendations($contestImpression);
 
-				if( count($result_data) < $contestImpression->limit ) {
-					$recommender = new StardustSimilarRecommender();
-					$result_data = 	$this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression) );
-				}
-
-				if( count($result_data) < $contestImpression->limit ) {
-					$recommender = new StardustSimilarRecommenderInstant();
-					$result_data = 	$this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression) );
-				}
-
 				if( count($result_data) >= $contestImpression->limit ) {
 					$fallback = false;
 				}

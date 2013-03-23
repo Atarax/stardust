@@ -21,7 +21,6 @@ class StardustShanonRecommender implements ContestRecommender {
 		}
 
 		$extractor = new BuzzwordExtractor();
-		// TODO: Add title and compare results, lets see if its even more cool ^^
 		$extractor->addString($contestImpression->item->title);
 
 		$buzzwords = $extractor->extract(true);
@@ -39,7 +38,7 @@ class StardustShanonRecommender implements ContestRecommender {
 			SELECT
 				item.id,
 				item.title,
-				SUM(itembuzzword.count * buzzword.information) AS score
+				SUM(buzzword.count * buzzword.information) AS score
 			FROM
 				itembuzzword,
 				item,
