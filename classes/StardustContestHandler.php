@@ -72,6 +72,11 @@ class StardustContestHandler implements ContestHandler{
 				}
 
 				$result_data = $this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression));
+
+				if( count($result_data) < $contestImpression->limit ) {
+					$recommender = new StardustHottestItemRecommender();
+					$result_data = $this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression));
+				}
 			}
 
 			$answer = array();
