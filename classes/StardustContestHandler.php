@@ -95,7 +95,7 @@ class StardustContestHandler implements ContestHandler{
 			// post the result back to the contest server
 			if( !DEBUG_ENVIRONMENT) {
 				if(empty($answer)) {
-					file_put_contents("log/emptyrecs", date('c') ." Recommendations empty!?\n", FILE_APPEND);
+					file_put_contents("log/emptyrecs", date('c') ." Recommendations empty!?\n".print_r($contestImpression,true)."\n".print_r($result_data,true)."\n", FILE_APPEND);
 				}
 				// construct a result message
 				$result_object = new stdClass;
