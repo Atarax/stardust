@@ -19,7 +19,7 @@ $db->query("DROP TABLE IF EXISTS hottestitemscore_tmp");
 $db->query($table);
 
 $data = $db->query("
-	SELECT item.id AS item
+	SELECT DISTINCT item.id AS item
 	FROM contest.item
 	WHERE item.recommendable > 0
 ");
