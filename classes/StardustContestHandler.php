@@ -47,14 +47,14 @@ class StardustContestHandler implements ContestHandler{
 				$recommender = new StardustShanonRecommender();
 				$result_data = $recommender->getRecommendations($contestImpression);
 
-				if( count($result_data) == 0 ) {
+				if( count($result_data) < $contestImpression->limit ) {
 					$recommender = new StardustSimilarRecommender();
-					$result_data = 	$recommender->getRecommendations($contestImpression);
+					$result_data = 	$this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression) );
 				}
 
-				if( count($result_data) == 0 ) {
+				if( count($result_data) < $contestImpression->limit ) {
 					$recommender = new StardustSimilarRecommenderInstant();
-					$result_data = 	$recommender->getRecommendations($contestImpression);
+					$result_data = 	$this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression) );
 				}
 
 				if( count($result_data) < $contestImpression->limit ) {
@@ -74,7 +74,7 @@ class StardustContestHandler implements ContestHandler{
 					$recommender = new StardustHottestItemRecommender();
 				}
 
-				$fill_data = $recommender->getRecommendations($contestImpression);
+				$result_data = $this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression));
 				$k = 0;
 
 				if( !is_array($fill_data) ) {
@@ -90,11 +90,24 @@ class StardustContestHandler implements ContestHandler{
 				}
 			}
 
+			$answer = array();
+			$i = 0;
+			foreach($result_data as $result) {
+				if (++$i > $contestImpression->limit) {
+					break;
+				}
+
+				$data_object = new stdClass;
+				$data_object->id = $result["id"];
+
+				$answer[] = $data_object;
+			}
+
 			// post the result back to the contest server
 			if( !DEBUG_ENVIRONMENT) {
 				// construct a result message
 				$result_object = new stdClass;
-				$result_object->items = $result_data;
+				$result_object->items = $answer;
 				$result_object->team = $contestImpression->team;
 				$result = ContestMessage::createMessage('result', $result_object);
 				$result->postBack();
@@ -154,7 +167,22 @@ class StardustContestHandler implements ContestHandler{
 	}
 
 	private function mergeRecommendations($data1, $data2) {
+		foreach($data2 as $d2) {
+			if( !$this->contains($data1,$d2) ) {
+				$data1[] = $d2;
+			}
+		}
 
+		return $data1;
+	}
+
+	private function contains($data, $item) {
+		foreach($data as $d) {
+			if($d["id"] == $item["id"] || $d["title"] == $item["title"]) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/* This method handles feedback messages from the contest server. As of now it does nothing. It could be used to look at

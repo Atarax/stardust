@@ -62,23 +62,25 @@ class StardustShanonRecommender implements ContestRecommender {
 				score DESC
 		";
 
-		file_put_contents("log/release", date('c') . " Data (".$query."\n", FILE_APPEND);
 		$data = $db->query($query);
 
-		$result_data = array();
+		$result = array();
+
 		$i = 0;
 		// iterate over the data array
 		foreach ($data as $row) {
+			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["item"] == $contestImpression->item->id) {
+				continue;
+			}
+
+			$result[] = array("id" => $row["item"], "title" => $row["title"]);
+
 			// don't return more items than asked for
 			if (++$i > $contestImpression->limit) {
 				break;
 			}
-
-			$data_object = new stdClass;
-			$data_object->id = $row["item"];
-			$result_data[] = $data_object;
 		}
 
-		return $result_data;
+		return $result;
 	}
 }
