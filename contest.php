@@ -7,6 +7,8 @@
 // load some common functions and constants
 require_once 'config.php';
 
+$t1 = microtime();
+
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
 $handler = StardustContestHandler::getInstance();
 
@@ -74,3 +76,8 @@ try {
 	// and also log it
 	file_put_contents($config["logfile"], date('c') . " Error: ".print_r($e, true)."\n", FILE_APPEND);
 }
+
+$t2 = microtime();
+
+file_put_contents("log/executiontime", date('c') . " Execution Time: ".print_r( ($t2-t1) * 1000, true)."\n", FILE_APPEND);
+
