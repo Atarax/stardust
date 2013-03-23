@@ -21,7 +21,7 @@ class StardustHottestItemRecommender implements ContestRecommender {
 			}
 
 			$db = DatabaseManager::getInstace();
-			$data = $db->query("
+			$query = "
 					SELECT item.id AS item, item.title
 					FROM contest.item, contest.hottestitemscore
 					WHERE item.id = hottestitemscore.item AND
@@ -31,8 +31,12 @@ class StardustHottestItemRecommender implements ContestRecommender {
 						  ".$filter."
 					ORDER BY hottestitemscore.score DESC
 					LIMIT 15
-			");
+			";
 
+			$data = $db->query($query);
+			if( empty($data) ) {
+				file_put_contents("log/emptyqueries", date('c') ." Recommendations empty!?\n".print_r($contestImpression,true)."\n".print_r($query,true)."\n", FILE_APPEND);
+			}
 			shuffle($data);
 
 			$result = array();
