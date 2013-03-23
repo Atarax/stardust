@@ -38,7 +38,7 @@ class StardustShanonRecommender implements ContestRecommender {
 			SELECT
 				item.id,
 				item.title,
-				SUM(buzzword.count * buzzword.information) AS score
+				SUM(itembuzzword.count * buzzword.information) AS score
 			FROM
 				itembuzzword,
 				item,
