@@ -39,11 +39,11 @@ class StardustNewsRecommender implements ContestRecommender {
 		$i = 0;
 		// iterate over the data array
 		foreach ($data as $row) {
-			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["id"] == $contestImpression->item->id) {
+			if(is_object($contestImpression->item) && $contestImpression->item->id > 0 && $row["item"] == $contestImpression->item->id) {
 				continue;
 			}
 
-			$result[] = array("id" => $row["id"], "title" => $row["title"]);
+			$result[] = array("id" => $row["item"], "title" => $row["title"]);
 
 			// don't return more items than asked for
 			if (++$i > $contestImpression->limit) {
