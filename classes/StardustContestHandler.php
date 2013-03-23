@@ -53,20 +53,8 @@ class StardustContestHandler implements ContestHandler{
 			}
 
 			if( $fallback ) {
-				$rand = rand(0,1000);
-				if( $rand <= 500 ) {
-					$recommender = new StardustNewsRecommender();
-				}
-				else {
-					$recommender = new StardustHottestItemRecommender();
-				}
-
+				$recommender = new StardustHottestItemRecommender();
 				$result_data = $this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression));
-
-				if( count($result_data) < $contestImpression->limit ) {
-					$recommender = new StardustHottestItemRecommender();
-					$result_data = $this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression));
-				}
 			}
 
 			$answer = array();
