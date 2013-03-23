@@ -31,7 +31,7 @@ class StardustContestHandler implements ContestHandler{
 		$item = $contestImpression->item;
 
 		if( is_object($item) ) {
-			if( $item->titel != null ) {
+			if( $item->title != null ) {
 				$item->title = preg_replace('/[^\P{C}\n]+/u', '', $item->title);
 			}
 		}
