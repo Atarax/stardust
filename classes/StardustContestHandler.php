@@ -57,10 +57,7 @@ class StardustContestHandler implements ContestHandler{
 					$result_data = 	$this->mergeRecommendations($result_data, $recommender->getRecommendations($contestImpression) );
 				}
 
-				if( count($result_data) < $contestImpression->limit ) {
-					$contestImpression->limit = $contestImpression->limit - count($result_data);
-				}
-				else {
+				if( count($result_data) >= $contestImpression->limit ) {
 					$fallback = false;
 				}
 			}
