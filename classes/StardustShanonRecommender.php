@@ -59,7 +59,8 @@ class StardustShanonRecommender implements ContestRecommender {
 				title
 			ORDER BY
 				score DESC
-		";
+			LIMIT ".$contestImpression->limit
+		;
 
 		$data = $db->query($query);
 
