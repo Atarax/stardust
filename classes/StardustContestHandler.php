@@ -145,7 +145,7 @@ class StardustContestHandler implements ContestHandler{
 			foreach($result_data as $record) {
 				$recommendation = new Recommendation();
 				$recommendation->source = $myItem->id;
-				$recommendation->item = $record->id;
+				$recommendation->item = $record["id"];
 				$recommendation->client = $impression->client;
 				$recommendation->recommender = $recommenderid;
 				$recommendation->save();
