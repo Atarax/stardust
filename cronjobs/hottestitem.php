@@ -5,30 +5,43 @@ file_put_contents(LOG_PATH."cronjobs", date('c') . " Hottest-Item started\n", FI
 
 mb_internal_encoding('UTF-8');
 
+$table = "
+ CREATE TABLE `hottestitemscore_tmp` (
+  `item` int(11) NOT NULL,
+  `score` float DEFAULT 0,
+  PRIMARY KEY (`item`)
+) DEFAULT CHARSET=utf8";
+
 $db = DatabaseManager::getInstace();
 $db->connect();
+
+$db->query("DROP TABLE IF EXISTS hottestitemscore_tmp");
+$db->query($table);
+
 $data = $db->query("
-				SELECT COUNT(impression.id) AS score, impression.item
-				FROM contest.impression, contest.item
-				WHERE item.id = impression.item AND
-					item.recommendable > 0 AND
-					impression.item != 0 AND
-					DATEDIFF(NOW(), impression.created) <= 1
-				GROUP BY item
-				ORDER BY score DESC
-			");
+	SELECT item.id AS item
+	FROM contest.item
+	WHERE item.recommendable > 0
+");
 
-$db->query("TRUNCATE TABLE contest.hottestitemscore");
+//$db->query("TRUNCATE TABLE contest.hottestitemscore");
 
-foreach( $data as $row ) {
+$total = count($data);
+
+foreach( $data as $i => $row ) {
 	if( !$row["item"] ) {
 		continue;
 	}
-	$scoreModel = new HottestItemScore();
-	$scoreModel->item = $row["item"];
-	$scoreModel->score = $row["score"];
-	$scoreModel->save();
+	echo "Item ".$i." of ".$total.PHP_EOL;
+	$score = $db->query("SELECT COUNT(*) AS score FROM contest.impression WHERE impression.item = ".$row["item"]." AND DATEDIFF(NOW(),created) <= 1");
+	$query = "INSERT INTO contest.hottestitemscore_tmp(item, score) VALUES (".$row["item"].",".$score[0]["score"].")";
+
+	$db->query($query);
 }
+
+$db->query("CREATE INDEX item ON hottestitemscore_tmp (item)");
+$db->query("DROP TABLE IF EXISTS hottestitemscore");
+$db->query("RENAME TABLE hottestitemscore_tmp TO hottestitemscore");
 
 echo "Finished.".PHP_EOL;
 

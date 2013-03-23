@@ -27,7 +27,7 @@ $db->query($table);
 $extractor = new BuzzwordExtractor();
 
 foreach( $items as $i => $item ) {
-$extractor->addString($item["title"], 3);
+	$extractor->addString($item["title"], 3);
 	$extractor->addString($item["text"], 1);
 }
 

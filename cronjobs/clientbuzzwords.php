@@ -40,13 +40,6 @@ foreach( $clients as $i => $client ) {
 		}
 		$query .= ( $i == 0 ? "" : ",")."(".$client["id"].",'".mysql_real_escape_string($buzzword)."',".$count.")";
 		$i++;
-		/*
-		$model = new ClientBuzzword();
-		$model->client = $client["id"];
-		$model->count = $count;
-		$model->buzzword = $buzzword;
-		$model->save();
-		*/
 	}
 	if( $i > 0 ) {
 		$db->query($query);
