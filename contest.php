@@ -78,6 +78,6 @@ try {
 }
 
 
-$duration = $t1 - microtime(true);
+$duration = microtime(true) - $t1;
 
 file_put_contents("log/executiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
