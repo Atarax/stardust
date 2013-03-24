@@ -37,7 +37,9 @@ class StardustHottestItemRecommender implements ContestRecommender {
 			$data = $db->query($query);
 			$duration = microtime(true) - $t1;
 
-			file_put_contents("log/hottestexecutiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
+			if( $duration > 0.07 ) {
+				file_put_contents("log/hottestexecutiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n".$query."\n", FILE_APPEND);
+			}
 
 			shuffle($data);
 
