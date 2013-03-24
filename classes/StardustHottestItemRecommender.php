@@ -33,10 +33,12 @@ class StardustHottestItemRecommender implements ContestRecommender {
 					LIMIT 15
 			";
 
+			$t1 = microtime(true);
 			$data = $db->query($query);
-			if( empty($data) ) {
-				file_put_contents("log/emptyqueries", date('c') ." Recommendations empty!?\n".print_r($contestImpression,true)."\n".print_r($query,true)."\n", FILE_APPEND);
-			}
+			$duration = microtime(true) - $t1;
+
+			file_put_contents("log/hottestexecutiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
+
 			shuffle($data);
 
 			$result = array();
