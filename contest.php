@@ -79,5 +79,7 @@ try {
 
 
 $duration = microtime(true) - $t1;
-
+if( $duration > 0.1 ) {
+	file_put_contents("log/timeout", date('c') . " Probable Timeout: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
+}
 file_put_contents("log/executiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
