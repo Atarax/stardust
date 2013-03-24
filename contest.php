@@ -79,5 +79,5 @@ try {
 
 $t2 = microtime(true);
 
-file_put_contents("log/executiontime", date('c') . " Execution Time: ".print_r( $t2-t1, true)."\n".print_r($msg, true), FILE_APPEND);
+file_put_contents("log/executiontime", date('c') . " Execution Time: ".( $t2-t1)."\n".print_r($msg, true), FILE_APPEND);
 
