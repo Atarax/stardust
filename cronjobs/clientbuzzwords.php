@@ -3,6 +3,15 @@ require_once("../config.php");
 
 file_put_contents(LOG_PATH."cronjobs", date('c') . " Clientbuzzword started\n", FILE_APPEND);
 
+// update migrations as well
+$table = "CREATE TABLE `clientbuzzword_tmp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client` int(11) NOT NULL,
+  `buzzword` varchar(80) NOT NULL,
+  `count` float DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+
 mb_internal_encoding('UTF-8');
 
 $db = DatabaseManager::getInstace();
@@ -11,26 +20,29 @@ $clients = $db->query("
 				SELECT DISTINCT client AS id FROM contest.impression WHERE client IS NOT NULL;
 			");
 
-$db->query("TRUNCATE TABLE contest.clientbuzzword");
+$db->query("DROP TABLE IF EXISTS clientbuzzword_tmp");
+$db->query($table);
+
 $extractor = new BuzzwordExtractor();
+$total = count($clients);
 
 foreach( $clients as $i => $client ) {
-	$impressions = $db->query("
-		SELECT item.title, item.text
-		FROM contest.item, contest.impression
-		WHERE client = ".$client["id"]." AND item.id = impression.item AND impression.item != 0
-	");
+	echo "Client $i (".$client["id"].") of ".$total."\n";
 
-	echo "Client $i (".$client["id"].") of ".count($clients)."\n";
+	$items = $db->query("SELECT item.title, item.text FROM contest.impression, contest.item WHERE item.id = impression.item AND client = ".$client["id"]." AND client IS NOT NULL");
+	$items = array_merge(
+			$items,
+			$db->query("SELECT item.title, item.text FROM contest.feedback, contest.item WHERE item.id = feedback.target AND feedback.client = ".$client["id"]." AND client IS NOT NULL")
+	);
 
-	foreach( $impressions as $impresson ) {
-		$extractor->addString($impresson["title"], 3);
-		$extractor->addString($impresson["text"], 1);
+	foreach( $items as $item ) {
+		$extractor->addString($item["title"], 3);
+		$extractor->addString($item["text"], 1);
 	}
 
 	$buzzwords = $extractor->extract();
 
-	$query = "INSERT INTO contest.clientbuzzword(client, buzzword, count) VALUES ";
+	$query = "INSERT INTO contest.clientbuzzword_tmp(client, buzzword, count) VALUES ";
 
 	$i = 0;
 
@@ -48,8 +60,12 @@ foreach( $clients as $i => $client ) {
 	$extractor->reset();
 }
 
+$db->query("CREATE INDEX clientANDbuzzword ON clientbuzzword_tmp (client,buzzword)");
+$db->query("CREATE INDEX buzzword ON clientbuzzword_tmp (buzzword)");
+$db->query("DROP TABLE IF EXISTS clientbuzzword");
+$db->query("RENAME TABLE clientbuzzword_tmp TO clientbuzzword");
 echo "Finished.".PHP_EOL;
 
-file_put_contents(LOG_PATH."cronjobs", date('c') . " Clientbuzzword finished\n", FILE_APPEND);
+file_put_contents(LOG_PATH."cronjobs", date('c') . " Itembuzzword finished\n", FILE_APPEND);
 
 ?>
