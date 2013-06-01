@@ -20,6 +20,9 @@ class StardustShanonRecommender implements ContestRecommender {
 			$filter = "";
 		}
 
+		// CAUTION DEBUG
+		$filter = "";
+
 		$extractor = new BuzzwordExtractor();
 		$extractor->addString($contestImpression->item->title);
 
@@ -49,8 +52,7 @@ class StardustShanonRecommender implements ContestRecommender {
 				itembuzzword.buzzword IN (".implode(",", $tmp ).") AND
 				item.id != ".$contestImpression->item->id." AND
 				item.domain = ".$domainid." AND
-				item.recommendable > 0 AND
-				item.title NOT LIKE '".mysql_real_escape_string( preg_replace('/[^\P{C}\n]+/u', '', $contestImpression->item->title) )."'
+				item.recommendable > 0
 				".$filter."
 			GROUP BY
 				item.id

@@ -20,6 +20,9 @@ class StardustHottestItemRecommender implements ContestRecommender {
 				$filter = "";
 			}
 
+			// CAUTION DEBUG
+			$filter = "";
+
 			$db = DatabaseManager::getInstace();
 			$query = "
 					SELECT item.id AS item, item.title
