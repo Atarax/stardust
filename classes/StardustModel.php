@@ -29,8 +29,8 @@ class StardustModel {
 			$onupdate[] = $field."=".$value;
 		}
 
-		$query = "INSERT DELAYES INTO contest.".strtolower( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
-		$query .= "ON DUPLICATE KEY UPDATE LOW_PRIORITY ".implode(",", $onupdate);
+		$query = "INSERT INTO contest.".strtolower( get_class($this) )." (".implode(",", $fields).") VALUES (".implode( ",", $values ).") ";
+		$query .= "ON DUPLICATE KEY UPDATE ".implode(",", $onupdate);
 
 		$dbmanager->query( $query );
 		//$this->id = mysqli_insert_id();
