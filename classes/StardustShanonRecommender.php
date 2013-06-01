@@ -14,7 +14,7 @@ class StardustShanonRecommender implements ContestRecommender {
 
 		if( $clientid > 0 ) {
 			$filter = " AND item.id NOT IN (SELECT item FROM contest.recommendation WHERE client IS NOT NULL and client = ".$clientid.") ";
-			$filter .= " AND item.id NOT IN (SELECT item FROM contest.impression WHERE client IS NOT NULL and client = ".$clientid.") AND item IS NOT NULL";
+			//$filter .= " AND item.id NOT IN (SELECT item FROM contest.impression WHERE client IS NOT NULL and client = ".$clientid.") AND item IS NOT NULL";
 		}
 		else {
 			$filter = "";
