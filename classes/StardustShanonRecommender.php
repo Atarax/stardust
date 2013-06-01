@@ -52,7 +52,7 @@ class StardustShanonRecommender implements ContestRecommender {
 				itembuzzword.buzzword IN (".implode(",", $tmp ).") AND
 				item.id != ".$contestImpression->item->id." AND
 				item.domain = ".$domainid." AND
-				item.title != ".mysql_real_escape_string( preg_replace('/[^\P{C}\n]+/u', '', $contestImpression->item->title) )." AND
+				item.title != '".mysql_real_escape_string( preg_replace('/[^\P{C}\n]+/u', '', $contestImpression->item->title) )."' AND
 				item.recommendable > 0
 				".$filter."
 			GROUP BY
