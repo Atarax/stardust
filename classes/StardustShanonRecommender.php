@@ -50,7 +50,7 @@ class StardustShanonRecommender implements ContestRecommender {
 				item.id != ".$contestImpression->item->id." AND
 				item.domain = ".$domainid." AND
 				item.recommendable > 0 AND
-				item.title NOT LIKE '".mysql_real_escape_string($contestImpression->item->title)."'
+				item.title NOT LIKE '".mysql_real_escape_string( preg_replace('/[^\P{C}\n]+/u', '', $contestImpression->item->title) )."'
 				".$filter."
 			GROUP BY
 				item.id
