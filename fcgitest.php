@@ -1,7 +1,7 @@
 <?php
 
+	fastcgi_finish_request();
 	echo "cgi-test";
-	//fastcgi_finish_request();
 	sleep(2);
 
 
