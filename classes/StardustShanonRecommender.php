@@ -66,8 +66,6 @@ class StardustShanonRecommender implements ContestRecommender {
 
 		$result = array();
 
-		file_put_contents("log/release2", date('c') ." ".$query."\n", FILE_APPEND);
-
 		$i = 0;
 		// iterate over the data array
 		foreach ($data as $row) {

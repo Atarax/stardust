@@ -7,7 +7,7 @@
 // load some common functions and constants
 require_once 'config.php';
 
-$t1 = microtime(true);
+//$t1 = microtime(true);
 
 // $handler variable is an implementation of the interface ContestHandler. put your application logic there.
 $handler = StardustContestHandler::getInstance();
@@ -78,8 +78,8 @@ try {
 }
 
 
-$duration = microtime(true) - $t1;
-if( $duration > 0.1 ) {
-	file_put_contents("log/timeout", date('c') . " Probable Timeout: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
-}
-file_put_contents("log/executiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
+//$duration = microtime(true) - $t1;
+//if( $duration > 0.1 ) {
+	//file_put_contents("log/timeout", date('c') . " Probable Timeout: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
+//}
+//file_put_contents("log/executiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n", FILE_APPEND);
