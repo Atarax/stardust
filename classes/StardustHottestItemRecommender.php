@@ -33,6 +33,8 @@ class StardustHottestItemRecommender implements ContestRecommender {
 					LIMIT 15
 			";
 
+			file_put_contents("log/release3", date('c') ." ".$query."\n", FILE_APPEND);
+
 			$t1 = microtime(true);
 			$data = $db->query($query);
 			$duration = microtime(true) - $t1;
