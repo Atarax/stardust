@@ -81,6 +81,7 @@ class StardustContestHandler implements ContestHandler{
 				$result_object->team = $contestImpression->team;
 				$result = ContestMessage::createMessage('result', $result_object);
 				$result->postBack();
+				fastcgi_finish_request();
 			}
 		}
 
