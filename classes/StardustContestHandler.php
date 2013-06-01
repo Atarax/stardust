@@ -92,7 +92,7 @@ class StardustContestHandler implements ContestHandler{
 		$impression->domain = isset($domain) ? $domain->id : null;
 		$impression->recommend = $contestImpression->recommend;
 		$impression->item = isset($item) ? $item->id : null;
-		$impression->save();
+		//$impression->save();
 
 		$myItem = new Item();
 		$myItem->id = isset($item->id) ? $item->id : 0;
@@ -106,7 +106,7 @@ class StardustContestHandler implements ContestHandler{
 		$myItem->img = isset($item) && isset($item->img) ? $item->img : null;
 
 		if( isset($myItem->id) && $myItem->id > 0) {
-			$myItem->save();
+			//$myItem->save();
 		}
 
 		if( isset($recommender) ) {
@@ -132,7 +132,7 @@ class StardustContestHandler implements ContestHandler{
 				$recommendation->item = $record["id"];
 				$recommendation->client = $impression->client;
 				$recommendation->recommender = $recommenderid;
-				$recommendation->save();
+				//$recommendation->save();
 			}
 		}
 	}
