@@ -21,7 +21,7 @@ class StardustShanonRecommender implements ContestRecommender {
 		}
 
 		// CAUTION DEBUG
-		//$filter = "";
+		$filter = "";
 
 		$extractor = new BuzzwordExtractor();
 		$extractor->addString($contestImpression->item->title);

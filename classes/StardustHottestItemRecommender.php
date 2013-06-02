@@ -21,7 +21,7 @@ class StardustHottestItemRecommender implements ContestRecommender {
 			}
 
 			// CAUTION DEBUG
-			//$filter = "";
+			$filter = "";
 
 			$db = DatabaseManager::getInstace();
 			$query = "
