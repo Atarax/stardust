@@ -46,7 +46,7 @@ class StardustHottestItemRecommender implements ContestRecommender {
 				file_put_contents("log/hottestexecutiontime", date('c') . " Execution Time: ".sprintf('%.3f', $duration)."\n".$query."\n", FILE_APPEND);
 			}
 			*/
-			shuffle($data);
+			//shuffle($data);
 
 			$result = array();
 
@@ -64,6 +64,8 @@ class StardustHottestItemRecommender implements ContestRecommender {
 					break;
 				}
 			}
+
+			shuffle($result);
 
 			return $result;
 
