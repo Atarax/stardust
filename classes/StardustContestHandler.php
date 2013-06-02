@@ -201,6 +201,18 @@ class StardustContestHandler implements ContestHandler{
 	/* This is the handler method for error messages from the contest server. Implement your error handling code here.
 	 */
 	public function handleError(ContestError $error) {
+		$message = $error->getMessage();
+
+		file_put_contents("wrongitems", date('c') . " Error: ".print_r($message, true)."\n", FILE_APPEND);
+		if( strpos($message, "invalid items returned:") !== false ) {
+			$wrongitems = explode( ",", substr( $error->getMessage(), strpos($message, ":")+1 ) );
+
+			$db = new DatabaseManager();
+			foreach( $wrongitems as $item ) {
+				$db->query("UPDATE contest.item SET recommendable = 0 WHERE id = ".$item);
+			}
+			file_put_contents("log/wrongitems", date('c') . " Error: ".print_r($wrongitems, true)."\n", FILE_APPEND);
+		}
 		//echo 'oh no, an error: ' . $error->getMessage();
 		throw new ContestException($error);
 	}
