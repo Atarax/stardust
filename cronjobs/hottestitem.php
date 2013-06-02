@@ -33,7 +33,7 @@ foreach( $data as $i => $row ) {
 		continue;
 	}
 	echo "Item ".$i." of ".$total.PHP_EOL;
-	$score = $db->query("SELECT COUNT(*) AS score FROM contest.impression WHERE impression.item = ".$row["item"]." AND DATEDIFF(NOW(),created) <= 1");
+	$score = $db->query("SELECT COUNT(*) AS score FROM contest.impression WHERE impression.item = ".$row["item"]." AND impression.created > DATE_SUB(NOW(), INTERVAL 1 DAY)");
 	$query = "INSERT INTO contest.hottestitemscore_tmp(item, score) VALUES (".$row["item"].",".$score[0]["score"].")";
 
 	$db->query($query);
