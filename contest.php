@@ -69,7 +69,7 @@ try {
 		foreach( $wrongitems as $item ) {
 			$db->query("UPDATE contest.item SET recommendable = 0 WHERE id = ".$item);
 		}
-		//file_put_contents("wrongitems", date('c') . " Error: ".print_r($wrongitems, true)."\n", FILE_APPEND);
+		file_put_contents("wrongitems", date('c') . " Error: ".print_r($wrongitems, true)."\n", FILE_APPEND);
 	}
 
 
