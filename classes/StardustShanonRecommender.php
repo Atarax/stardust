@@ -84,7 +84,7 @@ class StardustShanonRecommender implements ContestRecommender {
 			}
 		}
 
-		shuffle($result);
+		//shuffle($result);
 
 		return $result;
 	}
